@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Background.h"
 #include "Camera.h"
+#include "GameHost.h"
 
 using namespace zerO;
 

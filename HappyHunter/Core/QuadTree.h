@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Camera.h"
 #include "BitFlag.h"
 #include "basicutils.h"
+#include "SceneManager.h"
 
 namespace zerO
 {
@@ -225,7 +225,8 @@ namespace zerO
 		return m_uWorldMaskY;
 	}
 
-	class CQuadTree
+	class CQuadTree :
+		public CSceneManager
 	{
 		typedef enum
 		{
@@ -239,9 +240,9 @@ namespace zerO
 		void Create(const CRectangle3D& Boundary, UINT uDepth);
 		bool Destroy();
 
-		CQuadTreeObject* SearchObject(const CRectangle3D& WorldRectangle, const LPFRUSTUM pFrustum = NULL);
+		CSceneNode* SearchObject(const CRectangle3D& WorldRectangle, const LPFRUSTUM pFrustum = NULL);
 
-		UINT32 AddObject(CQuadTreeObject* pObject);
+		UINT32 AddObject(CSceneNode* pObject);
 	private:
 		CQuadTreeNode* m_pLevelNodes[MAXINUM_TREE_DEPTH];
 		D3DXVECTOR3 m_Scale;
@@ -292,9 +293,19 @@ namespace zerO
 	}
 
 	
-	inline UINT32 CQuadTree::AddObject(CQuadTreeObject* pObject)
+	inline UINT32 CQuadTree::AddObject(CSceneNode* pObject)
 	{
 		DEBUG_ASSERT(m_uDepth, "The quad tree has not been created.");
+
+		CQuadTreeObject* pQuadTreeObject;
+		if( !pObject || !( pQuadTreeObject = dynamic_cast<CQuadTreeObject*>(pObject) ) )
+		{
+			DEBUG_WARNING("The object is not a CQuadTreeObject.");
+
+			return 0;
+		}
+
+		CSceneManager::AddObject(pObject);
 
 		CQuadTreeRectangle ByteRect;
 
@@ -304,6 +315,6 @@ namespace zerO
 
 		DEBUG_ASSERT(pNode, "Failed to locate quad tree node.");
 
-		return pNode->AddMember(pObject, ByteRect);
+		return pNode->AddMember(pQuadTreeObject, ByteRect);
 	}
 }

@@ -26,23 +26,9 @@ namespace zerO
 
 	void SceneDirectionToRotation(FLOAT& x, FLOAT& y, const D3DXVECTOR3& Direction);
 
-	template <typename Type>
-	inline bool ElmentEquals(Type lhs, Type rhs, Type ref)
-	{
-		return abs(lhs - rhs) < ref;
-	}
+	void QuaternionToEular(D3DXVECTOR3& Eular, const D3DXQUATERNION& Quaternion);
 
-	template <typename Type1, typename Type2>
-	inline bool MoveBuffer(Type1& out, const Type1& poor, Type2 poorLen, Type2 ref, Type2 step)
-	{
-		if (!ElmentEquals(poorLen, 0.0f, ref))
-		{
-			out += poor * step;
-			return true;
-		}
-
-		return false;
-	}
+	void MatrixDecompose(D3DXVECTOR3 *pOutScale, D3DXVECTOR3 *pOutRotation, D3DXVECTOR3 *pOutTranslation, const D3DXMATRIX& Matrix);
 }
 
 #endif

@@ -20,6 +20,7 @@ namespace zerO
 
 		void SetShadowVisible(bool bValue);
 
+		bool CreateSphere(FLOAT fRadius, UINT Slices, UINT Stacks);
 		bool Create(const PBASICCHAR meshFile);
 		bool Destroy();
 

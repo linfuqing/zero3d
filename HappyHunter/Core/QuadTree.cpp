@@ -351,7 +351,7 @@ bool CQuadTree::Destroy()
 	return true;
 }
 
-CQuadTreeObject* CQuadTree::SearchObject(const CRectangle3D& WorldRectangle, const LPFRUSTUM pFrustum)
+CSceneNode* CQuadTree::SearchObject(const CRectangle3D& WorldRectangle, const LPFRUSTUM pFrustum)
 {
 	CQuadTreeObject* pListHead = NULL;
 	CQuadTreeObject* pListTail = NULL;

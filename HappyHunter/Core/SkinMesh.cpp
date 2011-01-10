@@ -253,7 +253,7 @@ void CSkinMesh::Render(CRenderQueue::LPRENDERENTRY pEntry, zerO::UINT32 uFlag)
 	{
 		if(pMeshContainer->pSkinInfo)
 		{
-			if( TEST_BIT(uFlag, zerO::CRenderQueue::MODEL_PARAMA) )
+			if( TEST_BIT(uFlag, zerO::CRenderQueue::PARENT) || TEST_BIT(uFlag, zerO::CRenderQueue::MODEL_PARAMA) )
 			{
 				DWORD cBones; 
 				DWORD iBone;

@@ -32,8 +32,31 @@ void CMesh::SetNormalMap(CTexture* pTexture)
 		m_pSurfaces[i].SetTexture(pTexture, NORMAL);
 }
 
+bool CMesh::CreateSphere(zerO::FLOAT fRadius, zerO::UINT uSlices, zerO::UINT uStacks)
+{
+	Destroy();
+
+	HRESULT hr;
+
+	hr = D3DXCreateSphere(&DEVICE, fRadius, uSlices, uStacks, &m_pMesh, NULL);
+
+	if( FAILED(hr) )
+	{
+		DEBUG_WARNING(hr);
+		return false;
+	}
+
+	DEBUG_NEW(m_pSurfaces, CSurface[1]);
+
+	m_uNumSurfaces = 1;
+
+	return __GenerateDeclMesh(m_pMesh) && __GetBoundBox(m_pMesh, m_Rectangle);
+}
+
 bool CMesh::Load(const PBASICCHAR pcFileName)
 {
+	Destroy();
+
 		//加载网格模型
 	LPD3DXBUFFER pD3DXMtrlBuffer;
 
@@ -77,8 +100,8 @@ bool CMesh::Load(const PBASICCHAR pcFileName)
 
 			BASICSTRING normalMapFile;
 			GetRealPath((PBASICCHAR)texFile.c_str(), normalMapFile, TEXT("."), TEXT("-normalmap.tga"), true);
-			if( !pSurface->LoadTexture((PBASICCHAR)normalMapFile.c_str(), 1) )
-				return false;
+			pSurface->LoadTexture((PBASICCHAR)normalMapFile.c_str(), 1) ;
+				//return false;
 #else
 			if( !pSurface->LoadTexture(d3dxMaterials[i].pTextureFilename, 0) )
 				return false;

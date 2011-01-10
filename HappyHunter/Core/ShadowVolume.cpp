@@ -16,7 +16,8 @@ m_bIsVisible(false),
 m_bIsCulled(false),
 m_fLength(0.0f)
 {
-	D3DXMatrixIdentity(&m_Matrix);
+	//D3DXMatrixIdentity(&m_Matrix);
+	D3DXMatrixIdentity(&m_Transform);
 }
 
 CShadowVolume::~CShadowVolume(void)
@@ -121,7 +122,9 @@ void CShadowVolume::Update()
 	if(!m_bIsVisible)
 		return;
 
-	D3DXMatrixIdentity(&m_Matrix);
+	//D3DXMatrixIdentity(&m_Matrix);
+
+	m_Matrix = m_Transform;
 
 	m_Matrix *= m_pParent->GetWorldMatrix();
 

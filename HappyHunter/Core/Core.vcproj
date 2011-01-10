@@ -229,6 +229,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SceneManager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\SceneNode.cpp"
 				>
 			</File>
@@ -296,6 +300,10 @@
 				RelativePath=".\VertexBuffer.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Water.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Í·ÎÄ¼þ"
@@ -340,6 +348,10 @@
 			</File>
 			<File
 				RelativePath=".\core.h"
+				>
+			</File>
+			<File
+				RelativePath=".\coretype.h"
 				>
 			</File>
 			<File
@@ -423,6 +435,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SceneManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SceneNode.h"
 				>
 			</File>
@@ -480,6 +496,10 @@
 			</File>
 			<File
 				RelativePath=".\VertexBuffer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Water.h"
 				>
 			</File>
 		</Filter>

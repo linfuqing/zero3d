@@ -23,15 +23,74 @@ namespace zerO
 			TEXTURE(CTexture::RESET pfnReset) :
 			pSurface(NULL)
 			{
-				DEBUG_ASSERT(Texture.Create(pfnReset, D3DUSAGE_RENDERTARGET), "CTexturePrinter::TEXTURE can not created.");
+				HRESULT hr;
+				RECT Rect;
+
+				DEBUG_ASSERT(Texture.Create(pfnReset, D3DUSAGE_RENDERTARGET), "CTexturePrinter::TEXTURE can not be created.");
+
+				hr = Texture.GetTexture()->GetSurfaceLevel(0, &pSurface);
+
+				if( SUCCEEDED(hr) )
+				{
+					hr = pSurface->GetDesc(&Desc);
+
+					hr = pSurface->GetDesc(&Desc);
+
+					DEBUG_ASSERT(SUCCEEDED(hr), hr);
+
+					Rect.left   = 0;
+					Rect.top    = 0;
+					Rect.right  = Desc.Width;
+					Rect.bottom = Desc.Height;
+
+					hr = DEVICE.ColorFill(pSurface, &Rect, 0);
+				}
+				else
+				{
+					DEBUG_RELEASE(pSurface);
+
+					pSurface = NULL;
+				}
 			}
 
 			TEXTURE(UINT uWidth, UINT uHeight, D3DFORMAT Format) :
 			pSurface(NULL)
 			{
-				DEBUG_ASSERT(Texture.Create(uWidth, uHeight, 1, D3DUSAGE_RENDERTARGET, Format, D3DPOOL_DEFAULT), "CTexturePrinter::TEXTURE can not created.") ;
+				HRESULT hr;
+				RECT Rect;
+
+				DEBUG_ASSERT(Texture.Create(uWidth, uHeight, 1, D3DUSAGE_RENDERTARGET, Format, D3DPOOL_DEFAULT), "CTexturePrinter::TEXTURE can not be created.");
+
+				hr = Texture.GetTexture()->GetSurfaceLevel(0, &pSurface);
+
+				if( SUCCEEDED(hr) )
+				{
+					hr = pSurface->GetDesc(&Desc);
+
+					DEBUG_ASSERT(SUCCEEDED(hr), hr);
+
+					Rect.left   = 0;
+					Rect.top    = 0;
+					Rect.right  = Desc.Width;
+					Rect.bottom = Desc.Height;
+
+					hr = DEVICE.ColorFill(pSurface, &Rect, 0);
+				}
+				else
+				{
+					DEBUG_RELEASE(pSurface);
+
+					pSurface = NULL;
+				}
 			}
 		}TEXTURE, * LPTEXTURE;
+
+		typedef enum
+		{
+			RENDER_SURFACE        = 0x01,
+			DEPTH_STENCIL_SURFACE = 0x02,
+			ALL_SURFACE           = RENDER_SURFACE | DEPTH_STENCIL_SURFACE
+		}ENDFLAG;
 
 		CTexturePrinter(void);
 		~CTexturePrinter(void);
@@ -43,11 +102,12 @@ namespace zerO
 		UINT AddTexture(CTexture::RESET pfnReset);
 		UINT AddTexture();
 
+		bool Create();
 		bool Disable();
 		bool Restore();
 
 		void Begin();
-		void End();
+		void End(ENDFLAG Flag = ALL_SURFACE);
 
 		void Activate(UINT uTextureIndex, UINT32 uClearFlag = 0, ARGBCOLOR Color = 0);
 		void Draw(UINT uTextureIndex);

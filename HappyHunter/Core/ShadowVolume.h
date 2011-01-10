@@ -64,6 +64,7 @@ namespace zerO
 		FLOAT        m_fLength;
 
 		D3DXMATRIX   m_Matrix;
+		D3DXMATRIX   m_Transform;
 
 		CSceneNode*  m_pParent;
 		bool         m_bIsRenderVolume;
@@ -83,6 +84,6 @@ namespace zerO
 
 	inline void CShadowVolume::SetTransform(const D3DXMATRIX Matrix)
 	{
-		m_Matrix = Matrix;
+		m_Transform = Matrix;
 	}
 }

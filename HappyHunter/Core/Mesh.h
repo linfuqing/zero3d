@@ -14,6 +14,11 @@ namespace zerO
 			TEXTURE = 0,
 			NORMAL
 		}MAPTYPE;
+
+		/*typedef enum
+		{
+
+		}MESHTYPE;*/
 	public:
 		CMesh(void);
 		~CMesh(void);
@@ -26,6 +31,10 @@ namespace zerO
 		const CRectangle3D& GetRectangle()const;
 
 		void SetNormalMap(CTexture* pTexture);
+
+		bool Intersect(D3DXVECTOR3* pHitPosition, FLOAT* pHitDistance, FLOAT fScreenX, FLOAT fScreenY);
+
+		bool CreateSphere(FLOAT fRadius, UINT Slices, UINT Stacks);
 
 		bool Load(const PBASICCHAR pcFileName = NULL);
 		bool Destroy();

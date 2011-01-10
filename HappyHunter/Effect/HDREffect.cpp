@@ -3,8 +3,8 @@
 #include "Gamehost.h"
 
 float g_fExposure = 0.50f;    // The exposure bias fed into the FinalPass.psh shader (OnFrameRender )
-float g_BrightThreshold = 1.0f;             // A configurable parameter into the pixel shader
-float g_GaussMultiplier = 2.4f;             // Default multiplier
+float g_BrightThreshold = 0.9f;             // A configurable parameter into the pixel shader
+float g_GaussMultiplier = 0.1f;             // Default multiplier
 float g_GaussMean = 0.0f;             // Default mean for gaussian distribution
 float g_GaussStdDev = 0.8f;             // Default standard deviation for gaussian distribution
 
@@ -137,7 +137,7 @@ bool CHDREffect::Destroy()
 void CHDREffect::Render(CTexturePrinter &TexturePrinter)
 {
 	TexturePrinter.Begin();
-	
+
 	__MeasureLuminance(TexturePrinter);
 
 	__PerformPostProcessing();
@@ -189,9 +189,18 @@ void CHDREffect::Render(CTexturePrinter &TexturePrinter)
     DEVICE.SetSamplerState(2, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
     DEVICE.SetSamplerState(2, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
 
+	//DEVICE.SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+	//DEVICE.SetSamplerState(1, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+	DEVICE.SetSamplerState(2, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+
     //DEVICE.SetVertexShader(NULL);
     DEVICE.SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
     DEVICE.DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, Vertices, sizeof(VERTEX) );
+
+	//DEVICE.SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+	//DEVICE.SetSamplerState(1, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+	//DEVICE.SetSamplerState(2, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+
 
 	DEVICE.SetPixelShader(NULL);
 

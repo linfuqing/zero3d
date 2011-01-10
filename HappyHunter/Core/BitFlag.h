@@ -11,18 +11,29 @@ namespace zerO
 	///
 	//比特工具宏
 	///
-#define FLAG(x)                          ( 1 << (x) )
-#define FLAG_VALUE(Bit, IsBit)           ( (IsBit) << (Bit) )
-#define MASK(x)                          ( ( 1 << (x + 1) ) - 1 )
-#define TEST_BIT(Value, Bit)             ( ( (Value) & FLAG(Bit) ) !=0 )
-#define TEST_FLAG(Value, FLAG)           ( ( (Value) & (FLAG) ) == (FLAG) )
-#define TEST_ANY(Value, Set)             ( ( (Value) & (Set) ) != 0 )
-#define SET_BIT(Value, Bit)              ( (Value) |= FLAG( (Bit) ) )
-#define SET_BIT_VALUE(Value, Bit, IsSet) ( (Value) |= FLAG_VALUE(Bit, IsSet) )
-#define CLEAR_BIT(Value, Bit)            ( (Value) &= ~FLAG((Bit) ) )
-#define SET_FLAG(Value, FLAG)            ( (Value) |= (FLAG) )
-#define CLEAR_FLAG(Value, FLAG)          ( (Value) &= ~(FLAG) )
-#define TOTAL_BITS(Type)                 (sizeof(Type) << 3)
+#define FLAG(x)                            ( 1 << (x) )
+#define FLAG_VALUE(Bit, IsBit)             ( (IsBit) << (Bit) )
+#define TEST_FLAG(Value, FLAG)             ( ( (Value) & (FLAG) ) == (FLAG) )
+#define SET_FLAG(Value, FLAG)              ( (Value) |= (FLAG) )
+#define CLEAR_FLAG(Value, FLAG)            ( (Value) &= ~(FLAG) )
+
+#define MASK(x)                            ( ( 1 << ( (x) + 1 ) ) - 1 )
+#define TEST_MASK(Value, MaxBit)           ( TEST_FLAG( Value, MASK(MaxBit) ) )
+#define SET_MASK(Value, MaxBit)            ( (Value) | MASK(MaxBit) )  
+#define CLEAR_MASK(Value, MaxBit)          ( CLEAR_FLAG( Value, MASK(MaxBit) ) )
+
+#define MASK2(MaxBit, MinBit)              ( MASK(MaxBit) & ~MASK(MinBit) ) 
+#define TEST_MASK2(Value, MaxBit, MinBit)  ( TEST_FLAG( Value, MASK2(MaxBit, MinBit) ) )
+#define SET_MASK2(Value, MaxBit, MinBit)   ( (Value) | MASK2(MaxBit, MinBit) )
+#define CLEAR_MASK2(Value, MaxBit, MinBit) ( CLEAR_FLAG( Value, MASK2(MaxBit, MinBit) ) )
+
+#define TEST_BIT(Value, Bit)               ( ( (Value) & FLAG(Bit) ) !=0 )
+#define SET_BIT(Value, Bit)                ( (Value) |= FLAG( (Bit) ) )
+#define SET_BIT_VALUE(Value, Bit, IsSet)   ( (Value) |= FLAG_VALUE(Bit, IsSet) )
+#define CLEAR_BIT(Value, Bit)              ( (Value) &= ~FLAG((Bit) ) )
+#define TOTAL_BITS(Type)                   (sizeof(Type) << 3)
+
+#define TEST_ANY(Value, Set)               ( ( (Value) & (Set) ) != 0 )
 
 	typedef UINT8 BIT;
 

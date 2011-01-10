@@ -17,6 +17,7 @@ namespace zerO
 #define ABS(x) ( (x) < 0 ? - (x) : (x) )
 #define ABS_SUBTRACT(x, y) ( (x) < (y) ? (y) - (x) : (x) - (y) )
 #define EQUAL(Source, Target, Error) (ABS_SUBTRACT( (Source),(Target) ) < Error)
+#define SIGN(x) (x ? (x > 0 ? 1 : -1) : 0) 
 }
 
 #endif

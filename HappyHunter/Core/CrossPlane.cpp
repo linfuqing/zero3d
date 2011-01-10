@@ -106,11 +106,6 @@ bool CCrossPlane::Destroy()
 	return true;
 }
 
-void CCrossPlane::Update()
-{
-	CSprite::Update();
-}
-
 bool CCrossPlane::ApplyForRender()
 {
 	CEffect* pEffect = m_RenderMethod.GetEffect();

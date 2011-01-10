@@ -1,6 +1,7 @@
 #pragma once
 
-#include "GameHost.h"
+//#include "GameHost.h"
+#include "coretype.h"
 
 namespace zerO
 {

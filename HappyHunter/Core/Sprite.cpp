@@ -11,8 +11,8 @@ m_WorldForward(0.0f, 0.0f, 1.0f),
 
 m_Position(0.0f, 0.0f, 0.0f),
 m_Rotation(0.0f, 0.0f, 0.0f),
-m_Scale(0.0f, 0.0f, 0.0f),
-m_uDirtyFlag(0)
+m_Scale(1.0f, 1.0f, 1.0f),
+m_uDirtyFlag(0xffffffff)
 {
 }
 
@@ -46,60 +46,61 @@ void CSprite::SetSceneDirection(const D3DXVECTOR3& Direction)
 
 void CSprite::Update()
 {
-	if(m_uDirtyFlag)
+	if( TEST_BIT(m_uDirtyFlag, TRANSFORM) )
 	{
-		D3DXMATRIX Matrix;
-
-		D3DXMatrixIdentity(&m_LocalMatrix);
-
-		if( TEST_BIT(m_uDirtyFlag, SCALE) )
+		if( TEST_BIT(m_uDirtyFlag, SCALE) || TEST_BIT(m_uDirtyFlag, ROTATION) )
 		{
-			D3DXMatrixScaling(&Matrix, m_Scale.x, m_Scale.y, m_Scale.z);
+			D3DXMATRIX Matrix;
 
-			m_LocalMatrix *= Matrix;
-		}
+			D3DXMatrixScaling(&m_LocalMatrix, m_Scale.x, m_Scale.y, m_Scale.z);
 
-		if( TEST_BIT(m_uDirtyFlag, ROTATION) )
-		{
-			D3DXQuaternionRotationYawPitchRoll(&m_Quaternion, m_Rotation.y, m_Rotation.x, m_Rotation.z);
+			if( TEST_BIT(m_uDirtyFlag, ROTATION) )
+			{
+				D3DXQuaternionRotationYawPitchRoll(&m_Quaternion, m_Rotation.y, m_Rotation.x, m_Rotation.z);
+
+				CLEAR_BIT(m_uDirtyFlag, ROTATION);
+			}
 
 			D3DXMatrixRotationQuaternion(&Matrix, &m_Quaternion);
 
 			m_LocalMatrix *= Matrix;
-		}
 
-		if( TEST_BIT(m_uDirtyFlag, POSITION) )
+			m_LocalMatrix._41 = m_Position.x;
+			m_LocalMatrix._42 = m_Position.y;
+			m_LocalMatrix._43 = m_Position.z;
+			//m_LocalMatrix._44 = m_Position.w;
+
+			CLEAR_BIT(m_uDirtyFlag, SCALE);
+
+			SET_BIT(m_uDirtyFlag, RIGHT  );
+			SET_BIT(m_uDirtyFlag, UP     );
+			SET_BIT(m_uDirtyFlag, FORWARD);
+		}
+		else if( TEST_BIT(m_uDirtyFlag, POSITION) )
 		{
-			D3DXMatrixTranslation(&Matrix, m_Position.x, m_Position.y, m_Position.z);
+			m_LocalMatrix._41 = m_Position.x;
+			m_LocalMatrix._42 = m_Position.y;
+			m_LocalMatrix._43 = m_Position.z;
+			//m_LocalMatrix._44 = m_Position.w;
 
-			m_LocalMatrix *= Matrix;
+			CLEAR_BIT(m_uDirtyFlag, POSITION);
 		}
+
+		CLEAR_BIT(m_uDirtyFlag, TRANSFORM);
 
 		m_bIsTransformDirty = true;
 	}
 
 	CSceneNode::Update();
+}
 
-	m_WorldRight.x   = m_WorldMatrix._11;
-	m_WorldRight.y   = m_WorldMatrix._12;
-	m_WorldRight.z   = m_WorldMatrix._13;
+void CSprite::UpdateTransform()
+{
+	CSceneNode::UpdateTransform();
 
-	if(m_WorldMatrix._14)
-		m_WorldRight /= m_WorldMatrix._14;
-
-	m_WorldUp.x      = m_WorldMatrix._21;
-	m_WorldUp.y      = m_WorldMatrix._22;
-	m_WorldUp.z      = m_WorldMatrix._23;
-
-	if(m_WorldMatrix._24)
-		m_WorldUp /= m_WorldMatrix._24;
-
-	m_WorldForward.x = m_WorldMatrix._31;
-	m_WorldForward.y = m_WorldMatrix._32;
-	m_WorldForward.z = m_WorldMatrix._33;
-
-	if(m_WorldMatrix._34)
-		m_WorldForward /= m_WorldMatrix._34;
+	SET_BIT(m_uDirtyFlag, WORLD_RIGHT  );
+	SET_BIT(m_uDirtyFlag, WORLD_UP     );
+	SET_BIT(m_uDirtyFlag, WORLD_FORWARD);
 }
 
 void CSprite::Right(zerO::FLOAT fNumSteps)
