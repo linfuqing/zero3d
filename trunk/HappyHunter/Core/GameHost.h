@@ -2,9 +2,12 @@
 
 #include "debug.h"
 #include "datatype.h"
+#include "coretype.h"
 #include "LightManager.h"
 #include "FogManager.h"
 #include "color.h"
+//#include "Camera.h"
+#include "SceneManager.h"
 #include <vector>
 #include <list>
 
@@ -21,29 +24,12 @@ namespace zerO
 #define LIGHTMANAGER GAMEHOST.GetLightManager()
 #define FOGMANAGER   GAMEHOST.GetFogManager()
 
-	typedef enum
-	{
-		RESOURCE_VERTEX_BUFFER = 0,
-		RESOURCE_INDEX_BUFFER,
-		RESOURCE_TEXTURE,
-		RESOURCE_SURFACE,
-		RESOURCE_EFFECT,
-		RESOURCE_MESH,
-		RESOURCE_MODEL,
-		RESOURCE_ANIMATIONCONTROLLER,
-		RESUORCE_FULLSCREENEFFECT,
-		RESOURCE_TEXTUREPRINTER,
-
-		TOTAL_RESOURCE_TYPES
-	}RESOURCETYPE;
-
-	typedef UINT16 RESOURCEHANDLE;
-
 	class CResource;
 	class CRenderQueue;
-	class CSceneNode;
-	class CCamera;
+	//class CSceneNode;
+	//class CCamera;
 	class CBackground;
+	class CWater;
 	class CShadow;
 	class CVertexBuffer;
 	class CTexture;
@@ -76,19 +62,27 @@ namespace zerO
 		CGameHost(void);
 		~CGameHost(void);
 
+		static bool IsGameHostCreated();
+
 		IDirect3D9& GetDirect();
 		IDirect3DDevice9& GetDevice();
 		CRenderQueue& GetRenderQueue();
 		static CGameHost& GetInstance();
+
+		bool GetLightEnable()const;
+		bool GetFogEnable()const;
+		//bool GetSceneEnable()const;
 
 		FLOAT GetElapsedTime()const;
 		FLOAT64 GetTime()const;
 
 		CCamera& GetCamera();
 
-		CSceneNode* GetScene()const;
+		CSceneNode& GetScene();
 
 		CBackground* GetBackground()const;
+
+		CWater* GetWater()const;
 
 		CTexturePrinter* GetTexturePrinter()const;
 
@@ -100,10 +94,13 @@ namespace zerO
 
 		void SetLightEnable(bool bValue);
 		void SetFogEnable(bool bValue);
+		//void SetSceneEnable(bool bValue);
 
 		void SetShadowColor(ARGBCOLOR Color);
 
 		void SetBackground(CBackground* pBackground);
+
+		void SetWater(CWater* pWater);
 
 		void SetFullScreenEffect(CFullScreenEffect* pFullScreenEffect);
 
@@ -114,6 +111,9 @@ namespace zerO
 		void AddShadow(CShadow* const pShadow);
 		void RemoveShadow(CShadow* const pShadow);
 
+		void AddSceneManager(CSceneManager& SceneManager);
+		void RemoveSceneManager(CSceneManager& SceneManager);
+
 		virtual bool Destroy(); 
 		virtual bool Disable(); 
 		virtual bool Restore(const D3DSURFACE_DESC& BackBufferSurfaceDesc); 
@@ -122,6 +122,7 @@ namespace zerO
 		virtual bool Update(FLOAT fElapsedTime);
 		virtual bool BeginRender();
 		virtual bool EndRender();
+		virtual bool Render();
 	private:
 		LPDIRECT3D9 m_pDirect;
 		LPDIRECT3DDEVICE9 m_pDevice;
@@ -134,14 +135,17 @@ namespace zerO
 
 		std::vector<CResource*> m_ResourceList[TOTAL_RESOURCE_TYPES];
 		std::list<CShadow*>     m_ShadowList;
+		std::list<CSceneManager*> m_SceneManagerList;
 
 		CRenderQueue* m_pRenderQueue;
 
-		CSceneNode* m_pScene;
+		CSprite m_Scene;
 
 		CCamera* m_pCamera;
 
 		CBackground* m_pBackground;
+
+		CWater* m_pWater;
 
 		CLightManager m_LightManager;
 		CFogManager   m_FogManager;
@@ -156,9 +160,15 @@ namespace zerO
 
 		bool m_bLightEnable;
 		bool m_bFogEnable;
+		//bool m_bSceneEnable;
 
 		ARGBCOLOR m_ShadowColor;
 	};
+
+	inline bool CGameHost::IsGameHostCreated()
+	{
+		return sm_pInstance != NULL;
+	}
 
 	inline IDirect3D9& CGameHost::GetDirect()
 	{
@@ -186,14 +196,29 @@ namespace zerO
 		return *sm_pInstance;
 	}
 
+	inline bool CGameHost::GetLightEnable()const
+	{
+		return m_bLightEnable;
+	}
+
+	inline bool CGameHost::GetFogEnable()const
+	{
+		return m_bFogEnable;
+	}
+
+	/*inline bool CGameHost::GetSceneEnable()const
+	{
+		return m_bSceneEnable;
+	}*/
+
 	inline CCamera& CGameHost::GetCamera()
 	{
 		return *m_pCamera;
 	}
 
-	inline CSceneNode* CGameHost::GetScene()const
+	inline CSceneNode& CGameHost::GetScene()
 	{
-		return m_pScene;
+		return m_Scene;
 	}
 
 	inline CBackground* CGameHost::GetBackground()const
@@ -241,6 +266,11 @@ namespace zerO
 		m_pBackground = pBackground;
 	}
 
+	inline void CGameHost::SetWater(CWater* pWater)
+	{
+		m_pWater = pWater;
+	}
+
 	inline void CGameHost::SetFullScreenEffect(CFullScreenEffect* pFullScreenEffect)
 	{
 		m_pFullScreenEffect = pFullScreenEffect;
@@ -255,6 +285,11 @@ namespace zerO
 	{
 		m_bFogEnable = bValue;
 	}
+
+	/*inline void CGameHost::SetSceneEnable(bool bValue)
+	{
+		m_bSceneEnable = bValue;
+	}*/
 
 	inline void CGameHost::SetShadowColor(ARGBCOLOR Color)
 	{

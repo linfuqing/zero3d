@@ -31,8 +31,6 @@ namespace zerO
 
 		bool Destroy();
 
-		void Update();
-
 		bool ApplyForRender();
 
 		void Render(CRenderQueue::LPRENDERENTRY pEntry, UINT32 uFlag);

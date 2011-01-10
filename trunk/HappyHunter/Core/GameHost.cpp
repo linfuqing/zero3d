@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "RenderQueue.h"
 #include "Background.h"
+#include "Water.h"
 #include "Shadow.h"
 #include "VertexBuffer.h"
 #include "Texture.h"
@@ -16,12 +17,14 @@ CGameHost* CGameHost::sm_pInstance = NULL;
 
 CGameHost::CGameHost(void) :
 m_pDevice(NULL),
-m_pScene(NULL),
+//m_pScene(NULL),
 m_pBackground(NULL),
+m_pWater(NULL),
 m_pVertexBuffer(NULL),
 m_pFullScreenEffect(NULL),
 m_bLightEnable(false),
 m_bFogEnable(false),
+//m_bSceneEnable(false),
 m_fTime(0),
 m_ShadowColor(0x7f000000)
 {
@@ -78,6 +81,16 @@ void CGameHost::RemoveShadow(CShadow* const pShadow)
 	m_ShadowList.remove(pShadow);
 }
 
+void CGameHost::AddSceneManager(CSceneManager& SceneManager)
+{
+	m_SceneManagerList.push_back(&SceneManager);
+}
+
+void CGameHost::RemoveSceneManager(CSceneManager& SceneManager)
+{
+	m_SceneManagerList.remove(&SceneManager);
+}
+
 bool CGameHost::Destroy()
 {
 	UINT uTotalResourceTypes = TOTAL_RESOURCE_TYPES;
@@ -92,16 +105,19 @@ bool CGameHost::Destroy()
 	for(std::list<CShadow*>::iterator i = m_ShadowList.begin(); i != m_ShadowList.end(); i ++)
 		(*i)->Destroy();
 
+	for(std::list<CSceneManager*>::iterator i = m_SceneManagerList.begin(); i != m_SceneManagerList.end(); i ++)
+		(*i)->Destroy();
+
 	DEBUG_DELETE(m_pRenderQueue);
 	DEBUG_DELETE(m_pCamera);
-	DEBUG_DELETE(m_pScene);
+	//DEBUG_DELETE(m_pScene);
 	DEBUG_DELETE(m_pVertexBuffer);
 	DEBUG_DELETE(m_pTexturePrinter);
 	//DEBUG_DELETE(m_pFullScreenEffect);
 
 	m_pRenderQueue              = NULL;
 	m_pCamera                   = NULL;
-	m_pScene                    = NULL;
+	//m_pScene                    = NULL;
 	m_pVertexBuffer             = NULL;
 	m_pFullScreenEffect         = NULL;
 	m_pTexturePrinter           = NULL;
@@ -173,7 +189,7 @@ bool CGameHost::Create(LPDIRECT3D9 pDirect, LPDIRECT3DDEVICE9 pDevice, const DEV
 
 	memcpy( &m_DeviceSettings, &DeviceSettings, sizeof(DeviceSettings) );
 	DEBUG_NEW( m_pRenderQueue, CRenderQueue(uMaxQueue) );
-	DEBUG_NEW( m_pScene, CSceneNode );
+	//DEBUG_NEW( m_pScene, CSceneNode );
 	DEBUG_NEW(m_pCamera, CCamera);
 
 	DEBUG_NEW(m_pVertexBuffer, CVertexBuffer);
@@ -183,6 +199,13 @@ bool CGameHost::Create(LPDIRECT3D9 pDirect, LPDIRECT3DDEVICE9 pDevice, const DEV
 	if( !m_pVertexBuffer->Create(4, sizeof(VERTEX), D3DUSAGE_WRITEONLY, D3DPOOL_MANAGED, NULL, D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1) )
 	{
 		Destroy();
+		return false;
+	}
+
+	if( !m_pTexturePrinter->Create() )
+	{
+		Destroy();
+
 		return false;
 	}
 
@@ -199,8 +222,13 @@ bool CGameHost::Update(zerO::FLOAT fElapsedTime)
 
 	m_pCamera->Update();
 
+	m_Scene.Update();
+
 	if(m_pBackground)
 		m_pBackground->Update();
+
+	if(m_pWater)
+		m_pWater->Update();
 
 	return true;
 }
@@ -217,7 +245,7 @@ bool CGameHost::BeginRender()
 	else
 		m_pDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
 
-	if(m_pFullScreenEffect)
+	if(m_pFullScreenEffect/* || m_pWater*/)
 	{
 		m_pTexturePrinter->Begin();
 		m_pTexturePrinter->Activate(0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL);
@@ -284,6 +312,117 @@ bool CGameHost::EndRender()
 		m_pDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
 		m_pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	}
+
+	if(m_pWater)
+	{
+		//m_pTexturePrinter->End(CTexturePrinter::RENDER_SURFACE);
+		//m_pTexturePrinter->End();
+
+		m_pWater->Render();
+
+		//m_pTexturePrinter->End();
+	}
+	//else if(m_pFullScreenEffect)
+	//	m_pTexturePrinter->End();
+
+	if(m_pFullScreenEffect)
+	{
+		m_pTexturePrinter->End();
+
+		m_pFullScreenEffect->Render(*m_pTexturePrinter);
+	}
+
+	return true;
+}
+
+bool CGameHost::Render()
+{
+	if(m_bLightEnable)
+		m_LightManager.Activate();
+	else
+		m_pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+
+	if(m_bFogEnable)
+		m_FogManager.Activate();
+	else
+		m_pDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
+
+	if(m_pFullScreenEffect/* || m_pWater*/)
+	{
+		m_pTexturePrinter->Begin();
+		m_pTexturePrinter->Activate(0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL);
+	}
+
+	if(m_pBackground)
+	{
+		m_pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+		m_pDevice->SetRenderState( D3DRS_FOGENABLE, m_pBackground->GetFogEnable() );
+		m_pBackground->Render();
+		m_pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+		m_pDevice->SetRenderState(D3DRS_FOGENABLE, m_bFogEnable);
+	}
+
+	m_Scene.AddedToRenderQueue();
+
+	m_pRenderQueue->Render();
+
+	if( !m_ShadowList.empty() )
+	{
+		m_pDevice->SetTransform( D3DTS_VIEW, &CAMERA.GetViewMatrix() );
+
+		//设置投影矩阵
+		m_pDevice->SetTransform( D3DTS_PROJECTION, &CAMERA.GetProjectionMatrix() );
+
+		for(std::list<CShadow*>::const_iterator i = m_ShadowList.begin(); i != m_ShadowList.end(); i ++)
+		{
+			(*i)->Update();
+			(*i)->Render();
+		}
+
+		//关闭深度测试, 启用Alpha混合
+		m_pDevice->SetRenderState( D3DRS_ZENABLE,          FALSE );
+		m_pDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
+		m_pDevice->SetRenderState( D3DRS_SRCBLEND,  D3DBLEND_SRCALPHA );
+		m_pDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+		m_pDevice->SetRenderState( D3DRS_BLENDOP, D3DBLENDOP_ADD);
+
+		m_pDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_DIFFUSE);
+		m_pDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
+
+		m_pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_DIFFUSE);
+		m_pDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
+
+		//设置模板相关渲染状态
+		m_pDevice->SetRenderState( D3DRS_STENCILENABLE,    TRUE );
+		m_pDevice->SetRenderState( D3DRS_STENCILREF,  0x1 );
+		m_pDevice->SetRenderState( D3DRS_STENCILFUNC, D3DCMP_LESSEQUAL );
+		m_pDevice->SetRenderState( D3DRS_STENCILPASS, D3DSTENCILOP_KEEP );
+
+		//渲染一个灰色矩形, 只有通过模板测试的像素才会被渲染到颜色缓冲区,表示阴影
+		m_pVertexBuffer->Activate(0, 0, true);
+
+		m_pDevice->DrawPrimitive( D3DPT_TRIANGLESTRIP, 0, 2 );
+
+		//恢复渲染状态
+		m_pDevice->SetRenderState( D3DRS_ZENABLE,          TRUE );
+		m_pDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
+		m_pDevice->SetRenderState( D3DRS_STENCILENABLE,    FALSE );
+
+		m_pDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+		m_pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+	}
+
+	if(m_pWater)
+	{
+		//m_pTexturePrinter->End(CTexturePrinter::RENDER_SURFACE);
+		//m_pTexturePrinter->End();
+
+		m_pWater->Render();
+
+		//m_pTexturePrinter->End();
+	}
+	//else if(m_pFullScreenEffect)
+	//	m_pTexturePrinter->End();
 
 	if(m_pFullScreenEffect)
 	{

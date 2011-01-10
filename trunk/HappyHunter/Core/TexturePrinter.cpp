@@ -52,6 +52,49 @@ zerO::UINT CTexturePrinter::AddTexture()
 	return AddTexture(ResetTexture);
 }
 
+bool CTexturePrinter::Create()
+{
+	if(m_pSavedRenderSurface || m_pSavedDepthStencilSurface || m_pDepthStencilSurface)
+		return false;
+
+	HRESULT hr;
+
+	hr = DEVICE.CreateDepthStencilSurface( 
+		GAMEHOST.GetBackBufferSurfaceDesc().Width, 
+		GAMEHOST.GetBackBufferSurfaceDesc().Height, 
+		GAMEHOST.GetDeviceSettings().pp.AutoDepthStencilFormat, 
+		GAMEHOST.GetBackBufferSurfaceDesc().MultiSampleType,
+		GAMEHOST.GetBackBufferSurfaceDesc().MultiSampleQuality, 
+		FALSE, 
+		&m_pDepthStencilSurface,
+		NULL );
+
+	if( SUCCEEDED(hr) )
+	{
+		hr = DEVICE.GetRenderTarget( 0, &m_pSavedRenderSurface );
+
+		if( FAILED(hr) )
+		{
+			DEBUG_WARNING(hr);
+			return false;
+		}
+
+		hr = DEVICE.GetDepthStencilSurface( &m_pSavedDepthStencilSurface );
+
+		if( FAILED(hr) )
+		{
+			DEBUG_WARNING(hr);
+			return false;
+		}
+	}
+
+	DEBUG_RELEASE(m_pDepthStencilSurface);
+
+	m_pDepthStencilSurface = NULL;
+
+	return true;
+}
+
 bool CTexturePrinter::Disable()
 {
 	DEBUG_RELEASE(m_pSavedRenderSurface);
@@ -75,6 +118,11 @@ bool CTexturePrinter::Disable()
 bool CTexturePrinter::Restore()
 {
 	HRESULT hr;
+	RECT Rect;
+
+	DEBUG_RELEASE(m_pSavedRenderSurface);
+	DEBUG_RELEASE(m_pSavedDepthStencilSurface);
+	DEBUG_RELEASE(m_pDepthStencilSurface);
 
 	hr = DEVICE.CreateDepthStencilSurface( 
 		GAMEHOST.GetBackBufferSurfaceDesc().Width, 
@@ -92,11 +140,26 @@ bool CTexturePrinter::Restore()
 		return false;
 	}
 
-	DEVICE.GetRenderTarget( 0, &m_pSavedRenderSurface );
-	DEVICE.GetDepthStencilSurface( &m_pSavedDepthStencilSurface );
+	hr = DEVICE.GetRenderTarget( 0, &m_pSavedRenderSurface );
+
+	if( FAILED(hr) )
+	{
+		DEBUG_WARNING(hr);
+		return false;
+	}
+
+	hr = DEVICE.GetDepthStencilSurface( &m_pSavedDepthStencilSurface );
+
+	if( FAILED(hr) )
+	{
+		DEBUG_WARNING(hr);
+		return false;
+	}
 
 	for(std::vector<LPTEXTURE>::iterator i = m_TextureList.begin(); i != m_TextureList.end(); i ++)
 	{
+		DEBUG_RELEASE( (*i)->pSurface );
+
 		hr = (*i)->Texture.GetTexture()->GetSurfaceLevel( 0, &( (*i)->pSurface ) );
 
 		if( FAILED(hr) )
@@ -112,6 +175,13 @@ bool CTexturePrinter::Restore()
 			DEBUG_WARNING(hr);
 			return false;
 		}
+
+		Rect.left   = 0;
+		Rect.top    = 0;
+		Rect.right  = (*i)->Desc.Width;
+		Rect.bottom = (*i)->Desc.Height;
+
+		hr = DEVICE.ColorFill( (*i)->pSurface, &Rect, 0 );
 	}
 
 	return true;
@@ -122,10 +192,13 @@ void CTexturePrinter::Begin()
 	DEVICE.SetDepthStencilSurface(m_pDepthStencilSurface);
 }
 
-void CTexturePrinter::End()
+void CTexturePrinter::End(ENDFLAG Flag)
 {
-	DEVICE.SetRenderTarget(0, m_pSavedRenderSurface);
-	DEVICE.SetDepthStencilSurface(m_pSavedDepthStencilSurface);
+	if( TEST_FLAG(Flag, RENDER_SURFACE) )
+		DEVICE.SetRenderTarget(0, m_pSavedRenderSurface);
+
+	if( TEST_FLAG(Flag, DEPTH_STENCIL_SURFACE) )
+		DEVICE.SetDepthStencilSurface(m_pSavedDepthStencilSurface);
 }
 
 void CTexturePrinter::Activate(zerO::UINT uTextureIndex, zerO::UINT32 uClearFlag, zerO::ARGBCOLOR Color)
@@ -155,6 +228,10 @@ void CTexturePrinter::Draw(zerO::UINT uTextureIndex)
 
 	LPTEXTURE pTexture = m_TextureList[uTextureIndex];
 
+	DEVICE.SetRenderState(D3DRS_ZENABLE, FALSE);
+	DEVICE.SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	DEVICE.SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+
 	DEVICE.SetRenderTarget(0, pTexture->pSurface);
 
     FLOAT fWidth  = static_cast< float >(pTexture->Desc.Width ) - 0.5f;
@@ -177,6 +254,9 @@ void CTexturePrinter::Draw(zerO::UINT uTextureIndex)
     DEVICE.SetVertexShader(NULL);
     DEVICE.SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
     DEVICE.DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, Vertices, sizeof(VERTEX) );
+
+	DEVICE.SetRenderState(D3DRS_ZENABLE, TRUE);
+	DEVICE.SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 }
 
 bool CTexturePrinter::Destroy()

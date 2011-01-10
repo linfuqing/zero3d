@@ -66,7 +66,7 @@ namespace zerO
 			GETPARTICLEDATA pfnGetSteps,
 			SETPARTICLEDATA pfnSetRenderData);
 
-		void Update();
+		void UpdateTransform();
 
 		bool ApplyForRender();
 
@@ -228,9 +228,9 @@ namespace zerO
 	}
 
 	template<typename T>
-	void CParticleSystem<T>::Update()
+	void CParticleSystem<T>::UpdateTransform()
 	{
-		CSceneNode::Update();
+		CSceneNode::UpdateTransform();
 
 		LPPARTICLENODE pParticle, *ppParticle;
 

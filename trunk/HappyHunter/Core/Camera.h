@@ -103,6 +103,12 @@ namespace zerO
 			FLOAT fNearPlane,
 			FLOAT fFarPlane);
 
+		void SetProjection();
+
+		void ModifyProjectionMatrix(const D3DXPLANE& Plane);
+
+		void GetRayByScreenPosition(D3DXVECTOR3* pRayPosition, D3DXVECTOR3* pRayDirection, FLOAT fScreenX, FLOAT fScreenY);
+
 		void UpdateTransform();
 	private:
 		D3DXMATRIX m_ViewMatrix;

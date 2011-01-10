@@ -88,6 +88,7 @@ technique SinglePassTerrain
 {
     pass P0
     {
+			//FILLMODE = SOLID;
 			//FILLMODE = WIREFRAME;
 			//CULLMODE = NONE;
 			//ZENABLE = TRUE;

@@ -11,7 +11,7 @@ m_strEffectFile(TEXT("")),
 m_pMesh(NULL),
 m_pShadow(NULL),
 m_bIsCreated(false),
-m_bIsVisibleShadow(true),
+m_bIsVisibleShadow(false),
 m_bIsCulled(false)
 {
 }
@@ -19,6 +19,29 @@ m_bIsCulled(false)
 CStaticMesh::~CStaticMesh()
 {
 	Destroy();
+}
+
+bool CStaticMesh::CreateSphere(zerO::FLOAT fRadius, zerO::UINT uSlices, zerO::UINT uStacks)
+{
+	//创建效果
+	if( !m_RenderMethod.LoadEffect( (PBASICCHAR)m_strEffectFile.c_str() ) )
+		return false;
+
+	DEBUG_NEW(m_pMesh, CMesh);
+
+	if( !m_pMesh->CreateSphere(fRadius, uSlices, uStacks) )
+		return false;
+
+	DEBUG_NEW(m_pShadow, CShadowVolume);
+
+	if( !m_pShadow->Create(*m_pMesh->GetMesh(), *this) )
+		return false;
+
+	m_LocalRect = m_pMesh->GetRectangle();
+
+	m_bIsCreated = true;
+
+	return true;
 }
 
 bool CStaticMesh::Create(const PBASICCHAR meshFile)
@@ -65,8 +88,8 @@ void CStaticMesh::Clone(CStaticMesh& StaticMesh)const
 
 bool CStaticMesh::ApplyForRender()
 {
-	if(m_bIsCulled)
-		return true;
+	//if(m_bIsCulled)
+	//	return true;
 
 	CEffect* pEffect = m_RenderMethod.GetEffect();
 	if(pEffect)

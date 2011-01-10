@@ -33,9 +33,9 @@ zerO::CHDREffect/*CUnderWaterEffect*/ g_Effect;
 zerO::CBullet g_Bullet;
 
 zerO::CStaticMesh g_Mesh;
-zerO::CStaticMesh g_Copy;
-//zerO::CSkinMesh   g_SkinMesh;
-//zerO::CSkinMesh   g_CopyMesh;
+//zerO::CStaticMesh g_Copy;
+zerO::CSkinMesh   g_SkinMesh;
+zerO::CSkinMesh   g_CopyMesh;
 
 zerO::CTerrainSystem g_TerrainSystem;
 
@@ -112,13 +112,14 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 
 	CAMERA.SetPosition(Postion);
 
-	/*g_SkinMesh.SetEffectFile( TEXT("HLSLSkinSoftware.fx") );
+	g_SkinMesh.SetEffectFile( TEXT("HLSLSkinSoftware.fx") );
 	if ( !g_SkinMesh.Create(TEXT("Aardvark.X")) )
+	//if ( !g_SkinMesh.Create(TEXT("MiShuShi.X")) )
 		return S_FALSE;
 
-	g_CopyMesh.SetEffectFile( TEXT("HLSLSkinSoftware.fx") );
-	if ( !g_CopyMesh.Create( TEXT("机关枪.x") ) )
-		return S_FALSE;*/
+	//g_CopyMesh.SetEffectFile( TEXT("HLSLSkinSoftware.fx") );
+	//if ( !g_CopyMesh.Create( TEXT("机关枪.x") ) )
+	//	return S_FALSE;
 
 	//float start = 1000.0f;
 	//float end   = 2000.0f;
@@ -130,15 +131,18 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	//pd3dDevice->SetRenderState(D3DRS_FOGCOLOR, 0x7f00ff00);
 	//g_SkinMesh.Clone(g_CopyMesh);
 
-	//FOGMANAGER.SetColor(0xff0000ff);
-	//FOGMANAGER.SetLinearFog(100.0f, 1500.0f);
+	//FOGMANAGER.SetColor(0x7f7f007f);
+	//FOGMANAGER.SetLinearFog(0.1f, 0.7f/*10.0f, 80000.0f*/);
+	//FOGMANAGER.SetExp2Fog(0.4f);
 	//GAMEHOST.SetFogEnable(true);
 
-	g_Mesh.SetEffectFile( TEXT("ItemEffect.fx") );
+	//g_Mesh.SetEffectFile( TEXT("HLSLTextureEffect.fx") );
 
-	g_Mesh.Create( TEXT("Brown bear.x") );
+	//g_Mesh.Create( TEXT("MiShuShi.x") );
 
-	g_Mesh.Clone(g_Copy);
+	//g_Mesh.SetShadowVisible(true);
+
+	//g_Mesh.Clone(g_Copy);
 
 	g_Bullet.Create(100, 500, 2000, 1.0f);
 
@@ -221,21 +225,21 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	//g_SkyBoxSurface.LoadTexture(TEXT("blue_0004.png"), 5);
 	//g_SkyBoxSurface.LoadTexture(TEXT("Cloud1.png"), 6);
 
-	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_UP.jpg"), 0);
+	/*g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_UP.jpg"), 0);
 	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_DN.jpg"), 1);
 	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_LF.jpg"), 2);
 	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_RT.jpg"), 3);
 	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_FR.jpg"), 4);
-	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_BK.jpg"), 5);
+	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_BK.jpg"), 5);*/
 	//g_SkyBoxSurface.LoadTexture(TEXT("night/Cloud.tga"), 6);
 
-	/*g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_UP.dds"), 0);
+	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_UP.dds"), 0);
 	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_DN.dds"), 1);
 	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_LF.dds"), 2);
 	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_RT.dds"), 3);
 	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_FR.dds"), 5);
-	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_BK.dds"), 4);*/
-	////g_SkyBoxSurface.LoadTexture(TEXT("Cloud1.png"), 6);
+	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_BK.dds"), 4);
+	//g_SkyBoxSurface.LoadTexture(TEXT("Cloud1.png"), 6);
 
 	/*g_SkyBoxSurface.LoadTexture(TEXT("sky_blue/blue_0005.jpg"), 0);
 	g_SkyBoxSurface.LoadTexture(TEXT("sky_blue/blue_0006.jpg"), 1);
@@ -262,7 +266,7 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
   //   light.Range       = 1000.0f;
 
 	 //LIGHTMANAGER.SetLight(light, 0);
-	 LIGHTMANAGER.SetAmbient(0xffffffff);
+	LIGHTMANAGER.SetAmbient(0xffffffff);
 
 	GAMEHOST.SetLightEnable(true);
 
@@ -355,10 +359,10 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
 	//根据光源位置更新阴影体
 	//g_pShadowVolume->Update();
 
-	g_Mesh.Update();
-	g_Copy.Update();
-	/*g_SkinMesh.Update();
-	g_CopyMesh.Update();*/
+	//g_Mesh.Update();
+	//g_Copy.Update();
+	g_SkinMesh.Update();
+	//g_CopyMesh.Update();
 
 	//g_SkinMesh.SetDirection(D3DXVECTOR3(0, 0, -1.0f));
 	//g_CopyMesh.SetSceneDirection(D3DXVECTOR3(-0.588091, -0.030936, 0.808203));
@@ -374,45 +378,50 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
 
 	static FLOAT x = 0, y = 0, z = 0, RotationY = 0, RotationX = 0;
 
-	/*D3DXMATRIX Matrix, Rotation, Translation;
+	//RotationY ++;
+	/*y ++;
+
+	D3DXMATRIX Matrix, Rotation, Translation;
 
 	D3DXMatrixIdentity(&Matrix);
 
-	D3DXMatrixRotationYawPitchRoll(&Rotation, RotationY / 180 * D3DX_PI, RotationX / 180 * D3DX_PI, 0.0f);
+	D3DXMatrixRotationYawPitchRoll(&Rotation, 0.0f, 0.0f, y / 180.0f * D3DX_PI/*RotationY / 180 * D3DX_PI, RotationX / 180 * D3DX_PI*//*);
 
-	Matrix *= Rotation;
+	Matrix *= Rotation;*/
 
-	D3DXMatrixTranslation( &Translation, x, g_Terrain.GetHeight(CAMERA.GetWorldPosition().x, CAMERA.GetWorldPosition().z) + 100.0f, z );
+	//D3DXMatrixTranslation( &Translation, x, g_Terrain.GetHeight(CAMERA.GetWorldPosition().x, CAMERA.GetWorldPosition().z) + 100.0f, z );
 
-	Matrix *= Translation;
+	//Matrix *= Translation;
 
-	CAMERA.SetTransform(Matrix);*/
+	//CAMERA.SetTransform(Matrix);
 
-	g_Bullet.Update();
+	//g_SkinMesh.SetTransform(Matrix);
 
-	g_Bullet.SetDirection( CAMERA.GetWorldForward() );
+	//g_Bullet.Update();
 
-	g_Bullet.SetSource( D3DXVECTOR3(- 10.0f, - 10.0f, 1.0f) + CAMERA.GetWorldPosition() );
+	//g_Bullet.SetDirection( CAMERA.GetWorldForward() );
 
-	g_Mesh.SetPosition( 
+	//g_Bullet.SetSource( D3DXVECTOR3(- 10.0f, - 10.0f, 1.0f) + CAMERA.GetWorldPosition() );
+
+	/*g_Mesh.SetPosition( 
 		D3DXVECTOR3(
 		g_Mesh.GetPosition().x, 
 		g_TerrainSystem.GetTerrain()->GetHeight(g_Mesh.GetPosition().x, g_Mesh.GetPosition().z) + 100.0f, 
-		g_Mesh.GetPosition().z)  );
+		g_Mesh.GetPosition().z)  );*/
 
-	g_Copy.SetPosition( 
+	/*g_Copy.SetPosition( 
 		D3DXVECTOR3(
 		100, 
 		g_TerrainSystem.GetTerrain()->GetHeight(g_Mesh.GetPosition().x, g_Mesh.GetPosition().z) + 100.0f, 
-		g_Mesh.GetPosition().z)  );
+		g_Mesh.GetPosition().z)  );*/
 
-	/*g_SkinMesh.SetPosition( 
+	g_SkinMesh.SetPosition( 
 		D3DXVECTOR3(
 		g_SkinMesh.GetPosition().x, 
 		g_TerrainSystem.GetTerrain()->GetHeight(g_SkinMesh.GetPosition().x, g_SkinMesh.GetPosition().z), 
 		g_SkinMesh.GetPosition().z)  );
 
-	g_CopyMesh.SetPosition( 
+	/*g_CopyMesh.SetPosition( 
 		D3DXVECTOR3(
 		100, 
 		g_TerrainSystem.GetTerrain()->GetHeight(g_SkinMesh.GetPosition().x, g_SkinMesh.GetPosition().z), 
@@ -521,13 +530,13 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
 
 		g_TerrainSystem.Render();
 
-		g_Mesh.ApplyForRender();
-		g_Copy.ApplyForRender();
+		//g_Mesh.ApplyForRender();
+		//g_Copy.ApplyForRender();
 
-		g_Bullet.ApplyForRender();
+		//g_Bullet.ApplyForRender();
 
-		/*g_SkinMesh.ApplyForRender();
-		g_CopyMesh.ApplyForRender();*/
+		g_SkinMesh.ApplyForRender();
+		//g_CopyMesh.ApplyForRender();
 
 		//结束渲染
 		g_Game.EndRender();
@@ -543,7 +552,7 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
 		//渲染阴影
 		//g_pShadowVolume->Render(false);
 
-		DrawShadow(pd3dDevice);
+		//DrawShadow(pd3dDevice);
 
 		//渲染文本和控件
         DXUT_BeginPerfEvent( DXUT_PERFEVENTCOLOR, L"HUD / Stats" ); 

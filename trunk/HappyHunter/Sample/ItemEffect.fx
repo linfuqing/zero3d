@@ -113,7 +113,7 @@ PS_OUTPUT PS(float2 Tex: TEXCOORD0, float3 Light : TEXCOORD1,
     float4 spec    = min(pow(saturate(dot(Reflect, ViewDir)), 25), color.a);
 
     //混合纹理颜色和光照颜色, 得到每个像素的最终颜色
-    Out_ps.Color = float4(1.0f, 0.5f, 0.5f, 0.5f);/*0.2 * color + (shadow * (color * diff + spec) )*/;
+    Out_ps.Color = /*float4(1.0f, 0.5f, 0.5f, 0.5f);*/0.2 * color + (shadow * (color * diff + spec) );
     
     return Out_ps;
 }
@@ -126,6 +126,9 @@ technique TShader
 {
     pass P0
     {
+		//FILLMODE = WIREFRAME;
+		//CULLMODE = NONE;
+		
         VertexShader = compile vs_2_0 VS();
         PixelShader  = compile ps_2_0 PS();
     }
