@@ -111,11 +111,15 @@ namespace zerO
 
 		void Activate(UINT uTextureIndex, UINT32 uClearFlag = 0, ARGBCOLOR Color = 0);
 		void Draw(UINT uTextureIndex);
+		bool Stretch(INT nDestinationIndex, INT nSourceIndex = -1);
+		bool RnederToTexture(INT nTextureIndex = - 1);
 
 		bool Destroy();
 
 	private:
 		std::vector<LPTEXTURE> m_TextureList;
+
+		INT m_nCurrentTexture;
 
 		/// 保存原有的渲染表面
 		LPDIRECT3DSURFACE9 m_pSavedRenderSurface;

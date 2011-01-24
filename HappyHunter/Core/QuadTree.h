@@ -35,7 +35,7 @@ namespace zerO
 	class CQuadTree;
 
 	class CQuadTreeObject :
-		public CSceneNode
+		public CSceneManagerEntry
 	{
 		friend class CQuadTreeNode;
 	public:
@@ -50,13 +50,13 @@ namespace zerO
 
 		virtual void PrepareForRender();
 
-		CQuadTreeObject* GetNext()const;
+		//CQuadTreeObject* GetNext()const;
 
 		/*void SetQueadTree(CQuadTreeNode* pParentQuadTreeNode, UINT32 uMaskZ);*/
 
 		void AttachToQuadTree(CQuadTree* pParent);
 
-		void DetachFromSearchList();
+		//void DetachFromSearchList();
 
 		void DetachFromQuadTree();
 
@@ -73,11 +73,12 @@ namespace zerO
 		CQuadTreeObject* m_pTreeForward;
 		CQuadTreeObject* m_pTreeRear;
 
-		CQuadTreeObject* m_pSearchForward;
-		CQuadTreeObject* m_pSearchRear;
+		//CQuadTreeObject* m_pSearchForward;
+		//CQuadTreeObject* m_pSearchRear;
 
 		CQuadTree*     m_pParentQuadTree;
 		CQuadTreeNode* m_pParentQuadTreeNode;
+
 		UINT32 m_uMaskY;
 	};
 
@@ -91,10 +92,10 @@ namespace zerO
 		return m_pTreeRear;
 	}*/
 
-	inline CQuadTreeObject* CQuadTreeObject::GetNext()const
+	/*inline CQuadTreeObject* CQuadTreeObject::GetNext()const
 	{
 		return m_pSearchForward;
-	}
+	}*/
 
 	/*inline void CQuadTreeObject::__SetTreeForward(CQuadTreeObject* pTreeForward)
 	{
@@ -144,7 +145,7 @@ namespace zerO
 			pRear->m_pSearchForward = this;
 	}
 
-	inline void CQuadTreeObject::DetachFromSearchList()
+	/*inline void CQuadTreeObject::DetachFromSearchList()
 	{
 		if(m_pSearchForward)
 			m_pSearchForward->m_pSearchRear = m_pSearchRear;
@@ -154,7 +155,7 @@ namespace zerO
 
 		m_pSearchForward = NULL;
 		m_pSearchRear    = NULL;
-	}
+	}*/
 
 	/*inline void CQuadTreeObject::ClearSearchListData()
 	{
@@ -240,9 +241,9 @@ namespace zerO
 		void Create(const CRectangle3D& Boundary, UINT uDepth);
 		bool Destroy();
 
-		CSceneNode* SearchObject(const CRectangle3D& WorldRectangle, const LPFRUSTUM pFrustum = NULL);
+		CSceneManagerEntry* SearchObject(const CRectangle3D& WorldRectangle, const LPFRUSTUM pFrustum = NULL, CSceneManagerEntry** ppSearchListTail = NULL);
 
-		UINT32 AddObject(CSceneNode* pObject);
+		UINT32 AddObject(CSceneManagerEntry* pObject);
 	private:
 		CQuadTreeNode* m_pLevelNodes[MAXINUM_TREE_DEPTH];
 		D3DXVECTOR3 m_Scale;
@@ -293,7 +294,7 @@ namespace zerO
 	}
 
 	
-	inline UINT32 CQuadTree::AddObject(CSceneNode* pObject)
+	inline UINT32 CQuadTree::AddObject(CSceneManagerEntry* pObject)
 	{
 		DEBUG_ASSERT(m_uDepth, "The quad tree has not been created.");
 

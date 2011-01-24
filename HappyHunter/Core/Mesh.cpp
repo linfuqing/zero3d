@@ -95,8 +95,7 @@ bool CMesh::Load(const PBASICCHAR pcFileName)
 			RemovePathFromFileName(d3dxMaterials[i].pTextureFilename, szFile);
 			BASICSTRING texFile;
 			GetRealPath(pcFileName, texFile, TEXT("/"), szFile);
-			if( !pSurface->LoadTexture((PBASICCHAR)texFile.c_str(), 0) )
-				return false;
+			pSurface->LoadTexture((PBASICCHAR)texFile.c_str(), 0);
 
 			BASICSTRING normalMapFile;
 			GetRealPath((PBASICCHAR)texFile.c_str(), normalMapFile, TEXT("."), TEXT("-normalmap.tga"), true);
@@ -111,7 +110,9 @@ bool CMesh::Load(const PBASICCHAR pcFileName)
 
 	DEBUG_RELEASE( pD3DXMtrlBuffer );
 
-	return __GenerateDeclMesh(m_pMesh) && __GetBoundBox(m_pMesh, m_Rectangle);
+	__GenerateDeclMesh(m_pMesh) && __GetBoundBox(m_pMesh, m_Rectangle);
+
+	return true;
 }
 
 bool CMesh::__GenerateDeclMesh(LPD3DXMESH& pMesh)

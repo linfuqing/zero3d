@@ -13,7 +13,7 @@ namespace zerO
 
 		const D3DXMATRIX GetMatrix()const;
 
-		virtual void Update();
+		virtual void UpdateViewSpace();
 
 		virtual void Render() = 0;
 

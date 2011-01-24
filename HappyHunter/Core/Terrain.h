@@ -70,7 +70,8 @@ namespace zerO
 		return m_uSectorY;
 	}
 
-	class CTerrain
+	class CTerrain :
+		public CSceneObject
 	{
 		typedef struct
 		{
@@ -342,6 +343,8 @@ namespace zerO
 
 		void Update();
 
+		void UpdateBeforeRender();
+
 		bool Destroy();
 
 		bool SubmitSection(CTerrainSection* pSection)const;
@@ -411,9 +414,9 @@ namespace zerO
 			UINT  uDepth,
 			TYPE Type = NORMAL);
 
-		void Update();
+		//void Update();
 
-		void Render();
+		//void Render();
 
 		void Destroy();
 

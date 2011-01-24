@@ -9,6 +9,7 @@
 #include "Bullet.h"
 #include "HDREffect.h"
 #include "UnderWaterEffect.h"
+#include "Water.h"
 
 #include "SDKmisc.h"
 
@@ -22,29 +23,32 @@ zerO::CGameHost g_Game;
 
 #define HEIGHT_MAP_FILE TEXT("summer6.jpg")
 
-zerO::CQuadTree g_QuadTree;
+//zerO::CQuadTree g_QuadTree;
 zerO::CTexture  g_HeightMap;
 zerO::CTexture  g_Texture;
-zerO::CTexture  g_Detail;
+//zerO::CTexture  g_Detail;
 zerO::CSurface  g_TerrainSurface;
-zerO::CTerrain g_Terrain;
+//zerO::CTerrain g_Terrain;
 zerO::CHDREffect/*CUnderWaterEffect*/ g_Effect;
 
-zerO::CBullet g_Bullet;
+//zerO::CBullet g_Bullet;
 
 zerO::CStaticMesh g_Mesh;
 //zerO::CStaticMesh g_Copy;
 zerO::CSkinMesh   g_SkinMesh;
-zerO::CSkinMesh   g_CopyMesh;
+//zerO::CSkinMesh   g_CopyMesh;
 
 zerO::CTerrainSystem g_TerrainSystem;
 
 zerO::CSkyBox g_SkyBox;
 zerO::CSurface g_SkyBoxSurface;
 
+zerO::CWater g_Water;
+zerO::CTexture g_WaterBumpMap;
+
 //zerO::CShadowVolume        g_ShadowVolume2;
 //zerO::CShadowVolume*       g_pShadowVolume;
-LPDIRECT3DVERTEXBUFFER9    g_pBigSquareVB;
+//LPDIRECT3DVERTEXBUFFER9    g_pBigSquareVB;
 //zerO::CSkyDome g_SkyDome;
 
 //阴影举行顶点结构和顶点格式
@@ -82,7 +86,31 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* p
 	//为当前设备设置深度模板缓冲区格式
 	pDeviceSettings->d3d9.pp.AutoDepthStencilFormat = D3DFMT_D24S8;
 
+	pDeviceSettings->d3d9.pp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+	pDeviceSettings->d3d9.pp.MultiSampleType = D3DMULTISAMPLE_NONE;
+
+
     return true;
+}
+
+void RefractionReset(
+				  zerO::UINT& uWidth, 
+				  zerO::UINT& uHeight, 
+				  D3DFORMAT & Format)
+{
+	uWidth     = GAMEHOST.GetBackBufferSurfaceDesc().Width  >> 2;
+	uHeight    = GAMEHOST.GetBackBufferSurfaceDesc().Height >> 2;
+	Format     = GAMEHOST.GetBackBufferSurfaceDesc().Format;
+}
+
+void ReflectionReset(
+				  zerO::UINT& uWidth, 
+				  zerO::UINT& uHeight, 
+				  D3DFORMAT & Format)
+{
+	uWidth     = GAMEHOST.GetBackBufferSurfaceDesc().Width  >> 3;
+	uHeight    = GAMEHOST.GetBackBufferSurfaceDesc().Height >> 3;
+	Format     = GAMEHOST.GetBackBufferSurfaceDesc().Format;
 }
 
 //--------------------------------------------------------------------------------------
@@ -103,10 +131,10 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	zerO::CGameHost::DEVICESETTINGS DeviceSettings;
 	memcpy( &DeviceSettings, &DXUTGetDeviceSettings().d3d9, sizeof(zerO::CGameHost::DEVICESETTINGS) );
 
-	if( !g_Game.Create(DXUTGetD3D9Object(), pd3dDevice, DeviceSettings, 0xff) )
+	if( !g_Game.Create(DXUTGetD3D9Object(), pd3dDevice, DeviceSettings, 0xf) )
 		return S_FALSE;
 
-	CAMERA.SetProjection(D3DX_PI / 4.0f, (zerO::FLOAT)DeviceSettings.pp.BackBufferWidth / DeviceSettings.pp.BackBufferHeight, 0.5f, 3000.0f);
+	CAMERA.SetProjection(D3DX_PI / 3.0f, 0.2f, 10000.0f);
 
 	D3DXVECTOR3 Postion(0.0f, 0.0f, - 1000.0f);
 
@@ -116,6 +144,8 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	if ( !g_SkinMesh.Create(TEXT("Aardvark.X")) )
 	//if ( !g_SkinMesh.Create(TEXT("MiShuShi.X")) )
 		return S_FALSE;
+
+	g_SkinMesh.SetShadowVisible(true);
 
 	//g_CopyMesh.SetEffectFile( TEXT("HLSLSkinSoftware.fx") );
 	//if ( !g_CopyMesh.Create( TEXT("机关枪.x") ) )
@@ -131,28 +161,47 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	//pd3dDevice->SetRenderState(D3DRS_FOGCOLOR, 0x7f00ff00);
 	//g_SkinMesh.Clone(g_CopyMesh);
 
-	//FOGMANAGER.SetColor(0x7f7f007f);
-	//FOGMANAGER.SetLinearFog(0.1f, 0.7f/*10.0f, 80000.0f*/);
+	//FOGMANAGER.SetColor(0xffffffff);
+	//FOGMANAGER.SetLinearFog(10.0f, 2000.0f);
 	//FOGMANAGER.SetExp2Fog(0.4f);
 	//GAMEHOST.SetFogEnable(true);
 
 	//g_Mesh.SetEffectFile( TEXT("HLSLTextureEffect.fx") );
 
-	//g_Mesh.Create( TEXT("MiShuShi.x") );
+	//g_Mesh.Create( TEXT("1.x") );
+
+	//g_Mesh.SetScale(D3DXVECTOR3(10, 10, 10) );
 
 	//g_Mesh.SetShadowVisible(true);
 
+	//g_Copy.SetEffectFile( TEXT("HLSLTextureEffect.fx") );
+
+	//g_Copy.Create( TEXT("mishushi.x") );
+
+	//g_Copy.SetShadowVisible(true);
+
 	//g_Mesh.Clone(g_Copy);
 
-	g_Bullet.Create(100, 500, 2000, 1.0f);
+	/*g_Bullet.Create(100, 500, 2000, 1.0f);
 
 	g_Bullet.SetSpeed(10.0f);
 	g_Bullet.SetStep(10);
 	g_Bullet.SetLength(100);
-	g_Bullet.GetSurface().LoadTexture(TEXT("DRUIDC03.tga"), 0);
+	g_Bullet.GetSurface().LoadTexture(TEXT("DRUIDC03.tga"), 0);*/
 
 	g_Effect.Create(6);
-	GAMEHOST.SetFullScreenEffect(&g_Effect);
+	//GAMEHOST.SetFullScreenEffect(&g_Effect);
+	/*g_Water.Create(10000.0f, 10000.0f, 10, 10, RefractionReset, ReflectionReset);
+	if( !g_Water.GetRenderMethod().LoadEffect( TEXT("WaterEffect.fx") ) )
+		return S_FALSE;
+
+	D3DXMATRIX Matrix;
+	D3DXMatrixTranslation(&Matrix, 0, 400, 0);
+	g_Water.SetTransform(Matrix);
+
+	g_WaterBumpMap.Load( TEXT("wavesbump.dds") );
+	g_Water.SetBumpMap(&g_WaterBumpMap);*/
+
 	//创建阴影体
 	/*g_pShadowVolume = new zerO::CShadowVolume();
 
@@ -181,7 +230,7 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	zerO::CRectangle3D Rect;
 	Rect.Set(- 2560.0f, 2560.0f, 0.0f, 640.0f, - 2560.0f, 2560.0f);
 
-	g_TerrainSystem.Create(&g_HeightMap, Rect, 6, 4/*, zerO::CTerrainSystem::ROAM*/);
+	g_TerrainSystem.Create(&g_HeightMap, Rect, 3, 4/*, zerO::CTerrainSystem::ROAM*/);
 	/*g_QuadTree.Create(Rect, 4);
 
 	g_Terrain.Create(NULL, &g_HeightMap, Rect, 6);
@@ -191,10 +240,10 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 
 	g_Texture.Load( TEXT("summer6_TX.dds") );
 
-	g_Detail.Load( TEXT("dirt_grass.jpg") );
+	/*g_Detail.Load( TEXT("dirt_grass.jpg") );*/
 
 	g_TerrainSurface.SetTexture(&g_Texture, 0);
-	g_TerrainSurface.SetTexture(&g_Detail, 1);
+	/*g_TerrainSurface.SetTexture(&g_Detail, 1);*/
 
 	g_TerrainSystem.GetTerrain()->GetRenderMethod().SetSurface(&g_TerrainSurface);
 	g_TerrainSystem.GetTerrain()->GetRenderMethod().LoadEffect( TEXT("Test.fx") );
@@ -207,7 +256,7 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 
 	//g_SkyBox.SetFogEnable(true);
 
-	g_SkyBox.SetCloudSpeed(0.01f, 0.01f);
+	/*g_SkyBox.SetCloudSpeed(0.01f, 0.01f);*/
 
 	D3DMATERIAL9 Matrial;
 	memset( &Matrial, 0, sizeof(D3DMATERIAL9) );
@@ -268,12 +317,12 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	 //LIGHTMANAGER.SetLight(light, 0);
 	LIGHTMANAGER.SetAmbient(0xffffffff);
 
-	GAMEHOST.SetLightEnable(true);
+	GAMEHOST.SetLightEnable(false);
 
 	//创建矩形顶点缓冲区
-    V_RETURN( pd3dDevice->CreateVertexBuffer( 4*sizeof(SHADOWVERTEX),
+    /*V_RETURN( pd3dDevice->CreateVertexBuffer( 4*sizeof(SHADOWVERTEX),
                                        D3DUSAGE_WRITEONLY, SHADOWVERTEX::FVF,
-                                       D3DPOOL_MANAGED, &g_pBigSquareVB, NULL ));
+                                       D3DPOOL_MANAGED, &g_pBigSquareVB, NULL ));*/
 
     return S_OK;
 }
@@ -292,19 +341,19 @@ HRESULT CALLBACK OnD3D9ResetDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFA
 		return S_FALSE;
 
 	//填充矩形顶点缓冲区
-	SHADOWVERTEX* v;
-    float sx = 100.0f;//(float)pBackBufferSurfaceDesc->Width;
-    float sy = 100.0f;//(float)pBackBufferSurfaceDesc->Height;
-    g_pBigSquareVB->Lock( 0, 0, (void**)&v, 0 );
-    v[0].p = D3DXVECTOR4(  0, sy, 0.0f, 1.0f );
-    v[1].p = D3DXVECTOR4(  0,  0, 0.0f, 1.0f );
-    v[2].p = D3DXVECTOR4( sx, sy, 0.0f, 1.0f );
-    v[3].p = D3DXVECTOR4( sx,  0, 0.0f, 1.0f );
-    v[0].color = 0x7f000000;
-    v[1].color = 0x7f000000;
-    v[2].color = 0x7f000000;
-    v[3].color = 0x7f000000;
-    g_pBigSquareVB->Unlock();
+	//SHADOWVERTEX* v;
+ //   float sx = 100.0f;//(float)pBackBufferSurfaceDesc->Width;
+ //   float sy = 100.0f;//(float)pBackBufferSurfaceDesc->Height;
+ //   g_pBigSquareVB->Lock( 0, 0, (void**)&v, 0 );
+ //   v[0].p = D3DXVECTOR4(  0, sy, 0.0f, 1.0f );
+ //   v[1].p = D3DXVECTOR4(  0,  0, 0.0f, 1.0f );
+ //   v[2].p = D3DXVECTOR4( sx, sy, 0.0f, 1.0f );
+ //   v[3].p = D3DXVECTOR4( sx,  0, 0.0f, 1.0f );
+ //   v[0].color = 0x7f000000;
+ //   v[1].color = 0x7f000000;
+ //   v[2].color = 0x7f000000;
+ //   v[3].color = 0x7f000000;
+ //   g_pBigSquareVB->Unlock();
 
 	//pd3dDevice->SetRenderState( D3DRS_AMBIENT, 0xffffffff );
 
@@ -338,30 +387,32 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
 	//light.Direction.y =  -1.0f;
 	//light.Direction.z = 1.0f;
 
-	static float h = 10000;
+	static float h = 1000;
 	float lx,ly,lz;           //光源位置
-	lx = 1000.0f * sinf(timeGetTime()/360.0f);
-	ly = 1000.0f;
-	lz = 1000.0f * cosf(timeGetTime()/360.0f);
-	light.Position= D3DXVECTOR3(lx,ly,lz);
+	lx = 100.0f * sinf(timeGetTime()/360.0f);
+	ly = 100.0f;
+	lz = 100.0f * cosf(timeGetTime()/360.0f);
+	light.Position= D3DXVECTOR3(lx,h,lz);
 	light.Direction = D3DXVECTOR3(lx, 1000, lz);
 
     light.Range        = 100.0f;
 	light.Attenuation0 = 0.9f;
     light.Attenuation1 = 0.0f;
 
+	//h -= 0.1;
+
 	LIGHTMANAGER.SetLight(light, 0);
 
-	GAMEHOST.Update(fElapsedTime);
+	//GAMEHOST.Update(fElapsedTime);
 
-	g_TerrainSystem.Update();
+	//g_TerrainSystem.Update();
 
 	//根据光源位置更新阴影体
 	//g_pShadowVolume->Update();
 
 	//g_Mesh.Update();
 	//g_Copy.Update();
-	g_SkinMesh.Update();
+	//g_SkinMesh.Update();
 	//g_CopyMesh.Update();
 
 	//g_SkinMesh.SetDirection(D3DXVECTOR3(0, 0, -1.0f));
@@ -403,10 +454,16 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
 
 	//g_Bullet.SetSource( D3DXVECTOR3(- 10.0f, - 10.0f, 1.0f) + CAMERA.GetWorldPosition() );
 
-	/*g_Mesh.SetPosition( 
+	g_Mesh.SetPosition( 
 		D3DXVECTOR3(
 		g_Mesh.GetPosition().x, 
-		g_TerrainSystem.GetTerrain()->GetHeight(g_Mesh.GetPosition().x, g_Mesh.GetPosition().z) + 100.0f, 
+		g_TerrainSystem.GetTerrain()->GetHeight(g_Mesh.GetPosition().x, g_Mesh.GetPosition().z) + 200.0f, 
+		g_Mesh.GetPosition().z)  );
+
+	/*g_Copy.SetPosition( 
+		D3DXVECTOR3(
+		g_Mesh.GetPosition().x, 
+		g_TerrainSystem.GetTerrain()->GetHeight(g_Mesh.GetPosition().x, g_Mesh.GetPosition().z) + 50.0f, 
 		g_Mesh.GetPosition().z)  );*/
 
 	/*g_Copy.SetPosition( 
@@ -418,7 +475,7 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
 	g_SkinMesh.SetPosition( 
 		D3DXVECTOR3(
 		g_SkinMesh.GetPosition().x, 
-		g_TerrainSystem.GetTerrain()->GetHeight(g_SkinMesh.GetPosition().x, g_SkinMesh.GetPosition().z), 
+		g_TerrainSystem.GetTerrain()->GetHeight(g_SkinMesh.GetPosition().x, g_SkinMesh.GetPosition().z) + 100, 
 		g_SkinMesh.GetPosition().z)  );
 
 	/*g_CopyMesh.SetPosition( 
@@ -427,12 +484,15 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
 		g_TerrainSystem.GetTerrain()->GetHeight(g_SkinMesh.GetPosition().x, g_SkinMesh.GetPosition().z), 
 		g_SkinMesh.GetPosition().z)  );*/
 
-	CAMERA.SetRotation( 
-		D3DXVECTOR3(RotationX / 180 * D3DX_PI, RotationY / 180 * D3DX_PI, 0.0f) );
 	CAMERA.SetPosition( 
 		D3DXVECTOR3(CAMERA.GetPosition().x, 
 		g_TerrainSystem.GetTerrain()->GetHeight(CAMERA.GetPosition().x, CAMERA.GetPosition().z) + 100.0f, 
 		CAMERA.GetPosition().z) );
+
+	/*CAMERA.SetPosition( 
+		D3DXVECTOR3(CAMERA.GetPosition().x, 
+		CAMERA.GetPosition().y < 450 ? 450 : CAMERA.GetPosition().y, 
+		CAMERA.GetPosition().z) );*/
 
 	if( DXUTIsKeyDown(VK_UP) )
 		RotationX += 1.0f;
@@ -461,39 +521,45 @@ void CALLBACK OnFrameMove( double fTime, float fElapsedTime, void* pUserContext 
 	if( DXUTIsKeyDown('D') )
 		RotationY += 1.0f;
 
-	if( DXUTIsMouseButtonDown(MK_LBUTTON) )
-		g_Bullet.Shoot();
+	CAMERA.SetRotation( 
+		D3DXVECTOR3(RotationX / 180 * D3DX_PI, RotationY / 180 * D3DX_PI, 0.0f) );
+
+	/*if( DXUTIsMouseButtonDown(MK_LBUTTON) )
+		g_Bullet.Shoot();*/
+
+	
+	GAMEHOST.Update(fElapsedTime);
 }
 
 //-----------------------------------------------------------------------------
 // Desc: 渲染阴影
 //-----------------------------------------------------------------------------
-HRESULT DrawShadow(IDirect3DDevice9* pd3dDevice)
-{
-	////关闭深度测试, 启用Alpha混合
-    pd3dDevice->SetRenderState( D3DRS_ZENABLE,          false );
- //   pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, true );
- //   pd3dDevice->SetRenderState( D3DRS_SRCBLEND,  D3DBLEND_SRCALPHA );
- //   pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
-
- //   //设置模板相关渲染状态
-	//pd3dDevice->SetRenderState( D3DRS_STENCILENABLE,    true );
- //   pd3dDevice->SetRenderState( D3DRS_STENCILREF,  0x1 );
- //   pd3dDevice->SetRenderState( D3DRS_STENCILFUNC, D3DCMP_LESSEQUAL );
- //   pd3dDevice->SetRenderState( D3DRS_STENCILPASS, D3DSTENCILOP_KEEP );
-
-    //渲染一个灰色矩形, 只有通过模板测试的像素才会被渲染到颜色缓冲区,表示阴影
-    pd3dDevice->SetFVF( SHADOWVERTEX::FVF );
-    pd3dDevice->SetStreamSource( 0, g_pBigSquareVB, 0, sizeof(SHADOWVERTEX) );
-    pd3dDevice->DrawPrimitive( D3DPT_TRIANGLESTRIP, 0, 2 );
-
-    //恢复渲染状态
-    pd3dDevice->SetRenderState( D3DRS_ZENABLE,          true );
-    /*pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, false );
-	pd3dDevice->SetRenderState( D3DRS_STENCILENABLE,    false );*/
-
-    return S_OK;
-}
+//HRESULT DrawShadow(IDirect3DDevice9* pd3dDevice)
+//{
+//	////关闭深度测试, 启用Alpha混合
+//    pd3dDevice->SetRenderState( D3DRS_ZENABLE,          false );
+// //   pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, true );
+// //   pd3dDevice->SetRenderState( D3DRS_SRCBLEND,  D3DBLEND_SRCALPHA );
+// //   pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+//
+// //   //设置模板相关渲染状态
+//	//pd3dDevice->SetRenderState( D3DRS_STENCILENABLE,    true );
+// //   pd3dDevice->SetRenderState( D3DRS_STENCILREF,  0x1 );
+// //   pd3dDevice->SetRenderState( D3DRS_STENCILFUNC, D3DCMP_LESSEQUAL );
+// //   pd3dDevice->SetRenderState( D3DRS_STENCILPASS, D3DSTENCILOP_KEEP );
+//
+//    //渲染一个灰色矩形, 只有通过模板测试的像素才会被渲染到颜色缓冲区,表示阴影
+//    pd3dDevice->SetFVF( SHADOWVERTEX::FVF );
+//    pd3dDevice->SetStreamSource( 0, g_pBigSquareVB, 0, sizeof(SHADOWVERTEX) );
+//    pd3dDevice->DrawPrimitive( D3DPT_TRIANGLESTRIP, 0, 2 );
+//
+//    //恢复渲染状态
+//    pd3dDevice->SetRenderState( D3DRS_ZENABLE,          true );
+//    /*pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, false );
+//	pd3dDevice->SetRenderState( D3DRS_STENCILENABLE,    false );*/
+//
+//    return S_OK;
+//}
 
 //-----------------------------------------------------------------------------
 // Desc: 渲染文本
@@ -526,20 +592,21 @@ void CALLBACK OnD3D9FrameRender( IDirect3DDevice9* pd3dDevice, double fTime, flo
     if( SUCCEEDED( pd3dDevice->BeginScene() ) )
     {
 		//开始渲染
-		g_Game.BeginRender();
+		//g_Game.BeginRender();
 
-		g_TerrainSystem.Render();
+		//g_TerrainSystem.Render();
 
 		//g_Mesh.ApplyForRender();
 		//g_Copy.ApplyForRender();
 
 		//g_Bullet.ApplyForRender();
 
-		g_SkinMesh.ApplyForRender();
+		//g_SkinMesh.ApplyForRender();
 		//g_CopyMesh.ApplyForRender();
 
 		//结束渲染
-		g_Game.EndRender();
+		//g_Game.EndRender();
+		g_Game.Render();
 
 		/*pd3dDevice->SetVertexShader(NULL);
 		pd3dDevice->SetPixelShader(NULL);*/
@@ -603,8 +670,8 @@ void CALLBACK OnD3D9DestroyDevice( void* pUserContext )
 	//自动化销毁
 	DEBUG_ASSERT(GAMEHOST.Destroy(), "Destroy error.");
 
-	if(g_pBigSquareVB)
-		g_pBigSquareVB->Release();
+	/*if(g_pBigSquareVB)
+		g_pBigSquareVB->Release();*/
 
 	/*g_pShadowVolume->Destroy();*/
 	/*if(g_pShadowVolume )
@@ -643,6 +710,8 @@ INT WINAPI wWinMain( HINSTANCE, HINSTANCE, LPWSTR, int )
     DXUTSetCursorSettings( true, true ); // Show the cursor and clip it when in full screen
     DXUTCreateWindow( L"Sample" );
     DXUTCreateDevice( true, 640, 480 );
+
+	//DXUTToggleFullScreen();
 
     // Start the render loop
     DXUTMainLoop();

@@ -17,7 +17,7 @@ CBackground::~CBackground(void)
 }
 
 
-void CBackground::Update()
+void CBackground::UpdateViewSpace()
 {
 	D3DXVECTOR3 Position = CAMERA.GetWorldPosition();
 

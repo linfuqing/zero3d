@@ -206,11 +206,6 @@ bool CSkyBox::Create(zerO::FLOAT fSize)
 	return m_VertexBuffer.Create(24, sizeof(VERTEX), D3DUSAGE_WRITEONLY, D3DPOOL_MANAGED, (void*)&Box, D3DFVF_XYZ | D3DFVF_TEX1);
 }
 
-void CSkyBox::Update()
-{
-	CBackground::Update();
-}
-
 void CSkyBox::Render()
 {
 #define SET_TEXTURE(i) \

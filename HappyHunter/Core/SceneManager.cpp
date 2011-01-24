@@ -5,8 +5,10 @@
 using namespace zerO;
 
 CSceneManagerEntry::CSceneManagerEntry(void) :
-m_pEntryForward(NULL),
-m_pEntryRear(NULL)
+//m_pTreeForward(NULL),
+//m_pTreeRear(NULL),
+m_pSearchForward(NULL),
+m_pSearchRear(NULL)
 {
 }
 
@@ -17,6 +19,7 @@ CSceneManagerEntry::~CSceneManagerEntry(void)
 CSceneManager::CSceneManager(void) :
 m_Scene(CSceneNode::LOCK_ADDED | CSceneNode::LOCK_REMOVE_CHILD)
 {
+	GAMEHOST.AddSceneManager(*this);
 }
 
 CSceneManager::~CSceneManager(void)
@@ -29,7 +32,7 @@ bool CSceneManager::Destroy()
 	return true;
 }
 
-zerO::UINT32 CSceneManager::AddObject(CSceneNode* pObject)
+zerO::UINT32 CSceneManager::AddObject(CSceneManagerEntry* pObject)
 {
 	m_Scene.AddChild(pObject);
 

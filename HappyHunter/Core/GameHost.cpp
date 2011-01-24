@@ -91,6 +91,16 @@ void CGameHost::RemoveSceneManager(CSceneManager& SceneManager)
 	m_SceneManagerList.remove(&SceneManager);
 }
 
+void CGameHost::AddSceneObject(CSceneObject& SceneObject)
+{
+	m_SceneObjectList.push_back(&SceneObject);
+}
+
+void CGameHost::RemoveSceneObject(CSceneObject& SceneObject)
+{
+	m_SceneObjectList.remove(&SceneObject);
+}
+
 bool CGameHost::Destroy()
 {
 	UINT uTotalResourceTypes = TOTAL_RESOURCE_TYPES;
@@ -106,6 +116,9 @@ bool CGameHost::Destroy()
 		(*i)->Destroy();
 
 	for(std::list<CSceneManager*>::iterator i = m_SceneManagerList.begin(); i != m_SceneManagerList.end(); i ++)
+		(*i)->Destroy();
+
+	for(std::list<CSceneObject*>::iterator i = m_SceneObjectList.begin(); i != m_SceneObjectList.end(); i ++)
 		(*i)->Destroy();
 
 	DEBUG_DELETE(m_pRenderQueue);
@@ -126,6 +139,10 @@ bool CGameHost::Destroy()
 		m_ResourceList[i].clear();
 
 	m_ShadowList.clear();
+
+	m_SceneManagerList.clear();
+
+	m_SceneObjectList.clear();
 
 	return true;
 }
@@ -157,6 +174,8 @@ bool CGameHost::Restore(const D3DSURFACE_DESC& BackBufferSurfaceDesc)
 			if( !(*Iteractor)->Restore() )
 				return false;
 
+	CAMERA.SetProjection();
+
 	LPVERTEX pVertices;
 
 	FLOAT sx = (FLOAT)BackBufferSurfaceDesc.Width;
@@ -168,6 +187,12 @@ bool CGameHost::Restore(const D3DSURFACE_DESC& BackBufferSurfaceDesc)
 		pVertices[1].Position = D3DXVECTOR4(  0,  0, 0.0f, 1.0f );
 		pVertices[2].Position = D3DXVECTOR4( sx, sy, 0.0f, 1.0f );
 		pVertices[3].Position = D3DXVECTOR4( sx,  0, 0.0f, 1.0f );
+
+		pVertices[0].UV       = D3DXVECTOR2(0.0f, 1.0f);
+		pVertices[1].UV       = D3DXVECTOR2(0.0f, 0.0f);
+		pVertices[2].UV       = D3DXVECTOR2(1.0f, 1.0f);
+		pVertices[3].UV       = D3DXVECTOR2(1.0f, 0.0f);
+
 		pVertices[0].Color    = m_ShadowColor;
 		pVertices[1].Color    = m_ShadowColor;
 		pVertices[2].Color    = m_ShadowColor;
@@ -188,6 +213,15 @@ bool CGameHost::Create(LPDIRECT3D9 pDirect, LPDIRECT3DDEVICE9 pDevice, const DEV
 	m_pDirect = pDirect;
 
 	memcpy( &m_DeviceSettings, &DeviceSettings, sizeof(DeviceSettings) );
+
+	m_DeviceSurfaceDest.Format              = m_DeviceSettings.pp.BackBufferFormat;
+	m_DeviceSurfaceDest.Width               = m_DeviceSettings.pp.BackBufferWidth;
+	m_DeviceSurfaceDest.Height              = m_DeviceSettings.pp.BackBufferHeight;
+	m_DeviceSurfaceDest.MultiSampleQuality  = m_DeviceSettings.pp.MultiSampleQuality;
+	m_DeviceSurfaceDest.MultiSampleQuality  = m_DeviceSettings.pp.MultiSampleType;
+
+	m_pDirect->GetDeviceCaps(m_DeviceSettings.AdapterOrdinal, m_DeviceSettings.DeviceType, &m_Caps);
+
 	DEBUG_NEW( m_pRenderQueue, CRenderQueue(uMaxQueue) );
 	//DEBUG_NEW( m_pScene, CSceneNode );
 	DEBUG_NEW(m_pCamera, CCamera);
@@ -220,20 +254,69 @@ bool CGameHost::Update(zerO::FLOAT fElapsedTime)
 
 	m_fTime += fElapsedTime;
 
-	m_pCamera->Update();
+	//m_pCamera->Update();
 
 	m_Scene.Update();
 
-	if(m_pBackground)
-		m_pBackground->Update();
+	UpdateCamera();
 
-	if(m_pWater)
-		m_pWater->Update();
+	//if(m_pBackground)
+	//	m_pBackground->Update();
+
+	//if(m_pWater)
+	//	m_pWater->Update();
 
 	return true;
 }
 
-bool CGameHost::BeginRender()
+bool CGameHost::UpdateCamera()
+{
+	m_pCamera->Update();
+
+	m_pDevice->SetTransform( D3DTS_VIEW, &CAMERA.GetViewMatrix() );
+
+		//ÉèÖÃÍ¶Ó°¾ØÕó
+	m_pDevice->SetTransform( D3DTS_PROJECTION, &CAMERA.GetProjectionMatrix() );
+
+	m_pSearchList = NULL;
+	if( !m_SceneManagerList.empty() )
+	{
+		CSceneManagerEntry* pEntry = NULL;
+		std::list<CSceneManager*>::iterator i = m_SceneManagerList.begin();
+		m_pSearchList = (*i)->SearchObject(m_pCamera->GetWorldRectangle(), (LPFRUSTUM)&m_pCamera->GetFrustum(), &pEntry);
+
+		for(++ i; i != m_SceneManagerList.end(); i ++)
+			(*i)->SearchObject(CAMERA.GetWorldRectangle(), (LPFRUSTUM)&CAMERA.GetFrustum(), &pEntry);
+
+		pEntry = m_pSearchList;
+		while(pEntry)
+		{
+			pEntry->Update();
+
+			pEntry = pEntry->GetNext();
+		}
+	}
+
+	m_Scene.UpdateViewSpace();
+
+	if(m_pBackground)
+		m_pBackground->UpdateViewSpace();
+
+	if(m_pWater)
+		m_pWater->UpdateViewSpace();
+
+	return true;
+}
+
+bool CGameHost::UpdateBeforeRender()
+{
+	for(std::list<CSceneObject*>::iterator i = m_SceneObjectList.begin(); i != m_SceneObjectList.end(); i ++)
+		(*i)->UpdateBeforeRender();
+
+	return true;
+}
+
+/*bool CGameHost::BeginRender()
 {
 	if(m_bLightEnable)
 		m_LightManager.Activate();
@@ -245,7 +328,7 @@ bool CGameHost::BeginRender()
 	else
 		m_pDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
 
-	if(m_pFullScreenEffect/* || m_pWater*/)
+	if(m_pFullScreenEffect || m_pWater)
 	{
 		m_pTexturePrinter->Begin();
 		m_pTexturePrinter->Activate(0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL);
@@ -333,33 +416,37 @@ bool CGameHost::EndRender()
 	}
 
 	return true;
-}
+}*/
 
-bool CGameHost::Render()
+bool CGameHost::RenderBackground()
 {
-	if(m_bLightEnable)
-		m_LightManager.Activate();
-	else
-		m_pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
-
-	if(m_bFogEnable)
-		m_FogManager.Activate();
-	else
-		m_pDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
-
-	if(m_pFullScreenEffect/* || m_pWater*/)
-	{
-		m_pTexturePrinter->Begin();
-		m_pTexturePrinter->Activate(0, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL);
-	}
-
 	if(m_pBackground)
 	{
+		m_pBackground->UpdateViewSpace();
+
 		m_pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-		m_pDevice->SetRenderState( D3DRS_FOGENABLE, m_pBackground->GetFogEnable() );
+		m_pDevice->SetRenderState(D3DRS_FOGENABLE, m_pBackground->GetFogEnable() ? TRUE : FALSE);
 		m_pBackground->Render();
 		m_pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-		m_pDevice->SetRenderState(D3DRS_FOGENABLE, m_bFogEnable);
+		m_pDevice->SetRenderState(D3DRS_FOGENABLE, m_bFogEnable ? TRUE : FALSE);
+
+		return true;
+	}
+
+	return false;
+}
+
+bool CGameHost::RenderScene()
+{
+	if(m_pSearchList)
+	{
+		CSceneManagerEntry* pEntry = m_pSearchList;
+		while(pEntry)
+		{
+			pEntry->AddedToRenderQueue();
+
+			pEntry = pEntry->GetNext();
+		}
 	}
 
 	m_Scene.AddedToRenderQueue();
@@ -381,6 +468,7 @@ bool CGameHost::Render()
 
 		//¹Ø±ÕÉî¶È²âÊÔ, ÆôÓÃAlpha»ìºÏ
 		m_pDevice->SetRenderState( D3DRS_ZENABLE,          FALSE );
+		m_pDevice->SetRenderState( D3DRS_ZWRITEENABLE,     FALSE );
 		m_pDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
 		m_pDevice->SetRenderState( D3DRS_SRCBLEND,  D3DBLEND_SRCALPHA );
 		m_pDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
@@ -405,6 +493,7 @@ bool CGameHost::Render()
 
 		//»Ö¸´äÖÈ¾×´Ì¬
 		m_pDevice->SetRenderState( D3DRS_ZENABLE,          TRUE );
+		m_pDevice->SetRenderState( D3DRS_ZWRITEENABLE,     TRUE );
 		m_pDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
 		m_pDevice->SetRenderState( D3DRS_STENCILENABLE,    FALSE );
 
@@ -412,24 +501,62 @@ bool CGameHost::Render()
 		m_pDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	}
 
+	return true;
+}
+
+bool CGameHost::Render()
+{
+	UpdateBeforeRender();
+
+	if(m_bLightEnable)
+		m_LightManager.Activate();
+	else
+		m_pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+
+	if(m_bFogEnable)
+		m_FogManager.Activate();
+	else
+		m_pDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
+
+	if(m_pFullScreenEffect)
+		m_pTexturePrinter->Activate(0, D3DCLEAR_TARGET/* | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL*/);
+
+	RenderBackground();
+
+	RenderScene();
+
 	if(m_pWater)
-	{
-		//m_pTexturePrinter->End(CTexturePrinter::RENDER_SURFACE);
-		//m_pTexturePrinter->End();
-
-		m_pWater->Render();
-
-		//m_pTexturePrinter->End();
-	}
-	//else if(m_pFullScreenEffect)
-	//	m_pTexturePrinter->End();
+		m_pWater->Render(m_pFullScreenEffect ? true : false);
 
 	if(m_pFullScreenEffect)
 	{
-		m_pTexturePrinter->End();
+		//m_pTexturePrinter->End(CTexturePrinter::RENDER_SURFACE);
 
 		m_pFullScreenEffect->Render(*m_pTexturePrinter);
 	}
 
 	return true;
+}
+
+void CGameHost::FillFullScreen(ARGBCOLOR Color)
+{
+	LPVERTEX pVertices;
+
+	if( m_pVertexBuffer->Lock(0, (void**)&pVertices) )
+	{
+		pVertices[0].Color    = Color;
+		pVertices[1].Color    = Color;
+		pVertices[2].Color    = Color;
+		pVertices[3].Color    = Color;
+
+		m_pVertexBuffer->Unlock();
+	}
+
+	m_pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+
+	m_pVertexBuffer->Activate(0, 0, true);
+
+	m_pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+
+	m_pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 }
