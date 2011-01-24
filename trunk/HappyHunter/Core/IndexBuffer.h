@@ -34,6 +34,8 @@ namespace zerO
 
 		LPDIRECT3DINDEXBUFFER9 GetBuffer()const;
 		D3DPRIMITIVETYPE GetType()const;
+		UINT GetCount()const;
+		UINT GetStride()const;
 
 		UINT GetPrimitiveCount(UINT uNumMember)const;
 		UINT GetPrimitiveCount()const;
@@ -64,6 +66,16 @@ namespace zerO
 	inline D3DPRIMITIVETYPE CIndexBuffer::GetType()const
 	{
 		return m_Type;
+	}
+
+	inline UINT CIndexBuffer::GetCount()const
+	{
+		return m_uMemberCount;
+	}
+
+	inline UINT CIndexBuffer::GetStride()const
+	{
+		return m_uStride;
 	}
 
 	inline UINT CIndexBuffer::GetPrimitiveCount(UINT uNumMember)const

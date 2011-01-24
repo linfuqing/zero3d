@@ -14,12 +14,12 @@ namespace zerO
 	public:
 		typedef enum
 		{
-			LOCK_NONE = 0,
-			LOCK_ADD_CHILD,
-			LOCK_REMOVE_CHILD,
+			LOCK_NONE         = 0x00,
+			LOCK_ADD_CHILD    = 0x01,
+			LOCK_REMOVE_CHILD = 0x02,
 
-			LOCK_ADDED,
-			LOCK_REMOVED
+			LOCK_ADDED        = 0x04,
+			LOCK_REMOVED      = 0x08
 		}LOCKTYPE;
 
 		CSceneNode(UINT32 uFlag = LOCK_NONE);
@@ -55,6 +55,8 @@ namespace zerO
 		virtual bool ApplyForRender();
 
 		virtual void UpdateTransform();
+
+		virtual void UpdateViewSpace();
 
 		virtual bool Destroy();
 

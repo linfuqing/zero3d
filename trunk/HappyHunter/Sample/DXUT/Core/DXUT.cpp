@@ -23,7 +23,7 @@ char (*RtlpNumberOf( UNALIGNED T (&)[N] ))[N];
 // Thread safety
 //--------------------------------------------------------------------------------------
 CRITICAL_SECTION    g_cs;
-bool                g_bThreadSafe = true;
+bool                g_bThreadSafe = false;
 
 
 //--------------------------------------------------------------------------------------

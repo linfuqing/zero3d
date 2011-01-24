@@ -44,10 +44,10 @@ void CQuadTreeRectangle::Convert(const CRectangle3D& Rect, const D3DXVECTOR3& Of
 
 CQuadTreeObject::CQuadTreeObject() :
 m_pParentQuadTreeNode(NULL),
-m_pTreeForward(NULL),
-m_pTreeRear(NULL),
-m_pSearchForward(NULL),
-m_pSearchRear(NULL),
+//m_pTreeForward(NULL),
+//m_pTreeRear(NULL),
+//m_pSearchForward(NULL),
+//m_pSearchRear(NULL),
 m_uMaskY(0)
 {
 }
@@ -351,7 +351,7 @@ bool CQuadTree::Destroy()
 	return true;
 }
 
-CSceneNode* CQuadTree::SearchObject(const CRectangle3D& WorldRectangle, const LPFRUSTUM pFrustum)
+CSceneManagerEntry* CQuadTree::SearchObject(const CRectangle3D& WorldRectangle, const LPFRUSTUM pFrustum, CSceneManagerEntry** ppSearchListTail)
 {
 	CQuadTreeObject* pListHead = NULL;
 	CQuadTreeObject* pListTail = NULL;
@@ -416,6 +416,13 @@ CSceneNode* CQuadTree::SearchObject(const CRectangle3D& WorldRectangle, const LP
 		}
 
 		uLevel ++;
+	}
+
+	if(ppSearchListTail)
+	{
+		_AttachToSearchListTail(pListHead, *ppSearchListTail);
+
+		*ppSearchListTail = pListTail;
 	}
 
 	return pListHead;

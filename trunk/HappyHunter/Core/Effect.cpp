@@ -76,6 +76,33 @@ bool CEffect::Restore()
 	return true;
 }
 
+using namespace std;
+wstring ANSIToUnicode( const string& str )
+{
+ int  len = 0;
+ len = str.length();
+ int  unicodeLen = ::MultiByteToWideChar( CP_ACP,
+            0,
+            str.c_str(),
+            -1,
+            NULL,
+            0 );  
+ wchar_t *  pUnicode;  
+ pUnicode = new  wchar_t[unicodeLen+1];  
+ memset(pUnicode,0,(unicodeLen+1)*sizeof(wchar_t));  
+ ::MultiByteToWideChar( CP_ACP,
+         0,
+         str.c_str(),
+         -1,
+         (LPWSTR)pUnicode,
+         unicodeLen );  
+ wstring  rt;  
+ rt = ( wchar_t* )pUnicode;
+ delete  pUnicode; 
+ 
+ return  rt;  
+}
+
 bool CEffect::Load(const PBASICCHAR pcFileName)
 {
 	LPD3DXBUFFER pBufferErrors = NULL;
@@ -84,6 +111,12 @@ bool CEffect::Load(const PBASICCHAR pcFileName)
 	if( FAILED(hr) )
 	{
 		DEBUG_ERROR( pBufferErrors->GetBufferPointer() );
+
+		string str;
+		
+		str.assign( (char*)pBufferErrors->GetBufferPointer() );
+
+		MessageBox(0, ANSIToUnicode(str).c_str(), 0, 0);
 
 		DEBUG_RELEASE(pBufferErrors);
 
@@ -210,6 +243,11 @@ void CEffect::__ParseParameters()
 					m_ParameterHandles[SPECULAR_MATERIAL_POWER] = hParameter;
 				else if( STRCMP(ParameterDesc.Semantic, "BONEINFLUENCESNUMBER") == 0 )
 					m_ParameterHandles[BONE_INFLUENCES_NUMBER] = hParameter;
+				else if( STRCMP(ParameterDesc.Semantic, "ELAPSEDTIME") == 0 )
+					m_ParameterHandles[ELAPSED_TIME] = hParameter;
+				else if( STRCMP(ParameterDesc.Semantic, "TIME") == 0 )
+					m_ParameterHandles[TOTAL_TIME] = hParameter;
+
 			}
 			else if(ParameterDesc.Class == D3DXPC_OBJECT)
 			{
@@ -291,6 +329,12 @@ bool CEffect::Begin()
 	SetMatrix(VIEW_PROJECTION, CAMERA.GetViewProjectionMatrix() );
 
 	SetParameter( EYE_POSITION, &CAMERA.GetWorldPosition() );
+
+	FLOAT fTime = (FLOAT)TIME, fElapsedTime = ELAPSEDTIME;
+
+	SetParameter( TOTAL_TIME, &fTime );
+
+	SetParameter( ELAPSED_TIME, &fElapsedTime );
 
 	m_bIsBegin = true;
 

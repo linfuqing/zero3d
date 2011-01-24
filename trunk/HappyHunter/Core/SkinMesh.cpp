@@ -205,10 +205,14 @@ bool CSkinMesh::Destroy()
 
 bool CSkinMesh::ApplyForRender()
 {
-	if(m_pEffect->GetEffect() && m_pModel)
+	if(m_pEffect && m_pEffect->GetEffect() && m_pModel)
+	{
 		__ApplyForRenderFrame( m_pModel->GetFrameRoot() );
 
-	return true;
+		return true;
+	}
+
+	return false;
 }
 
 //-----------------------------------------------------------------------------
@@ -326,8 +330,12 @@ void CSkinMesh::Render(CRenderQueue::LPRENDERENTRY pEntry, zerO::UINT32 uFlag)
 				{
 					if(m_bIsVisibleShadow)
 					{
+						void* pVertices;
+
 						pMeshContainer->pShadow->SetVisible(true);
-						pMeshContainer->pShadow->SetMeshData(*pMeshContainer->MeshData.pMesh);
+						pMeshContainer->MeshData.pMesh->LockVertexBuffer(0, &pVertices);
+						pMeshContainer->pShadow->UpdateVertices(pVertices);
+						pMeshContainer->MeshData.pMesh->UnlockVertexBuffer();
 					}
 					else
 						pMeshContainer->pShadow->SetVisible(false);

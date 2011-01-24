@@ -8,6 +8,7 @@
 #include "color.h"
 //#include "Camera.h"
 #include "SceneManager.h"
+#include "SceneObject.h"
 #include <vector>
 #include <list>
 
@@ -89,6 +90,7 @@ namespace zerO
 		CLightManager& GetLightManager();
 		CFogManager& GetFogManager();
 
+		const D3DCAPS9& GetCaps()const;
 		const DEVICESETTINGS& GetDeviceSettings()const;
 		const D3DSURFACE_DESC& GetBackBufferSurfaceDesc()const;
 
@@ -114,18 +116,28 @@ namespace zerO
 		void AddSceneManager(CSceneManager& SceneManager);
 		void RemoveSceneManager(CSceneManager& SceneManager);
 
+		void AddSceneObject(CSceneObject& SceneObject);
+		void RemoveSceneObject(CSceneObject& SceneObject);
+
+		void FillFullScreen(ARGBCOLOR Color = 0);
+
 		virtual bool Destroy(); 
 		virtual bool Disable(); 
 		virtual bool Restore(const D3DSURFACE_DESC& BackBufferSurfaceDesc); 
 
 		virtual bool Create(LPDIRECT3D9 pDirect, LPDIRECT3DDEVICE9 pDevice, const DEVICESETTINGS& DeviceSettings, UINT uMaxQueue);
 		virtual bool Update(FLOAT fElapsedTime);
-		virtual bool BeginRender();
-		virtual bool EndRender();
+		virtual bool UpdateCamera();
+		virtual bool UpdateBeforeRender();
+		//virtual bool BeginRender();
+		//virtual bool EndRender();
+		virtual bool RenderBackground();
+		virtual bool RenderScene();
 		virtual bool Render();
 	private:
 		LPDIRECT3D9 m_pDirect;
 		LPDIRECT3DDEVICE9 m_pDevice;
+		D3DCAPS9 m_Caps;
 		DEVICESETTINGS m_DeviceSettings;
 		D3DSURFACE_DESC m_DeviceSurfaceDest;
 		FLOAT m_fElapsedTime;
@@ -134,12 +146,16 @@ namespace zerO
 		static CGameHost* sm_pInstance;
 
 		std::vector<CResource*> m_ResourceList[TOTAL_RESOURCE_TYPES];
+
 		std::list<CShadow*>     m_ShadowList;
 		std::list<CSceneManager*> m_SceneManagerList;
+		std::list<CSceneObject*> m_SceneObjectList;
 
 		CRenderQueue* m_pRenderQueue;
 
-		CSprite m_Scene;
+		CSceneNode m_Scene;
+
+		CSceneManagerEntry* m_pSearchList;
 
 		CCamera* m_pCamera;
 
@@ -194,6 +210,11 @@ namespace zerO
 		DEBUG_ASSERT(sm_pInstance, "The game host has not yet been defined.");
 
 		return *sm_pInstance;
+	}
+
+	inline const D3DCAPS9& CGameHost::GetCaps()const
+	{
+		return m_Caps;
 	}
 
 	inline bool CGameHost::GetLightEnable()const

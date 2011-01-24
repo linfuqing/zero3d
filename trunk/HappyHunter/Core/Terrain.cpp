@@ -916,6 +916,13 @@ bool CRoamTerrain::Create(CSceneNode* pRootNode, CTexture* pHeightMap, const CRe
 	return bResult;
 }
 
+void CRoamTerrain::UpdateBeforeRender()
+{
+	ProcessTessellationQueue();
+
+	Reset();
+}
+
 bool CRoamTerrain::Destroy()
 {
 	DEBUG_DELETE_ARRAY(m_pRoamSection);
@@ -1171,11 +1178,11 @@ bool CTerrainSystem::Create(
 	return bResult;
 }
 
-void CTerrainSystem::Update()
+/*void CTerrainSystem::Update()
 {
 	m_pRenderObjects = (CQuadTreeObject*)m_QuadTree.SearchObject( CAMERA.GetWorldRectangle(), (LPFRUSTUM)&CAMERA.GetFrustum() );
 
-	CQuadTreeObject* pObject = m_pRenderObjects;
+	CSceneManagerEntry* pObject = m_pRenderObjects;
 
 	switch(m_Type)
 	{
@@ -1195,14 +1202,14 @@ void CTerrainSystem::Update()
 
 void CTerrainSystem::Render()
 {
-	CQuadTreeObject* pObject = m_pRenderObjects;
+	CSceneManagerEntry* pObject = m_pRenderObjects;
 
 	while(pObject)
 	{
 		pObject->ApplyForRender();
 		pObject = pObject->GetNext();
 	}
-}
+}*/
 
 void CTerrainSystem::Destroy()
 {

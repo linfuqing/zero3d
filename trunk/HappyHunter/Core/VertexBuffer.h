@@ -13,6 +13,10 @@ namespace zerO
 	class CVertexBuffer :
 		public CResource
 	{
+		typedef enum
+		{
+			MAXINUM_ELEMENTS = 16//TOTAL_BITS(UINT16)
+		}CONSTANTS;
 		/*typedef enum
 		{
 			DYNAMIC_OVERWRITE,
@@ -30,10 +34,6 @@ namespace zerO
 			VOLATILE
 		}STATEBIT;*/
 
-		typedef enum
-		{
-			MAXINUM_ELEMENTS = 16//TOTAL_BITS(UINT16)
-		}CONSTANTS;
 	public:
 		CVertexBuffer(void);
 		~CVertexBuffer(void);
@@ -52,6 +52,9 @@ namespace zerO
 
 		bool SetVertexDescription(UINT uElementCount, const D3DVERTEXELEMENT9* pElementList);
 
+		UINT GetVertexElementCount()const;
+		const LPD3DVERTEXELEMENT9 GetVertexElement()const;
+		UINT GetMemberCount()const;
 		LPDIRECT3DVERTEXBUFFER9 GetBuffer()const;
 	private:
 		LPDIRECT3DVERTEXBUFFER9	 m_pBuffer;
@@ -81,9 +84,24 @@ namespace zerO
 		LPDIRECT3DVERTEXDECLARATION9 m_pVertexDeclaration;
 	};
 
+	inline UINT CVertexBuffer::GetVertexElementCount()const
+	{
+		return m_uVertexElementCount;
+	}
+
+	inline const LPD3DVERTEXELEMENT9 CVertexBuffer::GetVertexElement()const
+	{
+		return (LPD3DVERTEXELEMENT9)(m_VertexElement);
+	}
+
 	inline LPDIRECT3DVERTEXBUFFER9 CVertexBuffer::GetBuffer()const
 	{
 		return m_pBuffer;
+	}
+
+	inline UINT CVertexBuffer::GetMemberCount()const
+	{
+		return m_uMemberCount;
 	}
 
 	inline bool CVertexBuffer::Lock(UINT uLockStart, UINT uLockCount, DWORD dwFlags, void **ppData)
@@ -93,6 +111,19 @@ namespace zerO
 
 		m_uLockOffset = uLockStart * m_uStride;
 		m_uLockSize   = uLockCount * m_uStride;
+
+		if(m_uLockOffset >= m_uByteSize)
+		{
+			DEBUG_WARNING("uLockOffset out of range.");
+			m_uLockOffset = 0;
+		}
+
+		if(m_uLockSize > m_uByteSize)
+		{
+			DEBUG_WARNING("uLockCount out of range.");
+
+			m_uLockSize = m_uByteSize;
+		}
 
 		if(m_pBuffer)
 		{

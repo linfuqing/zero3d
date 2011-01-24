@@ -99,9 +99,9 @@ namespace zerO
 		//投影矩阵参数.
 		void SetProjection(
 			FLOAT fFOV, 
-			FLOAT fAspect, 
 			FLOAT fNearPlane,
-			FLOAT fFarPlane);
+			FLOAT fFarPlane,
+			FLOAT fAspect = 0);
 
 		void SetProjection();
 

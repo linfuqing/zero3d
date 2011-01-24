@@ -6,7 +6,8 @@ CTexturePrinter::CTexturePrinter(void) :
 CResource(RESOURCE_TEXTUREPRINTER),
 m_pSavedRenderSurface(NULL),
 m_pSavedDepthStencilSurface(NULL),
-m_pDepthStencilSurface(NULL)
+m_pDepthStencilSurface(NULL),
+m_nCurrentTexture(-1)
 {
 }
 
@@ -194,8 +195,12 @@ void CTexturePrinter::Begin()
 
 void CTexturePrinter::End(ENDFLAG Flag)
 {
-	if( TEST_FLAG(Flag, RENDER_SURFACE) )
+	if(TEST_FLAG(Flag, RENDER_SURFACE) && m_nCurrentTexture != - 1)
+	{
 		DEVICE.SetRenderTarget(0, m_pSavedRenderSurface);
+
+		m_nCurrentTexture = - 1;
+	}
 
 	if( TEST_FLAG(Flag, DEPTH_STENCIL_SURFACE) )
 		DEVICE.SetDepthStencilSurface(m_pSavedDepthStencilSurface);
@@ -206,11 +211,18 @@ void CTexturePrinter::Activate(zerO::UINT uTextureIndex, zerO::UINT32 uClearFlag
 	if( uTextureIndex >= m_TextureList.size() )
 		return;
 
-	DEVICE.SetRenderTarget(0, m_TextureList[uTextureIndex]->pSurface);
+	HRESULT hr = DEVICE.SetRenderTarget(0, m_TextureList[uTextureIndex]->pSurface);
+
+	if( FAILED(hr) )
+	{
+		DEBUG_WARNING(hr);
+
+		return;
+	}
 
 	if(uClearFlag)
 	{
-		HRESULT hr = DEVICE.Clear(0, NULL, uClearFlag, Color, 1.0f, 0);
+		hr = DEVICE.Clear(0, NULL, uClearFlag, Color, 1.0f, 0);
 
 		if( FAILED(hr) )
 		{
@@ -219,6 +231,8 @@ void CTexturePrinter::Activate(zerO::UINT uTextureIndex, zerO::UINT32 uClearFlag
 			return;
 		}
 	}
+
+	m_nCurrentTexture = uTextureIndex;
 }
 
 void CTexturePrinter::Draw(zerO::UINT uTextureIndex)
@@ -257,6 +271,35 @@ void CTexturePrinter::Draw(zerO::UINT uTextureIndex)
 
 	DEVICE.SetRenderState(D3DRS_ZENABLE, TRUE);
 	DEVICE.SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+
+	m_nCurrentTexture = uTextureIndex;
+}
+
+bool CTexturePrinter::Stretch(zerO::INT nDestinationIndex, zerO::INT nSourceIndex)
+{
+	zerO::INT nTextureSize = m_TextureList.size();
+	if(nTextureSize <= nDestinationIndex || nTextureSize <= nSourceIndex)
+	{
+		DEBUG_WARNING("Erorr index.");
+
+		return false;
+	}
+
+	HRESULT hr = DEVICE.StretchRect(nSourceIndex < 0 ? m_pSavedRenderSurface : m_TextureList[nSourceIndex]->pSurface, NULL, nDestinationIndex < 0 ? m_pSavedRenderSurface : m_TextureList[nDestinationIndex]->pSurface, NULL, D3DTEXF_NONE);
+
+	if( FAILED(hr) )
+	{
+		DEBUG_WARNING(hr);
+
+		return false;
+	}
+
+	return true;
+}
+
+bool CTexturePrinter::RnederToTexture(zerO::INT nTextureIndex)
+{
+	return Stretch(nTextureIndex, m_nCurrentTexture);
 }
 
 bool CTexturePrinter::Destroy()

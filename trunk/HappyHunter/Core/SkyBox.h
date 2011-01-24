@@ -34,8 +34,6 @@ namespace zerO
 
 		bool Create(FLOAT fSize);
 
-		void Update();
-
 		void Render();
 	private:
 		CRenderMethod  m_RenderMethod;

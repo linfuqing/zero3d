@@ -42,6 +42,9 @@ namespace zerO
 
 			EYE_POSITION,
 
+			ELAPSED_TIME,
+			TOTAL_TIME,
+
 			MAXINUM_PARAMETER_HANDLES
 		};
 

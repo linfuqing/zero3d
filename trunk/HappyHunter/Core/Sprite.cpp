@@ -116,6 +116,7 @@ void CSprite::Right(zerO::FLOAT fNumSteps)
 
 	m_Position += Right;
 
+	SET_BIT(m_uDirtyFlag, TRANSFORM);
 	SET_BIT(m_uDirtyFlag, POSITION);
 }
 
@@ -132,6 +133,7 @@ void CSprite::Up(zerO::FLOAT fNumSteps)
 
 	m_Position += Up;
 
+	SET_BIT(m_uDirtyFlag, TRANSFORM);
 	SET_BIT(m_uDirtyFlag, POSITION);
 }
 
@@ -148,5 +150,6 @@ void CSprite::Forward(zerO::FLOAT fNumSteps)
 
 	m_Position += Forward;
 
+	SET_BIT(m_uDirtyFlag, TRANSFORM);
 	SET_BIT(m_uDirtyFlag, POSITION);
 }

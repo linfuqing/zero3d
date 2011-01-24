@@ -3,6 +3,7 @@
 #include "RenderMethod.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "Geometry.h"
 
 namespace zerO
 {
@@ -10,7 +11,7 @@ namespace zerO
 	{
 		typedef struct
 		{
-			FLOAT x, y, z, w;
+			FLOAT x, y, z;
 		}VERTEX, * LPVERTEX;
 	public:
 		CWater(void);
@@ -18,36 +19,56 @@ namespace zerO
 
 		CRenderMethod& GetRenderMethod();
 
-		bool Create(zerO::FLOAT fWidth, zerO::FLOAT fHeight, zerO::UINT uSegmentsX, zerO::UINT uSegmentsY);
-		void Update();
-		void Render();
+		void SetBumpMap(CTexture* const pTexture);
+		void SetTransform(const D3DXMATRIX& Matrix);
+
+		bool Create(
+			FLOAT fWidth, 
+			FLOAT fHeight, 
+			UINT uSegmentsX, 
+			UINT uSegmentsY, 
+			CTexture::RESET pfnRefractionReset = NULL, 
+			CTexture::RESET pfnReflectionReset = NULL);
+		void UpdateViewSpace();
+		void Render(bool bIsRenderToTexture = false);
 
 	private:
 		CRenderMethod m_RenderMethod;
 
-		CVertexBuffer m_VertexBuffer;
-		CIndexBuffer m_IndexBuffer;
-
-		UINT m_uVerticesX;
-		UINT m_uVerticesY;
+		CTexture* m_pBumpMap;
 
 		D3DXPLANE m_Plane;
 
 		D3DXMATRIX m_Matrix;
 
-		static UINT sm_uTexture;
+		CSurface m_Surface;
 
-		/*typedef struct
-		{
-			D3DXVECTOR4 Position;
-			D3DXVECTOR2 UV;
-		}RENDERVERTEX, * LPRENDERVERTEX;
+		CGeometry m_Geometry;
 
-		RENDERVERTEX m_Vertices[4];*/
+		CTexture::RESET m_pfnRefractionReset;
+		CTexture::RESET m_pfnReflectionReset;
+
+		UINT m_uRefractionMap;
+		UINT m_uReflectionMap;
+
+		static UINT sm_uRefractionMap;
+		static UINT sm_uReflectionMap;
 	};
 
 	inline CRenderMethod& CWater::GetRenderMethod()
 	{
 		return m_RenderMethod;
+	}
+
+	inline void CWater::SetBumpMap(CTexture* const pTexture)
+	{
+		m_pBumpMap = pTexture;
+
+		m_Surface.SetTexture(pTexture, 2);
+	}
+
+	inline void CWater::SetTransform(const D3DXMATRIX& Matrix)
+	{
+		m_Matrix = Matrix;
 	}
 }

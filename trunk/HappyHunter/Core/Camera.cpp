@@ -55,10 +55,13 @@ CCamera::~CCamera(void)
 
 void CCamera::SetProjection(
 							zerO::FLOAT fFOV, 
-							zerO::FLOAT fAspect, 
 							zerO::FLOAT fNearPlane,
-							zerO::FLOAT fFarPlane)
+							zerO::FLOAT fFarPlane,
+							zerO::FLOAT fAspect)
 {
+	if(fAspect <= 0)
+		fAspect = (FLOAT)GAMEHOST.GetBackBufferSurfaceDesc().Width / GAMEHOST.GetBackBufferSurfaceDesc().Height;
+
 	m_fFOV       = fFOV;
 	m_fAspect    = fAspect;
 	m_fNearPlane = fNearPlane;
@@ -91,7 +94,9 @@ void CCamera::SetProjection(
 
 void CCamera::SetProjection()
 {
-	SetProjection(m_fFOV, m_fAspect, m_fNearPlane, m_fFarPlane);
+	SetProjection(m_fFOV, m_fNearPlane, m_fFarPlane);
+
+	m_bIsTransformDirty = true;
 }
 
 void CCamera::ModifyProjectionMatrix(const D3DXPLANE& WorldClipPlane)

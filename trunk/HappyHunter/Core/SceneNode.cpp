@@ -37,7 +37,7 @@ bool CSceneNode::AddChild(CSceneNode* pChild)
 	if(pChild == NULL || pChild == this)
 		return false;
 
-	if( TEST_BIT(m_uFlag, LOCK_ADD_CHILD) || TEST_BIT(pChild->m_uFlag, LOCK_ADDED) )
+	if( TEST_FLAG(m_uFlag, LOCK_ADD_CHILD) || TEST_FLAG(pChild->m_uFlag, LOCK_ADDED) )
 		return false;
 
 	if( pChild->m_pParent && !pChild->m_pParent->RemoveChild(pChild) )
@@ -55,6 +55,8 @@ bool CSceneNode::AddChild(CSceneNode* pChild)
 
 	m_pChild = pChild;
 
+	pChild->m_bIsTransformDirty = true;
+
 	return true;
 }
 
@@ -63,7 +65,7 @@ bool CSceneNode::RemoveChild(CSceneNode* pChild)
 	if(pChild == NULL)
 		return false;
 
-	if( TEST_BIT(m_uFlag, LOCK_REMOVE_CHILD) || TEST_BIT(pChild->m_uFlag, LOCK_REMOVED) )
+	if( TEST_FLAG(m_uFlag, LOCK_REMOVE_CHILD) || TEST_FLAG(pChild->m_uFlag, LOCK_REMOVED) )
 		return false;
 
 	if(pChild->m_pParent != this)
@@ -72,7 +74,7 @@ bool CSceneNode::RemoveChild(CSceneNode* pChild)
 	if(m_pChild == pChild)
 		m_pChild = pChild->m_pNext;
 	else if(pChild->m_pPrevious)
-		pChild->m_pPrevious = pChild->m_pNext;
+		pChild->m_pPrevious->m_pNext = pChild->m_pNext;
 	else
 		return false;
 
@@ -115,6 +117,18 @@ void CSceneNode::UpdateTransform()
 	m_WorldRect = m_LocalRect;
 
 	m_WorldRect.Transform(m_WorldMatrix);
+}
+
+void CSceneNode::UpdateViewSpace()
+{
+	CSceneNode* pNode = m_pChild;
+
+	while(pNode)
+	{
+		pNode->UpdateViewSpace();
+
+		pNode = pNode->m_pNext;
+	}
 }
 
 void CSceneNode::Update()
@@ -169,6 +183,8 @@ void CSceneNode::AddedToRenderQueue()
 
 		pNode = pNode->m_pNext;
 	}
+
+	ApplyForRender();
 }
 
 bool CSceneNode::ApplyForRender()
