@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.0">
+  <asset>
+    <contributor>
+      <author></author>
+      <authoring_tool>FBX COLLADA exporter</authoring_tool>
+      <comments></comments>
+    </contributor>
+    <created>2011-03-01T05:37:10Z</created>
+    <modified>2011-03-01T05:37:10Z</modified>
+    <revision></revision>
+    <title></title>
+    <subject></subject>
+    <keywords></keywords>
+    <unit meter="0.001000"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="chest_2-image" name="chest_2">
+      <init_from>chest_2.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="chest_2" name="chest_2">
+      <instance_effect url="#chest_2-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="chest_2-fx" name="chest_2">
+      <profile_COMMON>
+        <technique sid="standard">
+          <phong>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.588000  0.588000 0.588000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <texture texture="chest_2-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>ADD</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color sid="specular">0.000000  0.000000 0.000000 1.000000</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">2.000000</float>
+            </shininess>
+            <reflective>
+              <color sid="reflective">0.000000  0.000000 0.000000 1.000000</color>
+            </reflective>
+            <reflectivity>
+              <float sid="reflectivity">1.000000</float>
+            </reflectivity>
+            <transparent>
+              <color sid="transparent">1.000000  1.000000 1.000000 1.000000</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">0.000000</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="chest_2-lib" name="chest_2Mesh">
+      <mesh>
+        <source id="chest_2-lib-Position">
+          <float_array id="chest_2-lib-Position-array" count="24">
+-108.629585 -47.239807 0.000000
+91.779251 -47.239807 0.000000
+-108.629585 49.488647 0.000000
+91.779251 49.488647 0.000000
+-108.629593 -47.239807 254.065918
+91.779251 -47.239807 254.065918
+-108.629593 49.488647 254.065918
+91.779251 49.488647 254.065918
+</float_array>
+          <technique_common>
+            <accessor source="#chest_2-lib-Position-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="chest_2-lib-Normal0">
+          <float_array id="chest_2-lib-Normal0-array" count="90">
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 -1.000000 0.000000
+0.000000 -1.000000 0.000000
+0.000000 -1.000000 0.000000
+0.000000 -1.000000 0.000000
+0.000000 -1.000000 0.000000
+0.000000 -1.000000 0.000000
+1.000000 0.000000 0.000000
+1.000000 0.000000 0.000000
+1.000000 0.000000 0.000000
+1.000000 0.000000 0.000000
+1.000000 0.000000 0.000000
+1.000000 0.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+-1.000000 0.000000 -0.000000
+-1.000000 0.000000 -0.000000
+-1.000000 0.000000 -0.000000
+-1.000000 0.000000 -0.000000
+-1.000000 0.000000 -0.000000
+-1.000000 0.000000 -0.000000
+</float_array>
+          <technique_common>
+            <accessor source="#chest_2-lib-Normal0-array" count="30" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="chest_2-lib-UV0">
+          <float_array id="chest_2-lib-UV0-array" count="32">
+0.012194 0.078184
+0.501026 0.078184
+0.012194 0.314122
+0.501026 0.314122
+0.748127 0.370268
+0.977725 0.370268
+0.748127 0.986533
+0.977725 0.986533
+0.519126 0.355624
+0.519126 0.014759
+0.974716 0.355624
+0.974716 0.014759
+0.252002 0.370268
+0.022404 0.370268
+0.252002 0.986533
+0.022404 0.986533
+</float_array>
+          <technique_common>
+            <accessor source="#chest_2-lib-UV0-array" count="16" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="chest_2-lib-Vertex">
+          <input semantic="POSITION" source="#chest_2-lib-Position"/>
+        </vertices>
+        <polygons material="chest_2" count="10">
+          <input semantic="VERTEX" offset="0" source="#chest_2-lib-Vertex"/>
+          <input semantic="NORMAL" offset="1" source="#chest_2-lib-Normal0"/>
+          <input semantic="TEXCOORD" offset="2" set="0" source="#chest_2-lib-UV0"/>
+          <p>4 0 0 5 1 1 7 2 3</p>
+          <p>7 3 3 6 4 2 4 5 0</p>
+          <p>0 6 12 1 7 4 5 8 6</p>
+          <p>5 9 6 4 10 14 0 11 12</p>
+          <p>1 12 4 3 13 5 7 14 7</p>
+          <p>7 15 7 5 16 6 1 17 4</p>
+          <p>3 18 9 2 19 8 6 20 10</p>
+          <p>6 21 10 7 22 11 3 23 9</p>
+          <p>2 24 13 0 25 12 4 26 14</p>
+          <p>4 27 14 6 28 15 2 29 13</p>
+        </polygons>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_lights>
+    <light id="SceneAmbient-lib" name="SceneAmbientMesh">
+      <technique_common>
+        <ambient>
+          <color>1.000000 1.000000 1.000000</color>
+        </ambient>
+      </technique_common>
+    </light>
+  </library_lights>
+  <library_visual_scenes>
+    <visual_scene id="RootNode" name="RootNode">
+      <node id="chest_2" name="chest_2">
+        <rotate sid="jointOrientX">1 0 0 -90.000000</rotate>
+        <scale sid="scale">1.306014 1.306014 1.306014</scale>
+        <instance_geometry url="#chest_2-lib">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="chest_2" target="#chest_2"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#RootNode"/>
+  </scene>
+</COLLADA>
+

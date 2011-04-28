@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=6400;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/field1.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:18:07Z</created>
+    <modified>2010-07-22T02:18:09Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="field_separate.png" name="field_separate_png">
+      <init_from>../../1/field_separate.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="field_separate" name="field_separate">
+      <instance_effect url="#field_separate-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="field_separate-fx" name="field_separate">
+      <profile_COMMON>
+        <newparam sid="field_separate_png-surface">
+          <surface type="2D">
+            <init_from>field_separate.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="field_separate_png-sampler">
+          <sampler2D>
+            <source>field_separate_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="field_separate_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>1</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="field_1-mesh" name="field_1">
+      <mesh>
+        <source id="field_1-mesh-positions">
+          <float_array id="field_1-mesh-positions-array" count="24">-26.4544 -15.6344 104.953 -23.1396 -12.7931 108.268 -23.1396 -12.7931 126.638 -4.76912 -12.7931 126.638 -4.76912 -12.7931 108.268 -26.4544 -15.6344 129.953 -1.45439 -15.6344 129.953 -1.45439 -15.6344 104.953</float_array>
+          <technique_common>
+            <accessor source="#field_1-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="field_1-mesh-normals">
+          <float_array id="field_1-mesh-normals-array" count="24">0.27018 -0.924122 -0.270188 0.270181 -0.924123 0.270181 -0.270182 -0.924124 0.270181 -0.270181 -0.924121 -0.270189 0.366517 -0.855178 0.366517 0.366523 -0.855175 -0.36652 -0.366523 -0.855174 -0.36652 -0.366517 -0.855178 0.366517</float_array>
+          <technique_common>
+            <accessor source="#field_1-mesh-normals-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="field_1-mesh-map-channel1">
+          <float_array id="field_1-mesh-map-channel1-array" count="36">0.032054 0 0 0.156144 0.156144 0 0.156143 0.843858 0 0.843857 0.843858 0 0.843857 0.156144 0 0.967946 0 0 0 0.032053 0 0.032053 0.999998 0 1 0.967943 0 0 0.967943 0 0.967946 0.999998 0 1 0.032053 0</float_array>
+          <technique_common>
+            <accessor source="#field_1-mesh-map-channel1-array" count="12" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="field_1-mesh-vertices">
+          <input semantic="POSITION" source="#field_1-mesh-positions"/>
+        </vertices>
+        <triangles material="field_separate" count="10">
+          <input semantic="VERTEX" source="#field_1-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#field_1-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#field_1-mesh-map-channel1" offset="2" set="1"/>
+          <p>2 0 2 1 1 1 4 2 4 4 2 4 3 3 3 2 0 2 0 4 6 1 1 1 2 0 2 2 0 2 5 5 9 0 4 6 5 5 7 2 0 2 3 3 3 3 3 3 6 6 10 5 5 7 6 6 8 3 3 3 4 2 4 4 2 4 7 7 11 6 6 8 7 7 5 4 2 4 1 1 1 1 1 1 0 4 0 7 7 5</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="field1.max" name="field1_max">
+      <node id="field_1-node" name="field_1" type="NODE">
+        <matrix>3.41549 0 -0.000001 0 -0.000001 -0.000000 -3.41549 0 0 -3.41549 0.000000 0 0 0 0 1</matrix>
+        <node id="field_1-node_PIVOT" name="field_1_PIVOT" type="NODE">
+          <matrix>1 0 0 13.9544 0 1 0 12.1309 0 0 1 -117.453 0 0 0 1</matrix>
+          <instance_geometry url="#field_1-mesh">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="field_separate" target="#field_separate">
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>1.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#field1.max"/>
+  </scene>
+</COLLADA>

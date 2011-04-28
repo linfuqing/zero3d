@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=6400;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/tree1.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:21:19Z</created>
+    <modified>2010-07-22T02:21:20Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="tree.png" name="tree_png">
+      <init_from>../../1/tree.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="orig_tree" name="orig_tree">
+      <instance_effect url="#orig_tree-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="orig_tree-fx" name="orig_tree">
+      <profile_COMMON>
+        <newparam sid="tree_png-surface">
+          <surface type="2D">
+            <init_from>tree.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="tree_png-sampler">
+          <sampler2D>
+            <source>tree_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="tree_png-surface">
+          <surface type="2D">
+            <init_from>tree.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="tree_png-sampler">
+          <sampler2D>
+            <source>tree_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="tree_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <texture texture="tree_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>1</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="tree1-mesh" name="tree1">
+      <mesh>
+        <source id="tree1-mesh-positions">
+          <float_array id="tree1-mesh-positions-array" count="195">-27.852 -27.852 6.93017 36.8691 -39.2733 6.93017 -27.852 27.852 6.93017 27.852 27.852 6.93016 8.24927 5.12993 170.603 19.6168 18.5811 58.1365 -2.27318 14.8467 83.2848 107.96 9.28429 201.543 -7.11235 -11.6086 69.327 21.8365 -12.5344 62.9717 7.10616 -13.4803 81.5053 16.8329 -1.84189 95.0886 -30.8459 -51.9234 192.684 11.4857 9.7341 117.427 -0.941269 -1.3882 113.994 48.9812 11.8031 115.437 37.6344 3.4135 124.276 128.959 -41.2728 164.395 34.0307 -3.63375 111.773 42.6076 -0.373596 105.088 16.693 4.61987 62.5865 -10.8708 16.6974 63.7736 -49.4733 94.9367 132.176 -2.60069 -9.46271 70.9215 20.1523 -12.0361 77.6102 -26.0276 29.3171 190.442 153.358 26.8835 194.642 -24.0586 146.266 137.165 146.993 141.996 141.365 73.9082 130.888 202.858 113.264 148.922 135.033 171.566 53.5907 204.889 249.572 19.4095 130.913 122.608 -92.7239 172.629 -19.5226 35.5063 176.749 -159.945 93.7317 70.1069 -138.651 75.7713 147.674 -41.2175 160.77 120.866 -1.49909 33.6907 160.367 -126.296 -34.684 109.607 -108.182 98.7974 155.627 11.9924 13.065 212.494 108.153 105.942 155.627 108.153 -77.957 155.627 -108.182 -85.1021 155.627 25.4265 8.31062 158.802 129.503 -58.4157 204.239 198.777 14.1289 158.802 198.777 -132.808 158.802 25.4265 -138.627 158.802 -65.2991 40.8856 181.876 -42.8301 -69.2036 218.095 84.7922 -33.8035 181.876 -14.9735 -159.004 164.989 -162.836 -83.8236 164.989 -73.0004 156.806 102.462 -15.3166 128.135 174.872 84.2077 115.218 123.349 30.4288 8.88632 175.119 -133.028 49.0974 154.232 9.45071 32.6082 134.354 -49.2189 -70.9839 165.91 59.8333 -104.827 123.225 -99.3458 -152.473 108.453 -150.653 -15.2413 119.581</float_array>
+          <technique_common>
+            <accessor source="#tree1-mesh-positions-array" count="65" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="tree1-mesh-normals">
+          <float_array id="tree1-mesh-normals-array" count="195">-0.731466 -0.618968 0.286068 0.642688 -0.703557 0.30325 0.030152 0.051125 0.998237 0.647219 0.740665 0.18034 -0.699817 0.670115 0.247388 0.620514 0.708408 -0.336334 -0.621373 0.500583 0.602754 0.597582 0.037186 0.800945 -0.42179 -0.76425 0.487868 0.566836 -0.791759 -0.22763 0.391475 -0.902709 -0.178503 0.839936 -0.523916 0.141489 -0.353608 -0.46055 0.814159 0.786518 0.180771 0.590518 -0.899896 0.431226 -0.065052 0.583447 0.808533 -0.076573 -0.444484 -0.110262 0.888975 0.794856 -0.404841 0.452004 -0.352268 -0.935299 -0.033517 0.299525 -0.523884 -0.79739 0.810767 0.58526 0.011304 -0.58658 0.349376 -0.730658 -0.430349 0.746578 0.507367 -0.552762 -0.592186 0.586319 0.513389 -0.100567 0.852243 -0.358633 0.635646 0.68362 0.039609 0.581298 0.812726 0.408365 0.680604 0.60829 0.265658 0.127449 0.955606 -0.279299 0.159049 0.94694 0.103817 0.628404 0.770928 0.373282 0.253306 0.892467 0.70415 0.080048 0.705525 0.135763 -0.25643 0.956981 -0.158022 0.151375 0.975764 -0.875123 0.359817 0.32356 -0.634637 0.180819 0.751359 -0.219218 0.513036 0.829902 -0.089993 0.007076 0.995917 -0.544587 -0.327079 0.772298 -0.269248 0.241064 0.932413 0.036882 0.010295 0.999267 0.274732 0.278956 0.920166 0.284388 -0.27361 0.918837 -0.247632 -0.24053 0.938522 -0.262521 0.228853 0.937395 0.067935 0.018571 0.997517 0.286348 0.297092 0.910901 0.289716 -0.287755 0.912832 -0.237333 -0.227093 0.944512 -0.131051 0.285587 0.94935 -0.052725 -0.125779 0.990656 0.277428 -0.017354 0.96059 0.051506 -0.496471 0.866524 -0.383366 -0.158404 0.909911 -0.269543 0.802405 0.532441 0.043967 0.594697 0.802747 0.442923 0.530886 0.722482 0.165102 0.065374 0.984107 -0.33754 0.266979 0.902656 0.112046 0.230954 0.966492 -0.064442 -0.136479 0.988545 0.283521 -0.25304 0.924979 -0.244493 -0.4538 0.856906 -0.384173 0.066283 0.920879</float_array>
+          <technique_common>
+            <accessor source="#tree1-mesh-normals-array" count="65" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="tree1-mesh-map-channel1">
+          <float_array id="tree1-mesh-map-channel1-array" count="210">0.833124 0.014891 0 0.989422 0.015502 0 0.849992 0.426477 0 0.471499 0.214291 0 0.58299 0.098108 0 0.316767 0.214149 0 0.703111 0.041672 0 0.388899 0.173253 0 0.62106 0.416349 0 0.284974 0.411628 0 0.089857 0.228142 0 0.260378 0.345633 0 0.074388 0.186134 0 0.023689 0.035641 0 0.293219 0.286012 0 0.436147 0.007259 0 0.323733 0.040137 0 0.458244 0.036556 0 0.287411 0.158048 0 0.084216 0.124767 0 0.233263 0.756495 0 0.091965 0.088681 0 0.123517 0.647123 0 0.481117 0.057897 0 0.23289 0.537377 0 0.74294 0.696537 0 0.489897 0.081583 0 0.495142 0.116599 0 0.60915 0.564577 0 0.013771 0.53775 0 0.94519 0.454631 0 0.965933 0.514345 0 0.845491 0.727673 0 0.811867 0.485044 0 0.856746 0.442026 0 0.901999 0.428812 0 0.233908 0.525848 0 0.231739 0.30674 0 0.123269 0.417378 0 0.01263 0.308909 0 0.463352 0.755655 0 0.353762 0.646123 0 0.014799 0.528017 0 0.463297 0.536535 0 0.230827 0.991021 0 0.121084 0.881645 0 0.244173 0.53659 0 0.741108 0.430786 0 0.23046 0.771902 0 0.751066 0.988472 0 0.244227 0.75571 0 0.477192 0.698369 0 0.47536 0.432618 0 0.011341 0.772269 0 0.61356 0.851741 0 0.750291 0.714235 0 0.011708 0.991387 0 0.879341 0.879522 0 0.476054 0.71501 0 0.988538 0.989443 0 0.461196 0.987653 0 0.35045 0.879293 0 0.989262 0.770325 0 0.476829 0.989247 0 0.76942 0.988719 0 0.45881 0.768548 0 0.770145 0.769601 0 0.239705 0.770933 0 0.014145 0.756868 0 0.24209 0.990039 0</float_array>
+          <technique_common>
+            <accessor source="#tree1-mesh-map-channel1-array" count="70" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="tree1-mesh-vertices">
+          <input semantic="POSITION" source="#tree1-mesh-positions"/>
+        </vertices>
+        <triangles material="orig_tree" count="52">
+          <input semantic="VERTEX" source="#tree1-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#tree1-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#tree1-mesh-map-channel1" offset="2" set="1"/>
+          <p>0 0 0 1 1 1 4 2 2 1 1 3 3 3 4 4 2 2 3 3 4 2 4 6 4 2 2 2 4 6 0 0 0 4 2 2 5 5 5 6 6 7 7 7 8 6 6 9 8 8 11 7 7 8 8 8 11 9 9 14 7 7 8 9 9 14 5 5 5 7 7 8 10 10 10 11 11 12 12 12 16 11 11 12 13 13 19 12 12 16 13 13 19 14 14 21 12 12 16 14 14 21 10 10 13 12 12 16 15 15 15 16 16 17 17 17 18 16 16 17 18 18 23 17 17 18 18 18 23 19 19 26 17 17 18 19 19 26 15 15 27 17 17 18 20 20 30 21 21 31 22 22 32 21 21 33 23 23 34 22 22 32 23 23 34 24 24 35 22 22 32 24 24 35 20 20 30 22 22 32 27 25 36 29 26 38 28 27 37 26 28 39 28 27 37 29 26 38 27 25 36 25 29 42 29 26 38 29 26 38 25 29 42 26 28 39 30 30 25 31 31 28 32 32 47 33 33 52 32 32 47 31 31 28 30 30 25 34 34 51 31 31 28 31 31 28 34 34 51 33 33 52 35 35 44 36 36 45 37 37 48 38 38 53 37 37 48 36 36 45 35 35 44 39 39 56 36 36 45 36 36 45 39 39 56 38 38 53 40 40 49 41 41 54 42 42 55 43 43 58 42 42 55 41 41 54 40 40 49 44 44 63 41 41 54 41 41 54 44 44 63 43 43 58 45 45 20 46 46 22 47 47 24 48 48 29 47 47 24 46 46 22 45 45 20 49 49 68 46 46 22 46 46 22 49 49 68 48 48 29 50 50 64 51 51 57 52 52 59 53 53 62 52 52 59 51 51 57 50 50 64 54 54 66 51 51 57 51 51 57 54 54 66 53 53 62 55 55 40 56 56 41 57 57 43 58 58 46 57 57 43 56 56 41 55 55 40 59 59 50 56 56 41 56 56 41 59 59 50 58 58 46 60 60 60 61 61 61 62 62 65 63 63 67 62 62 65 61 61 61 60 60 60 64 64 69 61 61 61 61 61 61 64 64 69 63 63 67</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="tree1.max" name="tree1_max">
+      <node id="tree1-node" name="tree1" type="NODE">
+        <matrix>-0.55899 0.41127 0 0 -0.411269 -0.55899 0 0 0 0 1.06257 0 0 0 0 1</matrix>
+        <instance_geometry url="#tree1-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="orig_tree" target="#orig_tree">
+                <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>1.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#tree1.max"/>
+  </scene>
+</COLLADA>
