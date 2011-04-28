@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=6400;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/bench2.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:30:26Z</created>
+    <modified>2010-07-22T02:30:27Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="bench2.png" name="bench2_png">
+      <init_from>../../1/bench2.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="orig_bench" name="orig_bench">
+      <instance_effect url="#orig_bench-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="orig_bench-fx" name="orig_bench">
+      <profile_COMMON>
+        <newparam sid="bench2_png-surface">
+          <surface type="2D">
+            <init_from>bench2.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="bench2_png-sampler">
+          <sampler2D>
+            <source>bench2_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="bench2_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>1</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="bench2-mesh" name="bench2">
+      <mesh>
+        <source id="bench2-mesh-positions">
+          <float_array id="bench2-mesh-positions-array" count="144">-20 -20 0 20 -20 0 -20 20 0 20 20 0 -20 -20 44.4391 20 -20 44.4391 -20 20 44.4391 20 20 44.4391 -42.5 -42.5 44.4266 42.5 -42.5 44.4266 -42.5 42.5 44.4266 42.5 42.5 44.4266 -42.5 -42.5 57.9876 42.5 -42.5 57.9876 -42.5 42.5 57.9876 42.5 42.5 57.9876 -13.8643 -94.7493 0 13.8643 -94.7493 0 -13.8643 -65.2507 0 13.8643 -65.2507 0 -13.8643 -94.7493 32.4451 13.8643 -94.7493 32.4451 -13.8643 -65.2507 32.4451 13.8643 -65.2507 32.4451 66.1357 -14.7493 0 93.8643 -14.7493 0 66.1357 14.7493 0 93.8643 14.7493 0 66.1357 -14.7493 32.4451 93.8643 -14.7493 32.4451 66.1357 14.7493 32.4451 93.8643 14.7493 32.4451 -93.8643 -14.7493 0 -66.1357 -14.7493 0 -93.8643 14.7493 0 -66.1357 14.7493 0 -93.8643 -14.7493 32.4451 -66.1357 -14.7493 32.4451 -93.8643 14.7493 32.4451 -66.1357 14.7493 32.4451 -13.8643 65.2507 0 13.8643 65.2507 0 -13.8643 94.7493 0 13.8643 94.7493 0 -13.8643 65.2507 32.4451 13.8643 65.2507 32.4451 -13.8643 94.7493 32.4451 13.8643 94.7493 32.4451</float_array>
+          <technique_common>
+            <accessor source="#bench2-mesh-positions-array" count="48" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="bench2-mesh-normals">
+          <float_array id="bench2-mesh-normals-array" count="144">-0.707107 -0.707107 0 0.707107 -0.707107 0 0.707107 -0.707107 0 -0.707107 -0.707107 0 0.707107 0.707107 0 0.707107 0.707107 0 -0.707107 0.707107 0 -0.707107 0.707107 0 -0.57735 -0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 -0.707107 -0.707107 0.000000 0.707107 -0.707107 0.000000 0.707107 0.707107 -0.000000 -0.707107 0.707107 -0.000000 -0.57735 -0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 -0.707107 -0.707107 0 0.707107 -0.707107 0 0.707107 0.707107 0 -0.707107 0.707107 0 -0.57735 -0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 -0.707107 -0.707107 0 0.707107 -0.707107 0 0.707107 0.707107 0 -0.707107 0.707107 0 -0.57735 -0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 -0.707107 -0.707107 0 0.707107 -0.707107 0 0.707107 0.707107 0 -0.707107 0.707107 0 -0.57735 -0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 -0.707107 -0.707107 0 0.707107 -0.707107 0 0.707107 0.707107 0 -0.707107 0.707107 0</float_array>
+          <technique_common>
+            <accessor source="#bench2-mesh-normals-array" count="48" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="bench2-mesh-map-channel1">
+          <float_array id="bench2-mesh-map-channel1-array" count="210">0.487487 0.186132 0 0.328293 0.186128 0 0.48749 0.009272 0 0.328297 0.009268 0 0.015242 0.60027 0 0.1691 0.186124 0 0.460691 0.599644 0 0.169105 0.009263 0 0.009907 0.186121 0 0.015712 0.937966 0 0.00991 0.00926 0 0.069668 0.99177 0 0.069117 0.600195 0 0.64668 0.186135 0 0.461163 0.93734 0 0.646683 0.009274 0 0.329118 0.537198 0 0.153195 0.364497 0 0.406814 0.59972 0 0.230503 0.285747 0 0.069041 0.546319 0 0.406738 0.545843 0 0.236972 0.44674 0 0.749898 0.074314 0 0.860254 0.074315 0 0.406426 0.458447 0 0.069591 0.937892 0 0.989379 0.203442 0 0.989379 0.32084 0 0.860253 0.203441 0 0.407364 0.991288 0 0.31428 0.367989 0 0.749897 0.449963 0 0.860252 0.449963 0 0.627734 0.742512 0 0.996342 0.742515 0 0.407287 0.937414 0 0.062737 0.456643 0 0.146514 0.538886 0 0.627734 0.859911 0 0.620772 0.203439 0 0.620772 0.320837 0 0.75686 0.989036 0 0.860252 0.320838 0 0.749898 0.20344 0 0.749898 0.320837 0 0.627017 0.47334 0 0.73737 0.473341 0 0.627016 0.590738 0 0.737369 0.590739 0 0.75686 0.742514 0 0.996342 0.859913 0 0.75686 0.859911 0 0.867215 0.989036 0 0.627017 0.344214 0 0.737372 0.344214 0 0.061048 0.274039 0 0.138357 0.195288 0 0.866497 0.473341 0 0.867216 0.742514 0 0.866496 0.59074 0 0.867215 0.859912 0 0.75686 0.613388 0 0.867216 0.613388 0 0.627014 0.719864 0 0.737369 0.719865 0 0.320961 0.193601 0 0.404739 0.275843 0 0.497891 0.473339 0 0.49789 0.590738 0</float_array>
+          <technique_common>
+            <accessor source="#bench2-mesh-map-channel1-array" count="70" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="bench2-mesh-vertices">
+          <input semantic="POSITION" source="#bench2-mesh-positions"/>
+        </vertices>
+        <triangles material="orig_bench" count="58">
+          <input semantic="VERTEX" source="#bench2-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#bench2-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#bench2-mesh-map-channel1" offset="2" set="1"/>
+          <p>0 0 0 1 1 1 5 2 3 5 2 3 4 3 2 0 0 0 1 1 1 3 4 5 7 5 7 7 5 7 5 2 3 1 1 1 3 4 5 2 6 8 6 7 10 6 7 10 7 5 7 3 4 5 2 6 13 0 0 0 4 3 2 4 3 2 6 7 15 2 6 13 12 8 12 13 9 18 15 10 36 15 10 36 14 11 26 12 8 12 8 12 20 9 13 21 13 9 18 13 9 18 12 8 12 8 12 20 9 13 6 11 14 14 15 10 36 15 10 36 13 9 18 9 13 6 11 14 30 10 15 11 14 11 26 14 11 26 15 10 36 11 14 30 10 15 9 8 12 4 12 8 12 12 8 12 14 11 26 10 15 9 20 16 44 21 17 29 23 18 43 23 18 43 22 19 45 20 16 44 16 20 23 17 21 24 21 17 29 21 17 29 20 16 44 16 20 23 17 21 27 19 22 28 23 18 43 23 18 43 21 17 29 17 21 27 19 22 33 18 23 32 22 19 45 22 19 45 23 18 43 19 22 33 18 23 41 16 20 40 20 16 44 20 16 44 22 19 45 18 23 41 28 24 50 29 25 59 31 26 61 31 26 61 30 27 52 28 24 50 24 28 62 25 29 63 29 25 59 29 25 59 28 24 50 24 28 62 25 29 35 27 30 51 31 26 61 31 26 61 29 25 59 25 29 35 27 30 53 26 31 42 30 27 52 30 27 52 31 26 61 27 30 53 26 31 39 24 28 34 28 24 50 28 24 50 30 27 52 26 31 39 36 32 46 37 33 47 39 34 49 39 34 49 38 35 48 36 32 46 32 36 54 33 37 55 37 33 47 37 33 47 36 32 46 32 36 54 33 37 58 35 38 60 39 34 49 39 34 49 37 33 47 33 37 58 35 38 65 34 39 64 38 35 48 38 35 48 39 34 49 35 38 65 34 39 69 32 36 68 36 32 46 36 32 46 38 35 48 34 39 69 44 40 17 45 41 19 47 42 31 47 42 31 46 43 22 44 40 17 40 44 56 41 45 57 45 41 19 45 41 19 44 40 17 40 44 56 41 45 66 43 46 67 47 42 31 47 42 31 45 41 19 41 45 66 43 46 25 42 47 16 46 43 22 46 43 22 47 42 31 43 46 25 42 47 38 40 44 37 44 40 17 44 40 17 46 43 22 42 47 38</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="bench2.max" name="bench2_max">
+      <node id="bench2-node" name="bench2" type="NODE">
+        <matrix>0.91793 0 0 0 0 0.91793 0 0 0 0 0.91793 0 0 0 0 1</matrix>
+        <instance_geometry url="#bench2-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="orig_bench" target="#orig_bench">
+                <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>1.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#bench2.max"/>
+  </scene>
+</COLLADA>

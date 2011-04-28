@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=6400;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/waterwheel.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:20:11Z</created>
+    <modified>2010-07-22T02:20:12Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="waterwheel.png" name="waterwheel_png">
+      <init_from>../../1/waterwheel.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="waterwheel" name="waterwheel">
+      <instance_effect url="#waterwheel-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="waterwheel-fx" name="waterwheel">
+      <profile_COMMON>
+        <newparam sid="waterwheel_png-surface">
+          <surface type="2D">
+            <init_from>waterwheel.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="waterwheel_png-sampler">
+          <sampler2D>
+            <source>waterwheel_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="waterwheel_png-surface">
+          <surface type="2D">
+            <init_from>waterwheel.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="waterwheel_png-sampler">
+          <sampler2D>
+            <source>waterwheel_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="waterwheel_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <texture texture="waterwheel_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>1</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="waterwheel-mesh" name="waterwheel">
+      <mesh>
+        <source id="waterwheel-mesh-positions">
+          <float_array id="waterwheel-mesh-positions-array" count="78">-7.87002 -59.628 -4.89081 0.279085 -104.048 -4.89081 6.88375 -56.9214 -4.89081 15.0329 -101.341 -4.89081 -7.87002 -59.628 1.10333 0.279085 -104.048 1.10333 6.88375 -56.9214 1.10333 15.0329 -101.341 1.10333 12.4971 -78.849 -20.1021 11.915 -75.6762 -12.4774 13.0792 -82.0219 -12.4774 -49.2294 -90.1731 -20.1021 -49.8114 -87.0003 -12.4774 -48.6473 -93.346 -12.4774 -45.0048 -43.2422 -100.454 -28.621 -132.548 -100.454 -36.8129 -87.8953 -3.4295 -59.7585 -45.9489 -100.454 -43.3748 -135.255 -100.454 -51.5667 -90.6019 -3.4295 6.64255 -33.7672 -100.454 14.8344 -78.4203 -3.4295 23.0263 -123.073 -100.454 -8.11123 -36.4739 -100.454 8.27251 -125.78 -100.454 0.080636 -81.1269 -3.4295</float_array>
+          <technique_common>
+            <accessor source="#waterwheel-mesh-positions-array" count="26" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="waterwheel-mesh-normals">
+          <float_array id="waterwheel-mesh-normals-array" count="162">0 0 1 0 0 1 0 0 1 0 0 1 -0.983585 -0.180445 0 -0.983585 -0.180445 0 -0.983585 -0.180445 0 -0.983585 -0.180445 0 0.180445 -0.983585 0 0.180445 -0.983585 0 0.180445 -0.983585 0 0.180445 -0.983585 0 0.983585 0.180445 0 0.983585 0.180445 0 0.983585 0.180445 0 0.983585 0.180445 0 -0.180445 0.983585 0 -0.180445 0.983585 0 -0.180445 0.983585 0 -0.180445 0.983585 0 0.166184 -0.90585 -0.38964 0.166184 -0.90585 -0.38964 0.166184 -0.90585 -0.38964 0.166184 -0.90585 -0.38964 0 0 1 0 0 1 0 0 1 0 0 1 -0.166184 0.90585 -0.38964 -0.166184 0.90585 -0.389639 -0.166183 0.90585 -0.38964 -0.166183 0.90585 -0.38964 -0.983585 -0.180445 0 -0.983585 -0.180445 0 -0.983585 -0.180445 0 0.163439 -0.890885 0.423807 0.163438 -0.890885 0.423806 0.163438 -0.890885 0.423806 0.163439 -0.890885 0.423807 -0.163438 0.890885 0.423807 -0.163438 0.890885 0.423807 -0.163438 0.890885 0.423807 -0.163438 0.890885 0.423806 0.983585 0.180445 0 0.983585 0.180445 0 0.983585 0.180445 0 0.163438 -0.890885 0.423807 0.163438 -0.890885 0.423807 0.163438 -0.890885 0.423807 0.163438 -0.890885 0.423806 -0.163438 0.890885 0.423807 -0.163438 0.890885 0.423806 -0.163438 0.890885 0.423807 -0.163438 0.890885 0.423806</float_array>
+          <technique_common>
+            <accessor source="#waterwheel-mesh-normals-array" count="54" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="waterwheel-mesh-map-channel1">
+          <float_array id="waterwheel-mesh-map-channel1-array" count="105">0.248394 0.244813 0 0.096331 0.093833 0 0.225652 0.24482 0 0.248367 0.074175 0 0.079677 0.216607 0 0.079876 0.093803 0 0.137557 0.093912 0 0.154054 0.093954 0 0.096351 0.07752 0 0.137572 0.077602 0 0.096174 0.21665 0 0.096159 0.23296 0 0.153855 0.216758 0 0.225602 0.074181 0 0.207916 0.244827 0 0.207866 0.074188 0 0.137379 0.233041 0 0.137399 0.216728 0 0.185151 0.244832 0 0.185124 0.074194 0 0.984908 0.559969 0 0.957622 0.311988 0 0.709006 0.464792 0 0.971829 0.598974 0 0.800999 0.778649 0 0.695914 0.503866 0 0.699785 0.703735 0 0.575766 0.967895 0 0.93639 0.276796 0 0.687724 0.429483 0 0.450304 0.704388 0 0.413027 0.721751 0 0.538385 0.985292 0 0.737161 0.720899 0 0.613203 0.985079 0</float_array>
+          <technique_common>
+            <accessor source="#waterwheel-mesh-map-channel1-array" count="35" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="waterwheel-mesh-vertices">
+          <input semantic="POSITION" source="#waterwheel-mesh-positions"/>
+        </vertices>
+        <triangles material="waterwheel" count="26">
+          <input semantic="VERTEX" source="#waterwheel-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#waterwheel-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#waterwheel-mesh-map-channel1" offset="2" set="1"/>
+          <p>4 0 10 5 1 1 7 2 6 7 2 6 6 3 17 4 0 10 0 4 4 1 5 5 5 6 1 5 6 1 4 7 10 0 4 4 1 8 8 3 9 9 7 10 6 7 10 6 5 11 1 1 8 8 3 12 7 2 13 12 6 14 17 6 14 17 7 15 6 3 12 7 2 16 16 0 17 11 4 18 10 4 18 10 6 19 17 2 16 16 8 20 0 10 21 2 13 22 13 13 22 13 11 23 3 8 20 0 10 24 2 9 25 14 12 26 15 12 26 15 13 27 13 10 24 2 9 28 14 8 29 18 11 30 19 11 30 19 12 31 15 9 28 14 17 32 23 18 33 24 19 34 25 15 35 21 16 36 22 19 37 29 19 37 29 18 38 28 15 35 21 16 39 22 14 40 20 17 41 23 17 41 23 19 42 25 16 39 22 20 43 26 21 44 27 22 45 30 22 46 30 21 47 27 25 48 32 25 48 32 24 49 31 22 46 30 21 50 27 20 51 26 23 52 33 23 52 33 25 53 34 21 50 27</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="waterwheel.max" name="waterwheel_max">
+      <node id="waterwheel-node" name="waterwheel" type="NODE">
+        <matrix>-2.25656 -0.22576 0 0 0.22576 -2.25656 0 0 0 0 2.26782 0 0 0 0 1</matrix>
+        <node id="waterwheel-node_PIVOT" name="waterwheel_PIVOT" type="NODE">
+          <matrix>1 0 0 18.3661 0 1 0 84.5111 0 0 1 84.7649 0 0 0 1</matrix>
+          <instance_geometry url="#waterwheel-mesh">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="waterwheel" target="#waterwheel">
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>1.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#waterwheel.max"/>
+  </scene>
+</COLLADA>

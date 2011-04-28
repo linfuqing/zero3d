@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=6400;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/barrier2.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:30:11Z</created>
+    <modified>2010-07-22T02:30:12Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="barrier.png" name="barrier_png">
+      <init_from>../../1/barrier.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="orig_barrier" name="orig_barrier">
+      <instance_effect url="#orig_barrier-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="orig_barrier-fx" name="orig_barrier">
+      <profile_COMMON>
+        <newparam sid="barrier_png-surface">
+          <surface type="2D">
+            <init_from>barrier.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="barrier_png-sampler">
+          <sampler2D>
+            <source>barrier_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="barrier_png-surface">
+          <surface type="2D">
+            <init_from>barrier.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="barrier_png-sampler">
+          <sampler2D>
+            <source>barrier_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="barrier_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <texture texture="barrier_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>1</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="barrier2-mesh" name="barrier2">
+      <mesh>
+        <source id="barrier2-mesh-positions">
+          <float_array id="barrier2-mesh-positions-array" count="24">-55.1014 27.9105 247.414 -20.1049 27.9105 247.414 -60.5838 40.774 247.248 -14.8082 40.774 247.248 -28.2497 49.6103 247.248 -47.1424 49.6103 247.248 -43.4359 34.3328 247.414 -31.7704 34.3328 247.414</float_array>
+          <technique_common>
+            <accessor source="#barrier2-mesh-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="barrier2-mesh-normals">
+          <float_array id="barrier2-mesh-normals-array" count="24">-0.002644 0.010163 0.999945 0.002676 0.010188 0.999945 0.002841 0.010352 0.999942 -0.00285 0.010317 0.999943 0.005978 0.00985 0.999934 0.006638 0.010098 0.999927 -0.006589 0.010023 0.999928 -0.005936 0.009783 0.999935</float_array>
+          <technique_common>
+            <accessor source="#barrier2-mesh-normals-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="barrier2-mesh-map-channel1">
+          <float_array id="barrier2-mesh-map-channel1-array" count="24">0.074443 0.723422 0 0.513577 0.723425 0 0.005649 0.884845 0 0.580037 0.884849 0 0.411374 0.995718 0 0.174311 0.995716 0 0.220821 0.804005 0 0.367198 0.804006 0</float_array>
+          <technique_common>
+            <accessor source="#barrier2-mesh-map-channel1-array" count="8" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="barrier2-mesh-vertices">
+          <input semantic="POSITION" source="#barrier2-mesh-positions"/>
+        </vertices>
+        <triangles material="orig_barrier" count="6">
+          <input semantic="VERTEX" source="#barrier2-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#barrier2-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#barrier2-mesh-map-channel1" offset="2" set="1"/>
+          <p>6 0 6 7 1 7 4 2 4 4 2 4 5 3 5 6 0 6 1 4 1 3 5 3 4 2 4 4 2 4 7 1 7 1 4 1 5 3 5 2 6 2 0 7 0 0 7 0 6 0 6 5 3 5</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="barrier2.max" name="barrier2_max">
+      <node id="barrier2-node" name="barrier2" type="NODE">
+        <matrix>4.96483 0 0 0 0 -0.000000 -4.96483 0 0 4.27465 -0.000000 0 0 0 0 1</matrix>
+        <node id="barrier2-node_PIVOT" name="barrier2_PIVOT" type="NODE">
+          <matrix>1 0 0 37.696 0 1 0 -38.7604 0 0 1 -247.331 0 0 0 1</matrix>
+          <instance_geometry url="#barrier2-mesh">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="orig_barrier" target="#orig_barrier">
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>1.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#barrier2.max"/>
+  </scene>
+</COLLADA>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=6400;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/pine.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:19:38Z</created>
+    <modified>2010-07-22T02:19:39Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="pine.png" name="pine_png">
+      <init_from>../../1/pine.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="pine" name="pine">
+      <instance_effect url="#pine-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="pine-fx" name="pine">
+      <profile_COMMON>
+        <newparam sid="pine_png-surface">
+          <surface type="2D">
+            <init_from>pine.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="pine_png-sampler">
+          <sampler2D>
+            <source>pine_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="pine_png-surface">
+          <surface type="2D">
+            <init_from>pine.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="pine_png-sampler">
+          <sampler2D>
+            <source>pine_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="pine_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <texture texture="pine_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>1</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="pine2-mesh" name="pine2">
+      <mesh>
+        <source id="pine2-mesh-positions">
+          <float_array id="pine2-mesh-positions-array" count="69">0 0 40 -20 -20 0 20 -20 0 20 20 0 -20 20 0 0 0 54.0277 -16.4901 -16.4901 21.0475 16.4901 -16.4901 21.0475 16.4901 16.4901 21.0475 -16.4901 16.4901 21.0475 0 0 65.0321 -12.5917 -12.5917 39.8487 12.5917 -12.5917 39.8487 12.5917 12.5917 39.8487 -12.5917 12.5917 39.8487 -3 -3 -18.0583 3 -3 -18.0583 -3 3 -18.0583 3 3 -18.0583 -3 -3 6.94165 3 -3 6.94165 -3 3 6.94165 3 3 6.94165</float_array>
+          <technique_common>
+            <accessor source="#pine2-mesh-positions-array" count="23" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pine2-mesh-normals">
+          <float_array id="pine2-mesh-normals-array" count="69">0 0 1 -0.57735 -0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0 0 1 -0.57735 -0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0 0 1 -0.57735 -0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 0.57735 0.57735 -0.57735 0.57735 0.57735 -0.707107 -0.707107 0 0.707107 -0.707107 0 0.707107 -0.707107 0 -0.707107 -0.707107 0 0.707107 0.707107 0 0.707107 0.707107 0 -0.707107 0.707107 0 -0.707107 0.707107 0</float_array>
+          <technique_common>
+            <accessor source="#pine2-mesh-normals-array" count="23" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pine2-mesh-map-channel1">
+          <float_array id="pine2-mesh-map-channel1-array" count="84">0.497081 0.482548 0 0.052452 0.744375 0 0.005649 0.325452 0 0.497081 0.482548 0 0.286468 0.011259 0 0.286468 0.01126 0 0.497081 0.482548 0 0.286468 0.01126 0 0.005649 0.325452 0 0.707694 0.01126 0 0.707694 0.01126 0 0.644438 0.496497 0 0.75928 0.496497 0 0.529597 0.496497 0 0.005649 0.325452 0 0.988512 0.325452 0 0.874121 0.496497 0 0.052452 0.744375 0 0.644438 0.98345 0 0.988512 0.325452 0 0.75928 0.98345 0 0.052452 0.744375 0 0.988962 0.496497 0 0.988962 0.98345 0 0.874121 0.98345 0 0.529597 0.98345 0 0.707694 0.011259 0 0.988512 0.325452 0</float_array>
+          <technique_common>
+            <accessor source="#pine2-mesh-map-channel1-array" count="28" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="pine2-mesh-vertices">
+          <input semantic="POSITION" source="#pine2-mesh-positions"/>
+        </vertices>
+        <triangles material="pine" count="20">
+          <input semantic="VERTEX" source="#pine2-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#pine2-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#pine2-mesh-map-channel1" offset="2" set="1"/>
+          <p>0 0 0 1 1 4 2 2 26 0 0 0 2 2 26 3 3 27 0 0 0 3 3 1 4 4 2 0 0 0 4 4 2 1 1 4 5 5 3 6 6 5 7 7 9 5 5 3 7 7 9 8 8 15 5 5 3 8 8 17 9 9 8 5 5 3 9 9 8 6 6 5 10 10 6 11 11 7 12 12 10 10 10 6 12 12 10 13 13 19 10 10 6 13 13 21 14 14 14 10 10 6 14 14 14 11 11 7 15 15 11 16 16 12 20 17 20 20 17 20 19 18 18 15 15 11 16 16 12 18 19 16 22 20 24 22 20 24 20 17 20 16 16 12 18 19 16 17 21 22 21 22 23 21 22 23 22 20 24 18 19 16 17 21 13 15 15 11 19 18 18 19 18 18 21 22 25 17 21 13</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="pine.max" name="pine_max">
+      <node id="pine2-node" name="pine2" type="NODE">
+        <matrix>2.82613 0 0 0 0 2.82613 0 0 0 0 2.82613 0 0 0 0 1</matrix>
+        <node id="pine2-node_PIVOT" name="pine2_PIVOT" type="NODE">
+          <matrix>1 0 0 0 0 1 0 0 0 0 1 18.0583 0 0 0 1</matrix>
+          <instance_geometry url="#pine2-mesh">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="pine" target="#pine">
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>1.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#pine.max"/>
+  </scene>
+</COLLADA>

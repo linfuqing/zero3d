@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=6400;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/ground.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:19:26Z</created>
+    <modified>2010-07-22T02:19:27Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="ground.png" name="ground_png">
+      <init_from>../../1/ground.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="ground" name="ground">
+      <instance_effect url="#ground-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="ground-fx" name="ground">
+      <profile_COMMON>
+        <newparam sid="ground_png-surface">
+          <surface type="2D">
+            <init_from>ground.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="ground_png-sampler">
+          <sampler2D>
+            <source>ground_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="ground_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>1</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="ground-mesh" name="ground">
+      <mesh>
+        <source id="ground-mesh-positions">
+          <float_array id="ground-mesh-positions-array" count="114">-152.377 -14.6991 251.642 224.534 -14.6991 251.642 -152.377 -14.6991 -40.7982 224.534 -14.6991 -40.7982 99.7978 -14.6982 251.647 111.262 -14.6973 251.647 122.726 -14.6982 251.647 87.4247 -14.6982 174.67 98.889 -5.05757 173.475 110.353 -14.6982 172.28 69.5019 -14.6982 -40.7999 80.9662 -14.6983 -40.7999 92.4304 -14.6982 -40.7999 159.201 -14.6982 251.647 170.666 -14.6973 251.647 182.13 -14.6982 251.647 127.046 -14.6982 32.3422 138.51 -6.62909 31.1471 149.974 -14.6982 29.952 124.756 -14.6982 -40.8 136.22 -14.6983 -40.8 147.685 -14.6982 -40.8 -114.645 -14.6982 186.63 -62.516 -14.6982 177.753 -122.893 -14.6982 118.249 -70.7639 -14.6982 109.372 -113.922 -14.6982 117.603 -113.922 -14.6982 178.399 -71.4873 -14.6982 178.399 -71.4873 -14.6982 117.603 -115.655 -12.1816 116.036 -115.655 -12.1816 179.966 -69.7541 -12.1816 179.966 -69.7541 -12.1816 116.036 -122.893 -14.6982 177.753 -70.7639 -14.6982 186.63 -114.645 -14.6982 109.372 -62.516 -14.6982 118.249</float_array>
+          <technique_common>
+            <accessor source="#ground-mesh-positions-array" count="38" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="ground-mesh-normals">
+          <float_array id="ground-mesh-normals-array" count="114">0 1 0 0 1 0 0 1 0 0 1 0 -0.070149 0.989937 0.122899 0.000007 0.992483 0.122386 -0.013799 0.999866 0.008752 -0.636943 0.767019 0.077362 0.082069 0.991866 0.097296 0.637037 0.767026 -0.076526 -0.029826 0.99872 -0.040843 0.000000 0.998989 -0.044947 0.027053 0.998587 -0.045743 -0.021074 0.999035 0.038536 0.000007 0.999331 0.036564 -0.020678 0.999776 -0.00449 -0.571271 0.819181 0.050909 0.024972 0.999188 0.031624 0.571337 0.819176 -0.050245 -0.071364 0.992655 -0.097686 0.000000 0.993769 -0.111457 0.069205 0.992326 -0.102467 -0.352548 0.931027 0.094336 -0.050759 0.996919 0.059793 -0.050756 0.99692 -0.059789 -0.352547 0.931027 -0.094336 0.11788 0.922954 0.366414 0.050758 0.996919 0.059792 -0.11788 0.922954 0.366414 0.352547 0.931027 -0.094336 0.050756 0.99692 -0.05979 0.352547 0.931027 0.094336 -0.117879 0.922956 -0.366411 0.117879 0.922955 -0.366412 0.503979 0.679268 -0.533479 0.503978 0.679262 0.533488 -0.503977 0.679269 -0.53348 -0.503976 0.679264 0.533487</float_array>
+          <technique_common>
+            <accessor source="#ground-mesh-normals-array" count="38" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="ground-mesh-map-channel1">
+          <float_array id="ground-mesh-map-channel1-array" count="114">0.01797 0.015575 0 0.958559 0.015575 0 0.01797 0.79426 0 0.958559 0.79426 0 0.988205 0.907659 0 0.990431 0.942763 0 0.992615 0.977933 0 0.807872 0.897555 0 0.807718 0.932773 0 0.806818 0.968106 0 0.309187 0.897802 0 0.311385 0.933054 0 0.313627 0.968168 0 0.985044 0.834679 0 0.98722 0.86775 0 0.989316 0.901302 0 0.477224 0.812195 0 0.476523 0.845999 0 0.476073 0.878875 0 0.309237 0.8185 0 0.311378 0.851824 0 0.313561 0.884959 0 0.026744 0.968557 0 0.055691 0.798568 0 0.249729 0.995453 0 0.278677 0.825464 0 0.251837 0.966198 0 0.053584 0.966198 0 0.053584 0.827822 0 0.251837 0.827822 0 0.256946 0.97185 0 0.048474 0.97185 0 0.048474 0.822171 0 0.256946 0.822171 0 0.055691 0.995453 0 0.026744 0.825464 0 0.278677 0.968557 0 0.249729 0.798568 0</float_array>
+          <technique_common>
+            <accessor source="#ground-mesh-map-channel1-array" count="38" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="ground-mesh-vertices">
+          <input semantic="POSITION" source="#ground-mesh-positions"/>
+        </vertices>
+        <triangles material="ground" count="38">
+          <input semantic="VERTEX" source="#ground-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#ground-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#ground-mesh-map-channel1" offset="2" set="1"/>
+          <p>1 0 1 3 1 3 2 2 2 2 2 2 0 3 0 1 0 1 4 4 4 5 5 5 8 6 8 8 6 8 7 7 7 4 4 4 8 6 8 6 8 6 9 9 9 10 10 10 8 6 8 11 11 11 8 6 8 9 9 9 12 12 12 12 12 12 11 11 11 8 6 8 13 13 13 14 14 14 17 15 17 17 15 17 16 16 16 13 13 13 17 15 17 15 17 15 18 18 18 19 19 19 17 15 17 20 20 20 17 15 17 18 18 18 21 21 21 21 21 21 20 20 20 17 15 17 34 22 34 31 23 31 30 24 30 30 24 30 24 25 24 34 22 34 35 26 35 32 27 32 31 23 31 31 23 31 22 28 22 35 26 35 37 29 37 33 30 33 32 27 32 32 27 32 23 31 23 37 29 37 36 32 36 30 24 30 33 30 33 33 30 33 25 33 25 36 32 36 27 34 27 26 35 26 30 24 30 30 24 30 31 23 31 27 34 27 28 36 28 27 34 27 31 23 31 31 23 31 32 27 32 28 36 28 29 37 29 28 36 28 32 27 32 32 27 32 33 30 33 29 37 29 26 35 26 29 37 29 33 30 33 33 30 33 30 24 30 26 35 26 17 15 17 14 14 14 15 17 15 8 6 8 5 5 5 6 8 6 10 10 10 7 7 7 8 6 8 36 32 36 24 25 24 30 24 30 34 22 34 22 28 22 31 23 31 35 26 35 23 31 23 32 27 32 37 29 37 25 33 25 33 30 33 19 19 19 16 16 16 17 15 17</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="ground.max" name="ground_max">
+      <node id="ground-node" name="ground" type="NODE">
+        <matrix>4.96483 0 0 0 0 -0.000000 -4.96483 0 0 4.27465 -0.000000 0 0 0 0 1</matrix>
+        <node id="ground-node_PIVOT" name="ground_PIVOT" type="NODE">
+          <matrix>1 0 0 -36.0783 0 1 0 14.6983 0 0 1 -105.424 0 0 0 1</matrix>
+          <instance_geometry url="#ground-mesh">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="ground" target="#ground">
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>1.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#ground.max"/>
+  </scene>
+</COLLADA>

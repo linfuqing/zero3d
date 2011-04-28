@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=16000;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/luobu.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:32:26Z</created>
+    <modified>2010-07-22T02:32:28Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="nongchang_huluobo.png" name="nongchang_huluobo_png">
+      <init_from>../../1/nongchang_huluobo.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="_0_-_Default" name="_0_-_Default">
+      <instance_effect url="#_0_-_Default-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="_0_-_Default-fx" name="_0_-_Default">
+      <profile_COMMON>
+        <newparam sid="nongchang_huluobo_png-surface">
+          <surface type="2D">
+            <init_from>nongchang_huluobo.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="nongchang_huluobo_png-sampler">
+          <sampler2D>
+            <source>nongchang_huluobo_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="nongchang_huluobo_png-surface">
+          <surface type="2D">
+            <init_from>nongchang_huluobo.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="nongchang_huluobo_png-sampler">
+          <sampler2D>
+            <source>nongchang_huluobo_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="nongchang_huluobo_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <texture texture="nongchang_huluobo_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>0</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="luobu-mesh" name="luobu">
+      <mesh>
+        <source id="luobu-mesh-positions">
+          <float_array id="luobu-mesh-positions-array" count="207">-27.0083 -27.2244 -1.01015 -8.58737 -36.892 0 8.58736 -36.892 0 27.0083 -27.2244 -1.01015 -36.5623 -8.65606 0 36.5623 -8.65606 0 -36.5623 8.65606 0 36.5623 8.65606 0 -27.0083 27.2244 -1.01015 -8.58737 36.892 0 8.58736 36.892 0 27.0083 27.2244 -1.01015 -28.4767 -28.7045 42.7735 -9.05424 -38.8978 41.7633 9.05424 -38.8978 41.7633 28.4767 -28.7045 42.7735 -38.5501 -9.12668 41.7633 -9.82799 -9.91663 53.611 11.1254 -9.91663 53.611 38.5501 -9.12668 41.7633 -38.5501 9.12668 41.7633 -9.82799 11.2258 53.611 11.1254 11.2258 53.611 38.5501 9.12668 41.7633 -28.4767 28.7045 42.7735 -9.05424 38.8978 41.7633 9.05424 38.8978 41.7633 28.4767 28.7045 42.7735 -30.4053 -30.6486 20.8817 -9.66744 -41.5321 20.8817 9.66744 -41.5321 20.8817 30.4053 -30.6486 20.8817 41.1609 -9.74478 20.8817 41.1609 9.74478 20.8817 30.4053 30.6486 20.8817 9.66744 41.5321 20.8817 -9.66744 41.5321 20.8817 -30.4053 30.6486 20.8817 -41.1609 9.74478 20.8817 -41.1609 -9.74478 20.8817 11.1254 11.2258 53.611 -5.91652 -5.99386 61.985 5.91652 -5.99386 61.985 5.91652 5.99386 61.985 -5.91652 5.99386 61.985 23.8951 -28.0059 59.5089 -22.6361 27.4479 59.5089 23.0717 -40.5447 87.0004 -31.5973 24.6072 87.0004 -5.21028 -60.5043 98.0686 -59.8793 4.64761 98.0686 -36.9036 -73.6408 71.4397 -82.7092 -19.0518 71.4397 -35.6783 -0.521057 59.5089 36.7115 -0.521057 59.5089 -35.6783 8.59264 92.5738 36.7115 8.59264 92.5738 -35.6783 23.502 119.612 36.7115 23.502 119.612 -35.6783 48.5061 141.543 36.7115 48.506 141.543 15.6797 32.4923 59.5089 -14.9136 -33.1151 59.5089 31.7575 25.6898 80.4677 1.16422 -39.9176 80.4677 54.2698 14.4974 86.7203 23.6766 -51.11 86.7203 91.371 0.303705 64.0552 60.7778 -65.3037 64.0552</float_array>
+          <technique_common>
+            <accessor source="#luobu-mesh-positions-array" count="69" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="luobu-mesh-normals">
+          <float_array id="luobu-mesh-normals-array" count="279">-0.580269 -0.577173 0.574595 -0.221982 -0.219837 0.949945 -0.803805 -0.178092 0.567609 -0.182232 -0.802602 0.567998 0.180471 -0.803135 0.567806 0.233688 -0.220818 0.946905 0.582667 -0.579092 0.570221 -0.222965 0.231475 0.946946 -0.804701 0.178471 0.566219 0 0 1 0 0 1 0 0 1 0 0 1 0.80807 -0.180024 0.560905 0.80867 0.178207 0.56062 0.399542 0.055382 0.91504 -0.182024 0.806483 0.562541 -0.584734 0.577038 0.570187 0.055708 0.396498 0.916344 0.182354 0.807433 0.561069 0.584778 0.581644 0.565443 -0.695053 -0.685178 -0.217789 -0.231907 -0.946968 -0.22242 -0.237583 -0.970312 -0.045257 -0.709384 -0.703367 -0.045267 0.234985 -0.946842 -0.219711 0.238032 -0.970109 -0.047208 0.691274 -0.688992 -0.217785 0.70873 -0.704024 -0.045289 0.94834 -0.227881 -0.220728 0.971232 -0.233856 -0.044942 0.948222 0.230932 -0.218048 0.971032 0.234305 -0.046884 0.695053 0.685178 -0.217789 0.709384 0.703367 -0.045267 0.231907 0.946968 -0.22242 0.237583 0.970312 -0.045257 -0.234985 0.946842 -0.219711 -0.238032 0.970109 -0.047208 -0.691274 0.688992 -0.217785 -0.70873 0.704024 -0.045289 -0.94834 0.227881 -0.220727 -0.971232 0.233856 -0.044942 -0.948222 -0.230932 -0.218048 -0.971032 -0.234305 -0.046884 0 -0.905565 0.424208 0 -0.905565 0.424208 0 -0.905565 0.424208 0 -0.905565 0.424208 0 -0.905565 0.424208 0 -0.905565 0.424208 0.849128 0 0.528187 0.849128 0 0.528187 0.849128 0 0.528187 0.849128 0 0.528187 0.849128 0 0.528187 0.849128 0 0.528187 0 0.848082 0.529865 0 0.848082 0.529865 0 0.848082 0.529865 0 0.848082 0.529865 0 0.848082 0.529865 0 0.848082 0.529865 -0.906033 0 0.423206 -0.906033 0 0.423206 -0.906033 0 0.423206 -0.906033 0 0.423206 -0.906033 0 0.423206 -0.906033 0 0.423206 0.730417 0.612893 0.301418 0.730417 0.612893 0.301418 0.524206 0.439861 0.729199 0.519538 0.435945 0.734869 -0.141519 -0.118749 0.982787 -0.098026 -0.082254 0.991779 -0.483521 -0.405722 0.775627 -0.483521 -0.405722 0.775627 0 -0.96405 0.265722 0 -0.96405 0.265722 0 -0.926257 0.376894 0 -0.926257 0.376894 0 -0.779233 0.626735 0 -0.779233 0.626735 0 -0.659394 0.751798 0 -0.659394 0.751798 -0.696562 0.324812 0.639764 -0.696562 0.324812 0.639764 -0.481488 0.224522 0.847207 -0.481684 0.224613 0.847071 0.120164 -0.056033 0.991172 0.128727 -0.060026 0.989862 0.449999 -0.209838 0.868026 0.449999 -0.209838 0.868026</float_array>
+          <technique_common>
+            <accessor source="#luobu-mesh-normals-array" count="93" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="luobu-mesh-map-channel1">
+          <float_array id="luobu-mesh-map-channel1-array" count="258">0.145522 0.012823 0.463744 0.273535 0.013818 0.456224 0.379912 0.013818 0.456224 0.507924 0.012823 0.463744 0.01769 0.013818 0.4562 0.635756 0.013818 0.4562 0.629875 0.393146 0.4562 0.009718 0.393146 0.4562 0.501611 0.392152 0.463744 0.373165 0.393146 0.456224 0.266428 0.393146 0.456224 0.137982 0.392152 0.463744 0.145522 0.268386 0.488957 0.273535 0.26249 0.481028 0.379912 0.26249 0.481028 0.507925 0.268386 0.488957 0.01769 0.26249 0.481003 0.145638 0.331644 0.168836 0.410043 0.331644 0.180325 0.635756 0.26249 0.481003 0.627784 0.641819 0.481003 0.39263 0.718326 0.180325 0.137666 0.718326 0.191125 0.009718 0.641819 0.481003 0.499952 0.647715 0.488957 0.371939 0.641819 0.481028 0.265563 0.641819 0.481028 0.13755 0.647715 0.488957 0.145522 0.140605 0.522072 0.273535 0.140605 0.513606 0.379912 0.140605 0.513606 0.507925 0.140605 0.522072 0.635756 0.140605 0.513579 0.009718 0.519934 0.513579 0.13755 0.519934 0.522072 0.265563 0.519934 0.513606 0.371939 0.519934 0.513606 0.499952 0.519934 0.522072 0.627784 0.519934 0.513579 0.01769 0.140605 0.513579 0.137666 0.718326 0.191125 0.145963 0.380523 0.101845 0.399703 0.380523 0.101845 0.138005 0.759851 0.101845 0.40274 0.759851 0.101845 0.736508 0.393146 0.4562 0.734057 0.641819 0.481003 0.668492 0.718326 0.168836 0.734057 0.519934 0.513579 0.668831 0.759851 0.101845 0.5463 0.818712 1 0.690041 0.818712 1 0.690041 0.963031 1 0.5463 0.963031 1 0.76155 0.467319 0 0.991631 0.467319 0 0.76155 0.612263 0 0.991631 0.612263 0 0.76155 0.757206 0 0.991631 0.757206 0 0.76155 0.90215 0 0.991631 0.90215 0 0.757016 0.011727 0 0.987891 0.011727 0 0.757016 0.157171 0 0.987891 0.157171 0 0.757016 0.302615 0 0.987891 0.302615 0 0.757016 0.448058 0 0.987891 0.448058 0 0.416588 0.776897 0 0.416588 0.991104 0 0.281644 0.776897 0 0.281644 0.991104 0 0.1467 0.776897 0 0.1467 0.991104 0 0.011755 0.776897 0 0.011755 0.991104 0 0.742029 0.26249 0.481003 0.654418 0.331644 0.191125 0.742029 0.013818 0.4562 0.742029 0.140605 0.513579 0.742029 0.140605 0.513579 0.742029 0.26249 0.481003 0.654418 0.331644 0.191125 0.654743 0.380523 0.101845</float_array>
+          <technique_common>
+            <accessor source="#luobu-mesh-map-channel1-array" count="86" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="luobu-mesh-vertices">
+          <input semantic="POSITION" source="#luobu-mesh-positions"/>
+        </vertices>
+        <triangles material="_0_-_Default" count="94">
+          <input semantic="VERTEX" source="#luobu-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#luobu-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#luobu-mesh-map-channel1" offset="2" set="1"/>
+          <p>12 0 12 17 1 17 16 2 16 13 3 13 14 4 14 18 5 18 18 5 18 17 1 17 13 3 13 14 4 14 15 6 15 18 5 18 16 2 46 17 1 47 21 7 21 21 7 21 20 8 20 16 2 46 41 9 50 42 10 51 43 11 52 43 11 52 44 12 53 41 9 50 18 5 18 19 13 19 23 14 78 23 14 78 22 15 79 18 5 18 21 7 21 25 16 25 24 17 24 21 7 21 22 15 22 40 18 40 21 7 21 40 18 40 26 19 26 21 7 21 26 19 26 25 16 25 22 15 22 23 14 23 27 20 27 27 20 27 40 18 40 22 15 22 0 21 0 1 22 1 29 23 29 29 23 29 28 24 28 0 21 0 1 22 1 2 25 2 30 26 30 30 26 30 29 23 29 1 22 1 2 25 2 3 27 3 31 28 31 31 28 31 30 26 30 2 25 2 28 24 28 29 23 29 13 3 13 13 3 13 12 0 12 28 24 28 29 23 29 30 26 30 14 4 14 14 4 14 13 3 13 29 23 29 30 26 30 31 28 31 15 6 15 15 6 15 14 4 14 30 26 30 3 27 3 5 29 5 32 30 32 32 30 32 31 28 31 3 27 3 5 29 5 7 31 80 33 32 81 33 32 81 32 30 32 5 29 5 7 31 7 11 33 11 34 34 34 34 34 34 33 32 33 7 31 7 31 28 31 32 30 32 19 13 19 19 13 19 15 6 15 31 28 31 32 30 32 33 32 82 23 14 83 23 14 83 19 13 19 32 30 32 33 32 33 34 34 34 27 20 27 27 20 27 23 14 23 33 32 33 11 33 11 10 35 10 35 36 35 35 36 35 34 34 34 11 33 11 10 35 10 9 37 9 36 38 36 36 38 36 35 36 35 10 35 10 9 37 9 8 39 8 37 40 37 37 40 37 36 38 36 9 37 9 34 34 34 35 36 35 26 19 26 26 19 26 27 20 27 34 34 34 35 36 35 36 38 36 25 16 25 25 16 25 26 19 26 35 36 35 36 38 36 37 40 37 24 17 24 24 17 24 25 16 25 36 38 36 8 39 8 6 41 6 38 42 38 38 42 38 37 40 37 8 39 8 6 41 6 4 43 45 39 44 48 39 44 48 38 42 38 6 41 6 4 43 4 0 21 0 28 24 28 28 24 28 39 44 39 4 43 4 37 40 37 38 42 38 20 8 20 20 8 20 24 17 24 37 40 37 38 42 38 39 44 48 16 2 46 16 2 46 20 8 20 38 42 38 39 44 39 28 24 28 12 0 12 12 0 12 16 2 16 39 44 39 24 17 24 20 8 20 21 7 21 12 0 12 13 3 13 17 1 17 15 6 15 19 13 19 18 5 18 27 20 27 26 19 26 40 18 40 17 45 17 18 46 18 42 47 42 42 48 42 41 49 41 17 50 17 18 51 18 22 52 84 43 53 85 43 54 85 42 55 42 18 56 18 22 57 22 21 58 21 44 59 44 44 60 44 43 61 43 22 62 22 21 63 21 17 64 47 41 65 49 41 66 49 44 67 44 21 68 21 45 69 54 46 70 55 48 71 57 48 71 57 47 72 56 45 69 54 47 72 56 48 71 57 50 73 59 50 73 59 49 74 58 47 72 56 49 74 58 50 73 59 52 75 61 52 75 61 51 76 60 49 74 58 53 77 62 54 78 63 56 79 65 56 79 65 55 80 64 53 77 62 55 80 64 56 79 65 58 81 67 58 81 67 57 82 66 55 80 64 57 82 66 58 81 67 60 83 69 60 83 69 59 84 68 57 82 66 61 85 70 62 86 71 64 87 73 64 87 73 63 88 72 61 85 70 63 88 72 64 87 73 66 89 75 66 89 75 65 90 74 63 88 72 65 90 74 66 89 75 68 91 77 68 91 77 67 92 76 65 90 74</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="luobu.max" name="luobu_max">
+      <node id="luobu-node" name="luobu" type="NODE">
+        <matrix>0.531818 0 0 0 0 0.531818 0 0 0 0 0.531818 0 0 0 0 1</matrix>
+        <instance_geometry url="#luobu-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="_0_-_Default" target="#_0_-_Default">
+                <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>3.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#luobu.max"/>
+  </scene>
+</COLLADA>

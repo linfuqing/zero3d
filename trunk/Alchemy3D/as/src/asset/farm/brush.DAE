@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=6400;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/brush.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:15:50Z</created>
+    <modified>2010-07-22T02:15:51Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="brush.png" name="brush_png">
+      <init_from>../../1/brush.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="orig_brush" name="orig_brush">
+      <instance_effect url="#orig_brush-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="orig_brush-fx" name="orig_brush">
+      <profile_COMMON>
+        <newparam sid="brush_png-surface">
+          <surface type="2D">
+            <init_from>brush.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="brush_png-sampler">
+          <sampler2D>
+            <source>brush_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="brush_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>1</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="brush-mesh" name="brush">
+      <mesh>
+        <source id="brush-mesh-positions">
+          <float_array id="brush-mesh-positions-array" count="48">1379.47 -68.1259 0 1379.47 72.5 0 1379.47 -68.1259 96.1094 1379.47 72.5 96.1094 -831.702 72.0959 0 -1171.47 412.116 0 -870.95 -68.0679 0 -1311.57 372.876 0 -831.702 72.0959 96.1094 -1171.47 412.116 96.1094 -870.95 -68.0679 96.1094 -1311.57 372.876 96.1094 -1170.96 2738.12 0 -1311.64 2738.12 0 -1170.96 2738.12 96.1094 -1311.64 2738.12 96.1094</float_array>
+          <technique_common>
+            <accessor source="#brush-mesh-positions-array" count="16" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="brush-mesh-normals">
+          <float_array id="brush-mesh-normals-array" count="48">-0.297258 -0.717246 0.630234 0.577343 -0.577359 0.577349 0.577303 0.577408 0.577341 0.227473 0.549019 0.80426 -0.382865 -0.923804 0 0.707097 -0.707116 0 0.707043 0.707171 0 0.382772 0.923843 -0.000000 0.549226 0.227306 0.804166 -0.717309 -0.296977 0.630296 0.923993 0.38241 -0.000000 -0.923944 -0.382528 0.000000 0.577419 0.577293 0.577339 -0.57736 0.577342 0.577349 0.707184 0.70703 0 -0.707118 0.707096 0</float_array>
+          <technique_common>
+            <accessor source="#brush-mesh-normals-array" count="16" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="brush-mesh-map-channel1">
+          <float_array id="brush-mesh-map-channel1-array" count="84">0.997234 0.198007 0 0.996742 0.255547 0 0.956761 0.158281 0 0.95624 0.45084 0 0.956807 0.197934 0 0.979496 0.134048 0 0.005007 0.158461 0 0.979321 0.096076 0 0.955981 0.293659 0 1 0.002239 0 0.956314 0.255497 0 0.999828 0.040923 0 0.025864 0.293333 0 0.026198 0.254324 0 0.039101 0.096112 0 0.979387 0.318182 0 0.000252 0.096114 0 0 0.040038 0 0.756582 0.450563 0 0.039276 0.134324 0 0.039021 0.002009 0 0.737301 0.317241 0 0.956401 0.410401 0 0.038849 0.040001 0 0.978364 0.358105 0 0.736175 0.35806 0 0.005054 0.198176 0 0.756653 0.410232 0</float_array>
+          <technique_common>
+            <accessor source="#brush-mesh-map-channel1-array" count="28" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="brush-mesh-vertices">
+          <input semantic="POSITION" source="#brush-mesh-positions"/>
+        </vertices>
+        <triangles material="orig_brush" count="22">
+          <input semantic="VERTEX" source="#brush-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#brush-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#brush-mesh-map-channel1" offset="2" set="1"/>
+          <p>10 0 26 2 1 4 3 2 10 3 2 10 8 3 13 10 0 26 6 4 6 0 5 2 2 1 4 2 1 4 10 0 26 6 4 6 0 5 0 1 6 1 3 2 10 3 2 10 2 1 4 0 5 0 1 6 8 4 7 12 8 3 13 8 3 13 3 2 10 1 6 8 8 3 22 9 8 27 11 9 25 11 9 25 10 0 24 8 3 22 4 7 3 5 10 18 9 8 27 9 8 27 8 3 22 4 7 3 7 11 21 6 4 15 10 0 24 10 0 24 11 9 25 7 11 21 9 8 7 14 12 14 15 13 23 15 13 23 11 9 11 9 8 7 5 10 5 12 14 19 14 12 14 14 12 14 9 8 7 5 10 5 12 14 16 13 15 17 15 13 23 15 13 23 14 12 14 12 14 16 13 15 20 7 11 9 11 9 11 11 9 11 15 13 23 13 15 20</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="brush.max" name="brush_max">
+      <node id="brush-node" name="brush" type="NODE">
+        <matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <node id="brush-node_PIVOT" name="brush_PIVOT" type="NODE">
+          <matrix>1 0 0 -33.9142 0 1 0 -1335 0 0 1 0 0 0 0 1</matrix>
+          <instance_geometry url="#brush-mesh">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="orig_brush" target="#orig_brush">
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>1.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#brush.max"/>
+  </scene>
+</COLLADA>

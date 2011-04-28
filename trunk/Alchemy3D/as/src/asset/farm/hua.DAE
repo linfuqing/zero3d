@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>cloud</author>
+      <authoring_tool>3dsMax 9 - Feeling ColladaMax v3.04C.</authoring_tool>
+      <comments>ColladaMax Export Options: ExportNormals=1;ExportEPolyAsTriangles=1;ExportXRefs=1;ExportSelected=0;ExportTangents=0;ExportAnimations=0;SampleAnim=1;ExportAnimClip=1;BakeMatrices=1;ExportRelativePaths=1;AnimStart=0;AnimEnd=16000;</comments>
+      <source_data>file:///D:/%C3%C0%CA%F5/farm_element/hua.max</source_data>
+    </contributor>
+    <created>2010-07-22T02:31:43Z</created>
+    <modified>2010-07-22T02:31:45Z</modified>
+    <unit meter="0.001" name="millimeter"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="nongchang_hua.png" name="nongchang_hua_png">
+      <init_from>../../1/nongchang_hua.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="nongchang_hua" name="nongchang_hua">
+      <instance_effect url="#nongchang_hua-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="nongchang_hua-fx" name="nongchang_hua">
+      <profile_COMMON>
+        <newparam sid="nongchang_hua_png-surface">
+          <surface type="2D">
+            <init_from>nongchang_hua.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="nongchang_hua_png-sampler">
+          <sampler2D>
+            <source>nongchang_hua_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="nongchang_hua_png-surface">
+          <surface type="2D">
+            <init_from>nongchang_hua.png</init_from>
+            <format>A8R8G8B8</format>
+          </surface>
+        </newparam>
+        <newparam sid="nongchang_hua_png-sampler">
+          <sampler2D>
+            <source>nongchang_hua_png-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>NONE</minfilter>
+            <magfilter>NONE</magfilter>
+            <mipfilter>NONE</mipfilter>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <blinn>
+            <ambient>
+              <color>0.588235 0.588235 0.588235 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="nongchang_hua_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1</color>
+            </specular>
+            <shininess>
+              <float>0.415939</float>
+            </shininess>
+            <reflective>
+              <color>0 0 0 1</color>
+            </reflective>
+            <reflectivity>
+              <float>1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <texture texture="nongchang_hua_png-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <repeatU>1</repeatU>
+                    <repeatV>1</repeatV>
+                    <offsetU>0</offsetU>
+                    <offsetV>0</offsetV>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>1</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1</float>
+            </index_of_refraction>
+          </blinn>
+          <extra>
+            <technique profile="FCOLLADA">
+              <spec_level>
+                <float>0</float>
+              </spec_level>
+              <emission_level>
+                <float>1</float>
+              </emission_level>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+      <extra>
+        <technique profile="MAX3D">
+          <faceted>0</faceted>
+          <double_sided>1</double_sided>
+          <wireframe>0</wireframe>
+          <face_map>0</face_map>
+        </technique>
+      </extra>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Object30-mesh" name="Object30">
+      <mesh>
+        <source id="Object30-mesh-positions">
+          <float_array id="Object30-mesh-positions-array" count="186">2121.67 -73.4453 198.864 2035.34 506.51 198.864 1243.63 143.204 198.864 1576.79 -324.673 198.864 1963.71 14.001 -198.864 1901.2 400.74 -198.864 1564.63 -153.741 -198.864 2042.92 757.174 198.864 1546.6 825.969 198.864 2079.47 1003.7 -71.9741 1583.14 1072.49 -71.9741 1192.72 741.091 317.667 947.82 303.946 317.667 1024.02 -114.086 347.229 2185.72 -305.206 298.13 1723.66 -499.027 298.13 2313.06 -26.0769 334.3 2272.8 473.371 334.3 2273.89 -467.338 63.3359 1811.82 -661.159 63.3359 913.153 -192.678 101.345 1208.08 -597.756 101.345 2615.12 2.37296 106.119 2574.86 501.821 106.119 1019.97 827.983 84.3776 775.072 390.839 84.3776 1631.36 148.664 1100.72 1609.88 201.54 1063.88 1653.65 250.118 1045.46 1718.89 245.821 1063.88 1718.49 168.656 1109.93 1882 -25.9252 598.992 1464.79 94.9288 560.918 1629.97 -128.58 591.378 1908.64 221.314 -140.075 2100.37 299.2 305.132 1925.76 228.266 439.456 2330.92 392.856 474.076 2142.54 316.332 648.087 1459.01 38.6607 -62.5542 1342.02 -8.86589 267.446 1464.77 40.998 447.609 1165.23 -80.6827 418.919 1325.46 -15.5932 631.613 2035.28 1002.32 -296.385 811.964 505.367 -296.385 1306.59 -712.233 -296.385 2529.91 -215.283 -296.385 1670.94 145.042 -131.659 1501.08 593.141 198.864 1243.63 143.204 198.864 2121.67 -73.4453 198.864 2035.34 506.51 198.864 1901.2 400.74 -198.864 1560.02 448.031 -198.864 1560.02 448.031 -198.864 1348.48 176.205 -198.864 1963.71 14.001 -198.864 1348.48 176.205 -198.864 1318.95 -519.164 347.229 1839.71 219.822 560.918 1622.67 274.281 545.689</float_array>
+          <technique_common>
+            <accessor source="#Object30-mesh-positions-array" count="62" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Object30-mesh-normals">
+          <float_array id="Object30-mesh-normals-array" count="186">0.651322 -0.720237 0.238826 0.921689 -0.298886 -0.2473 0.631209 0.67188 -0.387495 0.716677 0.693981 0.069021 -0.19888 0.963001 -0.181866 -0.157143 0.619985 0.768716 -0.958977 0.250615 -0.132498 -0.966891 -0.059547 -0.248145 -0.325581 -0.926069 -0.19077 -0.04999 -0.482287 0.874586 0.830386 -0.503724 0.238162 0.738931 0.650841 0.174321 0.455515 0.727795 0.51266 0.455325 -0.133675 0.880233 -0.303041 0.940573 0.15326 -0.318128 0.866528 0.384608 -0.980148 0.008824 0.198073 -0.751038 0.387908 0.534294 -0.244054 -0.939796 0.239208 -0.431891 -0.329821 0.839457 0.053447 0.3856 0.921117 0.054096 0.390282 0.919105 -0.39132 -0.058246 0.918409 0.101034 0.728913 0.67711 0.101034 0.728913 0.67711 -0.218208 0.122243 0.968216 -0.241427 0.133979 0.961126 0.316993 0.021857 0.948176 -0.210928 -0.15357 0.965363 -0.254399 -0.187596 0.94873 0.061641 -0.146952 0.987221 0.085469 -0.220798 0.971567 -0.161594 0.35047 0.922528 -0.01353 -0.00109 0.999908 0.01253 -0.01563 0.999799 0.304704 -0.726406 0.616027 0.304704 -0.726406 0.616027 -0.707562 -0.515157 0.483704 -0.707563 -0.515157 0.483703 0.59915 0.048296 0.799179 0.59915 0.048296 0.799179 -0.671955 0.37644 0.637786 -0.671955 0.37644 0.637785 0.654891 0.722686 0.221004 -0.772373 0.601091 0.205256 -0.834475 -0.546676 0.069266 0.387484 -0.921873 -0.002686 -0.376362 0.926473 0 -0.376362 0.926473 0 -0.376362 0.926473 0 -0.376362 0.926473 0 -0.376362 0.926473 0 -0.376362 0.926473 0 -0.376362 0.926473 0 -0.376362 0.926473 0 -0.376362 0.926472 0 -0.376363 0.926472 0 0.067839 0.160382 0.984721 -0.160468 0.067636 0.984721 0 0 1 -0.067839 -0.160382 0.984721 0.160468 -0.067636 0.984721</float_array>
+          <technique_common>
+            <accessor source="#Object30-mesh-normals-array" count="62" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Object30-mesh-map-channel1">
+          <float_array id="Object30-mesh-map-channel1-array" count="216">0.528402 0.778506 0.228314 0.481225 0.57165 0.228314 0.638955 0.469514 0.228314 0.790233 0.585266 0.228314 0.732861 0.788557 0.228314 0.113346 0.038158 0.184228 0.228193 0.068807 0.145905 0.328264 0.095513 0.166626 0.408324 0.116878 0.208242 0.021719 0.013706 0.229176 0.595513 0.685697 -0.5 0.58129 0.619751 -0.5 0.6297 0.590007 -0.5 0.880557 0.627137 0 0.837878 0.553214 0 0.880557 0.479292 0 0.965915 0.479292 0 0.987255 0.590176 0 0.67811 0.619751 -0.5 0.665763 0.686597 -0.5 0.446648 0.488376 0.228314 0.594676 0.397424 0.228314 0.928581 0.381715 0 0.990828 0.194714 0 0.866336 0.194713 0 0.99083 0.007713 0 0.866338 0.007712 0 0.520774 0.905985 0 0.267302 0.824815 0 0.267301 0.987153 0 0.013829 0.824814 0 0.013828 0.987152 0 0.642526 0.007786 0 0.858287 0.187225 0 0.678848 0.402986 0 0.463087 0.223547 0 0.660687 0.205386 0 0.383894 0.38308 -0.267641 0.531923 0.292128 -0.267641 0.717416 0.377621 0.445866 0.847294 0.482281 0.445866 0.880525 0.642202 0.5 0.839322 0.818743 0.5 0.537914 0.865208 0.410089 0.708831 0.867265 0.410089 0.461832 0.788724 0.476324 0.410433 0.615239 0.476324 0.54064 0.986533 -0.019862 0.711558 0.988591 -0.019862 0.992134 0.676951 0.049738 0.019032 0.729659 0.061441 0.169645 0.769775 0.061639 0.141642 0.762172 0.043186 0.096674 0.750301 0.018287 0.05979 0.740601 0.026934 0.04906 0.4611 0.171095 0.118642 0.48168 0.06725 0.207233 0.506127 0.065857 0.950931 0.853491 0.049738 0.333384 0.828248 0.058481 0.281985 0.654763 0.058481 0.820683 0.274418 0.018668 0.911686 0.371789 0.018668 0.012823 0.451832 0.20519 0.253242 0.517601 0.156358 0.253242 0.517601 0.156358 0.294023 0.526875 0.20519 0.194425 0.776646 0.061441 0.253242 0.517601 0.156358 0.294023 0.526875 0.20519 0.253242 0.517601 0.156358 0.491966 0.1392 0.229176</float_array>
+          <technique_common>
+            <accessor source="#Object30-mesh-map-channel1-array" count="72" stride="3">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+              <param name="P" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Object30-mesh-vertices">
+          <input semantic="POSITION" source="#Object30-mesh-positions"/>
+        </vertices>
+        <triangles material="nongchang_hua" count="63">
+          <input semantic="VERTEX" source="#Object30-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Object30-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Object30-mesh-map-channel1" offset="2" set="1"/>
+          <p>0 0 0 4 1 10 5 2 11 5 2 11 1 3 1 0 0 0 1 3 1 5 2 11 54 4 12 54 4 12 49 5 2 1 3 1 49 5 2 54 4 12 58 6 18 58 6 18 2 7 3 49 5 2 2 7 3 58 6 18 6 8 19 6 8 19 3 9 4 2 7 3 3 9 4 6 8 19 4 1 10 4 1 10 0 0 0 3 9 4 31 10 55 60 11 56 29 12 53 29 12 53 30 13 54 31 10 55 60 11 56 61 14 57 28 15 52 28 15 52 29 12 53 60 11 56 61 14 57 32 16 64 27 17 51 27 17 51 28 15 52 61 14 57 32 16 65 33 18 66 26 19 67 26 19 67 27 17 51 32 16 65 33 18 63 31 10 55 30 13 54 30 13 54 26 19 50 33 18 63 1 3 1 7 20 20 8 21 21 8 21 21 49 5 2 52 22 1 10 23 38 8 21 21 7 20 20 7 20 20 9 24 37 10 23 38 49 5 2 11 25 39 12 26 40 12 26 40 50 27 3 49 5 2 50 27 3 13 28 41 59 29 42 59 29 42 3 9 4 50 27 3 3 9 4 15 30 44 14 31 43 14 31 43 51 32 0 3 9 4 0 0 0 16 33 45 17 34 46 17 34 46 52 22 1 0 0 0 18 35 47 14 31 43 15 30 44 15 30 44 19 36 48 18 35 47 21 37 58 59 29 42 13 28 41 13 28 41 20 38 49 21 37 58 23 39 60 17 34 46 16 33 45 16 33 45 22 40 59 23 39 60 25 41 62 12 26 40 11 25 39 11 25 39 24 42 61 25 41 62 30 13 17 29 12 16 28 15 15 30 13 17 28 15 15 27 17 14 30 13 17 27 17 14 26 19 13 53 43 6 60 11 56 31 10 55 31 10 55 4 1 5 53 43 6 54 4 7 61 14 57 60 11 56 60 11 56 53 43 6 54 4 7 58 6 8 32 16 68 61 14 57 61 14 57 55 44 7 58 6 8 6 8 71 33 18 69 32 16 70 32 16 70 56 45 8 6 8 71 4 1 5 31 10 55 33 18 63 33 18 63 6 8 9 57 46 5 35 47 23 34 48 22 36 49 24 38 50 26 37 51 25 35 47 23 35 47 23 36 49 24 38 50 26 40 52 28 41 53 29 39 54 27 43 55 31 41 53 29 40 52 28 40 52 28 42 56 30 43 55 31 44 57 32 45 58 33 48 59 36 45 58 33 46 60 34 48 59 36 46 60 34 47 61 35 48 59 36 44 57 32 48 59 36 47 61 35</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="hua.max" name="hua_max">
+      <node id="Object30-node" name="Object30" type="NODE">
+        <matrix>0.003883 -0.050904 0 0 0.050904 0.003883 0 0 0 0 0.051052 0 0 0 0 1</matrix>
+        <node id="Object30-node_PIVOT" name="Object30_PIVOT" type="NODE">
+          <matrix>1 0 0 -1695.1 0 1 0 -180.13 0 0 1 315.523 0 0 0 1</matrix>
+          <instance_geometry url="#Object30-mesh">
+            <bind_material>
+              <technique_common>
+                <instance_material symbol="nongchang_hua" target="#nongchang_hua">
+                  <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+                </instance_material>
+              </technique_common>
+            </bind_material>
+          </instance_geometry>
+        </node>
+      </node>
+      <extra>
+        <technique profile="FCOLLADA">
+          <start_time>0</start_time>
+          <end_time>3.33333</end_time>
+        </technique>
+      </extra>
+      <extra>
+        <technique profile="MAX3D">
+          <frame_rate>30</frame_rate>
+        </technique>
+      </extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#hua.max"/>
+  </scene>
+</COLLADA>
