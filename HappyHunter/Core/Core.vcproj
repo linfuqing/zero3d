@@ -173,6 +173,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Collada.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\CrossPlane.cpp"
 				>
 			</File>
@@ -297,6 +301,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SyntaxParser.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Terrain.cpp"
 				>
 			</File>
@@ -314,6 +322,10 @@
 			</File>
 			<File
 				RelativePath=".\Water.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\XML.cpp"
 				>
 			</File>
 		</Filter>
@@ -352,6 +364,10 @@
 			</File>
 			<File
 				RelativePath=".\Camera.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Collada.h"
 				>
 			</File>
 			<File
@@ -499,6 +515,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SyntaxParser.h"
+				>
+			</File>
+			<File
 				RelativePath=".\targetver.h"
 				>
 			</File>
@@ -520,6 +540,10 @@
 			</File>
 			<File
 				RelativePath=".\Water.h"
+				>
+			</File>
+			<File
+				RelativePath=".\XML.h"
 				>
 			</File>
 		</Filter>

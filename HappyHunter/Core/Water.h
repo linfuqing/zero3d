@@ -45,6 +45,8 @@ namespace zerO
 
 		CGeometry m_Geometry;
 
+		CSceneNode m_Instance;
+
 		CTexture::RESET m_pfnRefractionReset;
 		CTexture::RESET m_pfnReflectionReset;
 

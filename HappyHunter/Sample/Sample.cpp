@@ -134,7 +134,7 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	if( !g_Game.Create(DXUTGetD3D9Object(), pd3dDevice, DeviceSettings, 0xf) )
 		return S_FALSE;
 
-	CAMERA.SetProjection(D3DX_PI / 3.0f, 0.2f, 10000.0f);
+	CAMERA.SetProjection(D3DX_PI / 3.0f, 5.0f, 20000.0f);
 
 	D3DXVECTOR3 Postion(0.0f, 0.0f, - 1000.0f);
 
@@ -145,7 +145,7 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	//if ( !g_SkinMesh.Create(TEXT("MiShuShi.X")) )
 		return S_FALSE;
 
-	g_SkinMesh.SetShadowVisible(true);
+	g_SkinMesh.SetShadowVisible(false);
 
 	//g_CopyMesh.SetEffectFile( TEXT("HLSLSkinSoftware.fx") );
 	//if ( !g_CopyMesh.Create( TEXT("机关枪.x") ) )
@@ -161,10 +161,10 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	//pd3dDevice->SetRenderState(D3DRS_FOGCOLOR, 0x7f00ff00);
 	//g_SkinMesh.Clone(g_CopyMesh);
 
-	//FOGMANAGER.SetColor(0xffffffff);
-	//FOGMANAGER.SetLinearFog(10.0f, 2000.0f);
+	FOGMANAGER.SetColor(0);
+	FOGMANAGER.SetLinearFog(3000.0f, 8000.0f);
 	//FOGMANAGER.SetExp2Fog(0.4f);
-	//GAMEHOST.SetFogEnable(true);
+	GAMEHOST.SetFogEnable(true);
 
 	//g_Mesh.SetEffectFile( TEXT("HLSLTextureEffect.fx") );
 
@@ -190,8 +190,8 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	g_Bullet.GetSurface().LoadTexture(TEXT("DRUIDC03.tga"), 0);*/
 
 	g_Effect.Create(6);
-	//GAMEHOST.SetFullScreenEffect(&g_Effect);
-	/*g_Water.Create(10000.0f, 10000.0f, 10, 10, RefractionReset, ReflectionReset);
+	GAMEHOST.SetFullScreenEffect(&g_Effect);
+	g_Water.Create(10000.0f, 10000.0f, 1, 1, RefractionReset, ReflectionReset);
 	if( !g_Water.GetRenderMethod().LoadEffect( TEXT("WaterEffect.fx") ) )
 		return S_FALSE;
 
@@ -200,7 +200,7 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	g_Water.SetTransform(Matrix);
 
 	g_WaterBumpMap.Load( TEXT("wavesbump.dds") );
-	g_Water.SetBumpMap(&g_WaterBumpMap);*/
+	g_Water.SetBumpMap(&g_WaterBumpMap);
 
 	//创建阴影体
 	/*g_pShadowVolume = new zerO::CShadowVolume();
@@ -274,20 +274,20 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	//g_SkyBoxSurface.LoadTexture(TEXT("blue_0004.png"), 5);
 	//g_SkyBoxSurface.LoadTexture(TEXT("Cloud1.png"), 6);
 
-	/*g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_UP.jpg"), 0);
+	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_UP.jpg"), 0);
 	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_DN.jpg"), 1);
 	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_LF.jpg"), 2);
 	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_RT.jpg"), 3);
 	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_FR.jpg"), 4);
-	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_BK.jpg"), 5);*/
+	g_SkyBoxSurface.LoadTexture(TEXT("night/afx_darksky_BK.jpg"), 5);
 	//g_SkyBoxSurface.LoadTexture(TEXT("night/Cloud.tga"), 6);
 
-	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_UP.dds"), 0);
+	/*g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_UP.dds"), 0);
 	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_DN.dds"), 1);
 	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_LF.dds"), 2);
 	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_RT.dds"), 3);
 	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_FR.dds"), 5);
-	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_BK.dds"), 4);
+	g_SkyBoxSurface.LoadTexture(TEXT("noon/cloudy_noon_BK.dds"), 4);*/
 	//g_SkyBoxSurface.LoadTexture(TEXT("Cloud1.png"), 6);
 
 	/*g_SkyBoxSurface.LoadTexture(TEXT("sky_blue/blue_0005.jpg"), 0);
