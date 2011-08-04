@@ -157,7 +157,7 @@ void CSceneNode::Update()
 		pNode = pNode->m_pNext;
 	}
 
-	m_bIsTransformDirty = true;
+	m_bIsTransformDirty = false;
 }
 
 void CSceneNode::Clone(CSceneNode& Node)const

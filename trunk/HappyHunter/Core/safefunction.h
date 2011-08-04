@@ -4,13 +4,17 @@
 namespace zerO
 {
 #ifdef _UNICODE
+#define STRLEN(pStr) wcslen(pStr)
 #define STRCPY(pDest, pSource) wcscpy_s(pDest, pSource) 
 #define STRTOK(pStr, pDelim, ppContext) wcstok_s(pStr, pDelim, ppContext)
 #define VSPRINTF(pBuffer, uCount, pText, pArgList) vswprintf_s(pBuffer, uCount, pText, pArgList)
+#define STRSTR(pStr, pSubStr) wcsstr(pStr, pSubStr)
 #else
+#define STRLEN(pStr) strlen(pStr)
 #define STRCPY(pDest, pSource) strcpy_s(pDest, pSource) 
 #define STRTOK(pStr, pDelim, ppContext) strtok_s(pStr, pDelim, ppContext)
 #define VSPRINTF(pBuffer, uCount, pText, pArgList) vsprintf_s(pBuffer, uCount, pText, pArgList)
+#define STRSTR(pStr, pSubStr) strstr(pStr, pSubStr)
 #endif
 
 #define STRCMP(pStr1, pStr2)              _strcmpi(pStr1, pStr2)

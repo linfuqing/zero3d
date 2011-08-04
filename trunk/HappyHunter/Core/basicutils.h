@@ -14,6 +14,13 @@ namespace zerO
 {
 #define CASE(Value, Type) ( *( (Type*)&(Value) ) )
 #define SWAP(Target, Source, Temp) (Temp = Source, Source = Target, Target = Temp)
+
+	typedef struct
+	{
+		PUINT8 puBuffer;
+		UINT uLength;
+	}BUFFER, * LPBUFFER;
+
 	///
 	// øÏÀŸ≈≈–Ú
 	///

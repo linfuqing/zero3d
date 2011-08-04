@@ -14,7 +14,9 @@ m_uReflectionMap(0),
 m_pBumpMap(NULL),
 m_pfnRefractionReset(NULL),
 m_pfnReflectionReset(NULL),
-m_Plane(0, 1.0f, 0.0f, 0.0f)
+m_Plane(0, 1.0f, 0.0f, 0.0f),
+m_Instance(CSceneNode::LOCK_ADDED),
+m_Geometry(&m_Instance)
 {
 	GAMEHOST.SetWater(this);
 
@@ -148,7 +150,13 @@ void CWater::Render(bool bIsRenderToTexture)
 	{
 		pEffect->GetEffect()->BeginPass(i);
 
+		pEffect->GetEffect()->CommitChanges();
+
+		DEVICE.SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
 		m_Geometry.Draw(false);
+
+		//DEVICE.SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
 		pEffect->GetEffect()->EndPass();
 	}
